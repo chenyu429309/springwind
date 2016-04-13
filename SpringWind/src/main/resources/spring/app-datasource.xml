@@ -24,7 +24,7 @@
    		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:xml/mybatis-config.xml" />
 		<property name="typeAliasesPackage" value="com.baomidou.springwind.entity" />
-		<property name="mapperLocations" value="classpath:com/baomidou/cms/mapper/xml/*Mapper.xml" />
+		<property name="mapperLocations" value="classpath:com/baomidou/springwind/mapper/xml/*Mapper.xml" />
         <property name="plugins">
             <array>
                 <!-- 分页插件配置 -->
