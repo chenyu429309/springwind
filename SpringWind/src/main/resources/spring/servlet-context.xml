@@ -55,7 +55,7 @@
 		<!-- SSO 拦截器 -->
 		<!-- path 对所有的请求拦截使用/**，对某个模块下的请求拦截使用：/myPath/* -->
 		<mvc:interceptor>
-			<mvc:mapping path="/system/**" />
+			<mvc:mapping path="/**" />
 			<bean class="com.baomidou.kisso.web.interceptor.SSOSpringInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

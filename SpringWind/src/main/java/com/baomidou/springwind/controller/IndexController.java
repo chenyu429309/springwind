@@ -4,6 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.baomidou.kisso.annotation.Action;
+import com.baomidou.kisso.annotation.Login;
+
 /**
  * <p>
  * 首页
@@ -13,14 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date 2016-04-13
  */
 @Controller
-public class HomeController extends BaseController {
+public class IndexController extends BaseController {
 
 	/**
 	 * 首页
 	 */
+	@Login(action = Action.Skip)
 	@RequestMapping("/index")
 	public String index( Model model ) {
 		
 		return "/index";
+	}
+	
+	/**
+	 * 主页
+	 */
+	@Login(action = Action.Skip)
+	@RequestMapping("/home")
+	public String home( Model model ) {
+		
+		return "/home";
 	}
 }

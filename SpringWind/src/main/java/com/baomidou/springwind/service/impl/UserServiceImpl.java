@@ -1,9 +1,19 @@
 package com.baomidou.springwind.service.impl;
 
-import com.baomidou.springwind.entity.User;
+import org.springframework.stereotype.Service;
+
 import com.baomidou.springwind.mapper.UserMapper;
+import com.baomidou.springwind.entity.User;
+import com.baomidou.springwind.service.IUserService;
 import com.baomidou.springwind.service.support.BaseServiceImpl;
 
-public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> {
+/**
+ *
+ * User 表数据服务层接口实现类
+ *
+ */
+@Service
+public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implements IUserService {
+
 
 }
