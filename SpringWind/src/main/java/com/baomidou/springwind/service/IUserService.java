@@ -1,7 +1,7 @@
 package com.baomidou.springwind.service;
 
-import com.baomidou.springwind.entity.User;
 import com.baomidou.framework.service.ISuperService;
+import com.baomidou.springwind.entity.User;
 
 /**
  *
@@ -10,5 +10,5 @@ import com.baomidou.framework.service.ISuperService;
  */
 public interface IUserService extends ISuperService<User> {
 
-
+	User selectByLoginName(String loginName);
 }

@@ -15,5 +15,11 @@ import com.baomidou.springwind.service.support.BaseServiceImpl;
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implements IUserService {
 
+	@Override
+	public User selectByLoginName(String loginName) {
+		User user = new User();
+		user.setLoginName(loginName);
+		return super.selectOne(user);
+	}
 
 }

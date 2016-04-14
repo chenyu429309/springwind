@@ -9,12 +9,11 @@
 		</encoder>
 	</appender>
 	<!-- Output to File -->
-	<appender name="File"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>/home/logs/qas.log</File>
+	<appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>/home/logs/springwind.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<FileNamePattern>
-				/home/logs/qas.%d{yyyy-MM-dd}.log
+				/home/logs/springwind.%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<!-- keep 1 days worth of history -->
 			<MaxHistory>10</MaxHistory>
@@ -30,5 +29,5 @@
 		<appender-ref ref="File" />
 	</root>
 	<logger name="org.springframework" level="ERROR" />
-	<logger name="com.baomidou.cms" level="DEBUG" />
+	<logger name="com.baomidou.springwind" level="DEBUG" />
 </configuration>
