@@ -23,7 +23,7 @@
     <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
    		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:xml/mybatis-config.xml" />
-		<property name="typeAliasesPackage" value="com.baomidou.springwind.entity" />
+		<property name="typeAliasesPackage" value="com.baomidou.springwind.entity;com.baomidou.springwind.entity.vo" />
 		<property name="mapperLocations" value="classpath:com/baomidou/springwind/mapper/xml/*Mapper.xml" />
         <property name="plugins">
             <array>

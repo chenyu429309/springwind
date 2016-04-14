@@ -3,7 +3,7 @@ Velocity是一个基于java的模板引擎（template engine），它允许任�
 
 # 基本语法
 
-1、"#"用来标识Velocity的脚本语句，包括#set、#if 、#else、#end、#foreach、#end、#iinclude、#parse、#macro等；
+1、"#"用来标识Velocity的脚本语句，包括#set、#if 、#else、#end、#foreach、#end、#include、#parse、#macro等；
 如:
 #if($info.imgs)
 <img src="$info.imgs" border=0>

@@ -8,8 +8,9 @@
                     <span><img alt="image" class="img-circle" src="/static/img/profile_small.jpg" /></span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
-                       <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
-                        <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                       		<span class="text-muted text-xs block">
+                        		<strong class="font-bold">$!{currentUser.loginName}</strong><b class="caret"></b>
+                      		</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -24,69 +25,22 @@
                 </div>
                 <div class="logo-element">SW</div>
             </li>
+            #foreach( $menu in $menuList )
             <li>
                 <a href="#">
-                    <i class="fa fa-home"></i>
-                    <span class="nav-label">功能管理</span>
+                    <i class="${menu.icon}"></i>
+                    <span class="nav-label">${menu.title}</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
+                	#foreach( $m in $menu.mvList)
                     <li>
-                        <a class="J_menuItem" href="none1.html" data-index="0">暂无1</a>
+                        <a class="J_menuItem" href="${m.url}">${m.title}</a>
                     </li>
-                    <li>
-                        <a class="J_menuItem" href="none2.html">暂无2</a>
-                    </li>
+                    #end
                 </ul>
             </li>
-			<li>
-                <a href="mailbox.html">
-                	<i class="fa fa-envelope"></i>
-                	<span class="nav-label">信箱 </span>
-                	<span class="label label-warning pull-right">16</span>
-               	</a>
-                <ul class="nav nav-second-level">
-                    <li><a class="J_menuItem" href="mailbox.html">收件箱</a>
-                    </li>
-                    <li><a class="J_menuItem" href="mail_detail.html">查看邮件</a>
-                    </li>
-                    <li><a class="J_menuItem" href="mail_compose.html">写信</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-magic"></i>
-                    <span class="nav-label">权限管理</span>
-                    <span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a class="J_menuItem" href="index_v1.html" data-index="0">主页示例一</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="index_v2.html">主页示例二</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa fa-bar-chart-o"></i>
-                    <span class="nav-label">系统分析</span>
-                    <span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a class="J_menuItem" href="graph_echarts.html">百度ECharts</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="graph_flot.html">Flot</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="graph_morris.html">Morris.js</a>
-                    </li>
-                </ul>
-            </li>
+            #end
         </ul>
     </div>
 </nav>

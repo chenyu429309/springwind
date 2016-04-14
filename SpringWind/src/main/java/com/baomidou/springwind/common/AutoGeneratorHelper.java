@@ -39,7 +39,7 @@ public class AutoGeneratorHelper {
 		cg.setDbUser("root");
 		cg.setDbPassword("");
 		cg.setDbUrl("jdbc:mysql://127.0.0.1:3306/springwind?characterEncoding=utf8");
-		cg.setDbPrefix(true);
+		cg.setDbPrefix(false);
 		AutoGenerator.run(cg);
 	}
 	
