@@ -1,18 +1,20 @@
 package com.baomidou.springwind.controller;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.springwind.service.IUserService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.springwind.entity.User;
+import com.baomidou.springwind.service.IUserService;
 
 /**
  * <p>
- * 用户管理相关操作
+ * 鐢ㄦ埛绠＄悊鐩稿叧鎿嶄綔
  * </p>
  *
  *
@@ -28,6 +30,9 @@ public class UserController extends BaseController {
 
     @RequestMapping("/toUserPage")
     public String toUserPage(Model model){
+    	Page<User> page = getPage();
+    	page = userService.selectPage(page, null);
+    	model.addAttribute("page", page);
         return "/user/user";
     }
 
