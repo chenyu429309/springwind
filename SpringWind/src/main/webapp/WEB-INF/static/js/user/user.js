@@ -49,7 +49,7 @@ var TableInit = function () {
                 title: '用户类型'
             }, {
                 field: 'status',
-                title: '状态̬'
+                title: '状态'
             }, {
                 field: 'crTime',
                 title: '创建时间'
