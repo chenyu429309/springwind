@@ -20,6 +20,15 @@ SSM 架构后台管理系统
 更多补充中。。。。。
 
 
+演示界面
+=======
+
+![登录效果](http://git.oschina.net/uploads/images/2016/0415/233200_ee76b11a_12260.png "登录效果")
+
+![后台界面效果](http://git.oschina.net/uploads/images/2016/0415/233226_7713bf12_12260.png "后台界面效果")
+
+![锁定效果](http://git.oschina.net/uploads/images/2016/0415/233245_dc44f2f9_12260.png "锁定效果")
+
 
 Features
 =======
