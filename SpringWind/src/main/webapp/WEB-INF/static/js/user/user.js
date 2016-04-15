@@ -1,71 +1,70 @@
 /**
- * ÓÃ»§¹ÜÀíJS
+ * ç”¨æˆ·ç®¡ç†JS
  *
  * @Author Jack
  *
  *
  */
 $(function () {
-    //1.³õÊ¼»¯Table
+    //1.åˆå§‹åŒ–Table
     var oTable = new TableInit();
     oTable.Init();
-
 })
 
 var TableInit = function () {
     var oTableInit = new Object();
-    //³õÊ¼»¯Table
+    //åˆå§‹åŒ–Table
     oTableInit.Init = function () {
         $('#userTable').bootstrapTable({
-            url: '/user/getUserList',     //ÇëÇóºóÌ¨µÄURL£¨*£©
-            method: 'get',           //ÇëÇó·½Ê½£¨*£©
-            toolbar: '#toolbar',        //¹¤¾ß°´Å¥ÓÃÄÄ¸öÈİÆ÷
-            striped: true,           //ÊÇ·ñÏÔÊ¾ĞĞ¼ä¸ôÉ«
-            cache: false,            //ÊÇ·ñÊ¹ÓÃ»º´æ£¬Ä¬ÈÏÎªtrue£¬ËùÒÔÒ»°ãÇé¿öÏÂĞèÒªÉèÖÃÒ»ÏÂÕâ¸öÊôĞÔ£¨*£©
-            pagination: true,          //ÊÇ·ñÏÔÊ¾·ÖÒ³£¨*£©
-            sortable: false,           //ÊÇ·ñÆôÓÃÅÅĞò
-            sortOrder: "asc",          //ÅÅĞò·½Ê½
-            queryParams: oTableInit.queryParams,//´«µİ²ÎÊı£¨*£©
-            sidePagination: "server",      //·ÖÒ³·½Ê½£ºclient¿Í»§¶Ë·ÖÒ³£¬server·şÎñ¶Ë·ÖÒ³£¨*£©
-            pageNumber: 1,            //³õÊ¼»¯¼ÓÔØµÚÒ»Ò³£¬Ä¬ÈÏµÚÒ»Ò³
-            pageSize: 50,            //Ã¿Ò³µÄ¼ÇÂ¼ĞĞÊı£¨*£©
-            pageList: [10, 25, 50, 100],    //¿É¹©Ñ¡ÔñµÄÃ¿Ò³µÄĞĞÊı£¨*£©
+            url: 'getUserList',     //è¯·æ±‚åå°çš„URLï¼ˆ*ï¼‰
+            method: 'post',           //è¯·æ±‚æ–¹å¼ï¼ˆ*ï¼‰
+            toolbar: '#toolbar',        //å·¥å…·æŒ‰é’®ç”¨å“ªä¸ªå®¹å™¨
+            striped: true,           //æ˜¯å¦æ˜¾ç¤ºè¡Œé—´éš”è‰²
+            cache: false,            //æ˜¯å¦ä½¿ç”¨ç¼“å­˜ï¼Œé»˜è®¤ä¸ºtrueï¼Œæ‰€ä»¥ä¸€èˆ¬æƒ…å†µä¸‹éœ€è¦è®¾ç½®ä¸€ä¸‹è¿™ä¸ªå±æ€§ï¼ˆ*ï¼‰
+            pagination: true,          //æ˜¯å¦æ˜¾ç¤ºåˆ†é¡µï¼ˆ*ï¼‰
+            sortable: false,           //æ˜¯å¦å¯ç”¨æ’åº
+            sortOrder: "asc",          //æ’åºæ–¹å¼
+            queryParams: oTableInit.queryParams,//ä¼ é€’å‚æ•°ï¼ˆ*ï¼‰
+            sidePagination: "server",      //åˆ†é¡µæ–¹å¼ï¼šclientå®¢æˆ·ç«¯åˆ†é¡µï¼ŒserveræœåŠ¡ç«¯åˆ†é¡µï¼ˆ*ï¼‰
+            pageNumber:1,            //åˆå§‹åŒ–åŠ è½½ç¬¬ä¸€é¡µï¼Œé»˜è®¤ç¬¬ä¸€é¡µ
+            pageSize: 50,            //æ¯é¡µçš„è®°å½•è¡Œæ•°ï¼ˆ*ï¼‰
+            pageList: [10, 25, 50, 100],    //å¯ä¾›é€‰æ‹©çš„æ¯é¡µçš„è¡Œæ•°ï¼ˆ*ï¼‰
             strictSearch: true,
-            clickToSelect: true,        //ÊÇ·ñÆôÓÃµã»÷Ñ¡ÖĞĞĞ
-            height: 460,            //ĞĞ¸ß£¬Èç¹ûÃ»ÓĞÉèÖÃheightÊôĞÔ£¬±í¸ñ×Ô¶¯¸ù¾İ¼ÇÂ¼ÌõÊı¾õµÃ±í¸ñ¸ß¶È
-            uniqueId: "id",           //Ã¿Ò»ĞĞµÄÎ¨Ò»±êÊ¶£¬Ò»°ãÎªÖ÷¼üÁĞ
-            cardView: false,          //ÊÇ·ñÏÔÊ¾ÏêÏ¸ÊÓÍ¼
-            detailView: false,          //ÊÇ·ñÏÔÊ¾¸¸×Ó±í
+            clickToSelect: true,        //æ˜¯å¦å¯ç”¨ç‚¹å‡»é€‰ä¸­è¡Œ
+            height: 460,            //è¡Œé«˜ï¼Œå¦‚æœæ²¡æœ‰è®¾ç½®heightå±æ€§ï¼Œè¡¨æ ¼è‡ªåŠ¨æ ¹æ®è®°å½•æ¡æ•°è§‰å¾—è¡¨æ ¼é«˜åº¦
+            uniqueId: "id",           //æ¯ä¸€è¡Œçš„å”¯ä¸€æ ‡è¯†ï¼Œä¸€èˆ¬ä¸ºä¸»é”®åˆ—
+            cardView: false,          //æ˜¯å¦æ˜¾ç¤ºè¯¦ç»†è§†å›¾
+            detailView: false,          //æ˜¯å¦æ˜¾ç¤ºçˆ¶å­è¡¨
             columns: [{
                 field: 'id',
-                title: 'ĞòºÅ'
+                title: 'åºå·'
             }, {
                 field: 'loginName',
-                title: 'µÇÂ¼Ãû³Æ'
+                title: 'ç™»å½•å'
             }, {
                 field: 'email',
-                title: 'ÓÊÏä'
+                title: 'é‚®ç®±'
             },{
                 field: 'type',
-                title: 'ÓÃ»§ÀàĞÍ'
+                title: 'ç”¨æˆ·ç±»å‹'
             }, {
                 field: 'status',
-                title: 'ÓÃ»§×´Ì¬'
+                title: 'çŠ¶æ€Ì¬'
             }, {
                 field: 'crTime',
-                title: '´´½¨Ê±¼ä'
+                title: 'åˆ›å»ºæ—¶é—´'
             }, {
                 field: 'lastTime',
-                title: '×îºóµÇÂ¼Ê±¼ä'
-            },]
+                title: 'æœ€åæ›´æ–°æ—¶é—´'
+            }]
         });
     };
 
-    //µÃµ½²éÑ¯µÄ²ÎÊı
+    //å¾—åˆ°æŸ¥è¯¢çš„å‚æ•°
     oTableInit.queryParams = function (params) {
-        var temp = {  //ÕâÀïµÄ¼üµÄÃû×ÖºÍ¿ØÖÆÆ÷µÄ±äÁ¿Ãû±ØĞëÒ»Ö±£¬Õâ±ß¸Ä¶¯£¬¿ØÖÆÆ÷Ò²ĞèÒª¸Ä³ÉÒ»ÑùµÄ
-            limit: params.limit,  //Ò³Ãæ´óĞ¡
-            offset: params.offset, //Ò³Âë
+        var temp = {  //è¿™é‡Œçš„é”®çš„åå­—å’Œæ§åˆ¶å™¨çš„å˜é‡åå¿…é¡»ä¸€ç›´ï¼Œè¿™è¾¹æ”¹åŠ¨ï¼Œæ§åˆ¶å™¨ä¹Ÿéœ€è¦æ”¹æˆä¸€æ ·çš„
+            _index: params.limit,  //é¡µé¢å¤§å°
+            _size: params.offset, //é¡µç 
             /*sdate: $("#stratTime").val(),
             edate: $("#endTime").val(),
             sellerid: $("#sellerid").val(),

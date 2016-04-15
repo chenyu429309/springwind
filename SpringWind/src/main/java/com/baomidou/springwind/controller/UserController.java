@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.entity.User;
 import com.baomidou.springwind.service.IUserService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * <p>
@@ -30,16 +31,15 @@ public class UserController extends BaseController {
 
     @RequestMapping("/toUserPage")
     public String toUserPage(Model model){
-    	Page<User> page = getPage();
-    	page = userService.selectPage(page, null);
-    	model.addAttribute("page", page);
         return "/user/user";
     }
 
     @RequestMapping("/getUserList")
+    @ResponseBody
     public Page getUserList(HttpServletRequest request, HttpServletResponse response){
-
-        return null;
+        Page<User> page = getPage();
+        page = userService.selectPage(page, null);
+        return page;
     }
 
 
