@@ -7,35 +7,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.springwind.entity.User;
-import com.baomidou.springwind.service.IUserService;
+import com.baomidou.springwind.entity.Role;
+import com.baomidou.springwind.service.IRoleService;
 
 /**
  * <p>
- * 用户管理相关操作
+ * 角色管理相关操作
  * </p>
  *
  *
- * @Author Jack
- * @Date 2016/4/15 15:03
+ * @Author hubin
+ * @Date 2016-04-15
  */
 @Controller
-@RequestMapping("/user")
-public class UserController extends BaseController {
+@RequestMapping("/role")
+public class RoleController extends BaseController {
 
 	@Autowired
-	private IUserService userService;
+	private IRoleService roleService;
 
 	@RequestMapping("/list")
 	public String list(Model model) {
-		return "/user/list";
+		return "/role/list";
 	}
 
 	@ResponseBody
-	@RequestMapping("/getUserList")
+	@RequestMapping("/getRoleList")
 	public String getUserList() {
-		Page<User> page = getPage();
-		return jsonPage(userService.selectPage(page, null));
+		Page<Role> page = getPage();
+		return jsonPage(roleService.selectPage(page, null));
 	}
 
 }

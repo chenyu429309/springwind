@@ -1,9 +1,7 @@
 /**
  * 用户管理JS
- *
+ * 
  * @Author Jack
- *
- *
  */
 $(function () {
     //1.初始化Table
@@ -15,9 +13,9 @@ var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
     oTableInit.Init = function () {
-        $('#userTable').bootstrapTable({
-            url: 'getUserList',     //请求后台的URL（*）
-            method: 'post',           //请求方式（*）
+        $('#dataTable').bootstrapTable({
+            url: '/user/getUserList.html',     //请求后台的URL（*）
+            method: 'get',           //请求方式（*）
             toolbar: '#toolbar',        //工具按钮用哪个容器
             striped: true,           //是否显示行间隔色
             cache: false,            //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -27,7 +25,7 @@ var TableInit = function () {
             queryParams: oTableInit.queryParams,//传递参数（*）
             sidePagination: "server",      //分页方式：client客户端分页，server服务端分页（*）
             pageNumber:1,            //初始化加载第一页，默认第一页
-            pageSize: 50,            //每页的记录行数（*）
+            pageSize: 10,            //每页的记录行数（*）
             pageList: [10, 25, 50, 100],    //可供选择的每页的行数（*）
             strictSearch: true,
             clickToSelect: true,        //是否启用点击选中行
@@ -63,8 +61,8 @@ var TableInit = function () {
     //得到查询的参数
     oTableInit.queryParams = function (params) {
         var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            _index: params.limit,  //页面大小
-            _size: params.offset, //页码
+    		_size: params.limit,  //页面大小
+    		_index: params.offset + 1, //页码
             /*sdate: $("#stratTime").val(),
             edate: $("#endTime").val(),
             sellerid: $("#sellerid").val(),
