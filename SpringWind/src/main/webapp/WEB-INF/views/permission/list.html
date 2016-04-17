@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>权限管理</title>
-    <link href="/static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="/static/ont-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="/static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
-    <link href="/static/css/animate.min.css" rel="stylesheet">
-    <link href="/static/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-</head>
-
+#override("title")
+权限管理
+#end
+#override("body")
 <body class="gray-bg">
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
@@ -38,12 +29,39 @@
         </div>
     </div>
 </div>
-<script src="/static/js/jquery.min.js?v=2.1.4"></script>
-<script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="/static/js/content.min.js?v=1.0.0"></script>
-<script src="/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-<script src="/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-<script src="/static/js/permission/list.js"></script>
-</body>
-</html>
+#end  
+#override("js")
+<script type="text/javascript">
+var dataUrl="#springUrl('/permission/getPermissionList.html')";
+var dataColumns = [{
+    field: 'id',
+    title: '序号'
+}, {
+    field: 'title',
+    title: '标题'
+}, {
+    field: 'type',
+    title: '类型'
+},{
+    field: 'state',
+    title: '状态'
+}, {
+    field: 'url',
+    title: '地址'
+}, {
+	field: 'permCode',
+	title: '权限编码'
+}, {
+    field: 'icon',
+    title: '图标'
+}, {
+	field: 'description',
+	title: '描述'
+}];
+var dataQueryParams =  {
+	_size: params.limit,  //页面大小
+	_index: params.offset + 1, //页码
+};
+</script>
+#end
+#extends("/common/base_list.html")

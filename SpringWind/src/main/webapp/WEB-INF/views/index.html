@@ -5,10 +5,10 @@ SpringWind 管理系统 SSM 框架
 <!--[if lt IE 9]>
 <meta http-equiv="refresh" content="0;ie.html" />
 <![endif]-->
-<link href="/static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="/static/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-<link href="/static/css/animate.min.css" rel="stylesheet">
-<link href="/static/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="#springUrl('/static/css/bootstrap.min14ed.css?v=3.3.6')" rel="stylesheet">
+<link href="#springUrl('/static/css/font-awesome.min93e3.css?v=4.4.0')" rel="stylesheet">
+<link href="#springUrl('/static/css/animate.min.css')" rel="stylesheet">
+<link href="#springUrl('/static/css/style.min862f.css?v=4.1.0')" rel="stylesheet">
 #end
 #override("body")
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -133,10 +133,10 @@ SpringWind 管理系统 SSM 框架
                         </li>
                     </ul>
                 </div>
-                <a href="/account/lockscreen.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+                <a href="#springUrl('/account/lockscreen.html')" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="/home.html" frameborder="0" data-id="/home.html" seamless></iframe>
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="#springUrl('/home.html')" frameborder="0" data-id="#springUrl('/home.html')" seamless></iframe>
             </div>
             <div class="footer">
                 <div class="pull-right">&copy; 2016-2020 <a href="http://www.baomidou.com/" target="_blank">baomidou</a>
@@ -460,12 +460,12 @@ SpringWind 管理系统 SSM 框架
         </div>
         <!--右侧边栏结束-->
     </div>
-    <script src="/static/js/jquery.min.js?v=2.1.4"></script>
-    <script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="/static/js/hplus.min.js?v=4.1.0"></script>
-    <script type="text/javascript" src="/static/js/contabs.min.js"></script>
-    <script src="/static/js/plugins/pace/pace.min.js"></script>
+    <script src="#springUrl('/static/js/jquery.min.js?v=2.1.4')"></script>
+    <script src="#springUrl('/static/js/bootstrap.min.js?v=3.3.6')"></script>
+    <script src="#springUrl('/static/js/plugins/metisMenu/jquery.metisMenu.js')"></script>
+    <script src="#springUrl('/static/js/plugins/slimscroll/jquery.slimscroll.min.js')"></script>
+    <script src="#springUrl('/static/js/hplus.min.js?v=4.1.0')"></script>
+    <script type="text/javascript" src="#springUrl('/static/js/contabs.min.js')"></script>
+    <script src="#springUrl('/static/js/plugins/pace/pace.min.js')"></script>
 #end  
 #extends("/common/base.html")

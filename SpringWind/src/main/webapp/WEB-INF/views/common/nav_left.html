@@ -5,7 +5,7 @@
         <ul class="nav" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <span><img alt="image" class="img-circle" src="/static/img/profile_small.jpg" /></span>
+                    <span><img alt="image" class="img-circle" src="#springUrl('/static/img/profile_small.jpg')" /></span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                        		<span class="text-muted text-xs block">
@@ -19,7 +19,7 @@
                         <li><a class="J_menuItem" href="contacts.html">联系我们</a></li>
                         <li><a class="J_menuItem" href="mailbox.html">信箱</a></li>
                         <li class="divider"></li>
-                        <li><a href="/account/logout.html">安全退出</a>
+                        <li><a href="#springUrl('/account/logout.html')">安全退出</a>
                         </li>
                     </ul>
                 </div>
@@ -35,7 +35,7 @@
                 <ul class="nav nav-second-level">
                 	#foreach( $m in $menu.mvList)
                     <li>
-                        <a class="J_menuItem" href="${m.url}">${m.title}</a>
+                        <a class="J_menuItem" href="#springUrl(${m.url})">${m.title}</a>
                     </li>
                     #end
                 </ul>

@@ -14,7 +14,7 @@ var TableInit = function () {
     //初始化Table
     oTableInit.Init = function () {
         $('#dataTable').bootstrapTable({
-            url: '/user/getUserList.html',     //请求后台的URL（*）
+            url: dataUrl,     //请求后台的URL（*）
             method: 'get',           //请求方式（*）
             toolbar: '#toolbar',        //工具按钮用哪个容器
             striped: true,           //是否显示行间隔色
@@ -33,49 +33,13 @@ var TableInit = function () {
             uniqueId: "id",           //每一行的唯一标识，一般为主键列
             cardView: false,          //是否显示详细视图
             detailView: false,          //是否显示父子表
-            columns: [{
-                field: 'id',
-                title: '序号'
-            }, {
-                field: 'loginName',
-                title: '登录名'
-            }, {
-                field: 'email',
-                title: '邮箱'
-            },{
-                field: 'type',
-                title: '用户类型'
-            }, {
-                field: 'status',
-                title: '状态̬'
-            }, {
-                field: 'crTime',
-                title: '创建时间'
-            }, {
-                field: 'lastTime',
-                title: '最后更新时间'
-            }]
+            columns: dataColumns
         });
     };
 
     //得到查询的参数
     oTableInit.queryParams = function (params) {
-        var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-    		_size: params.limit,  //页面大小
-    		_index: params.offset + 1, //页码
-            /*sdate: $("#stratTime").val(),
-            edate: $("#endTime").val(),
-            sellerid: $("#sellerid").val(),
-            orderid: $("#orderid").val(),
-            CardNumber: $("#CardNumber").val(),
-            maxrows: params.limit,
-            pageindex: params.pageNumber,
-            portid: $("#portid").val(),
-            CardNumber: $("#CardNumber").val(),
-            tradetype: $('input:radio[name="tradetype"]:checked').val(),
-            success: $('input:radio[name="success"]:checked').val(),*/
-        };
-        return temp;
+        return dataQueryParams;
     };
     return oTableInit;
 };
