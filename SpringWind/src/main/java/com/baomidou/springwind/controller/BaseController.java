@@ -35,4 +35,17 @@ public class BaseController extends SuperController {
 		jo.put("rows", page.getRecords());
 		return toJson(jo);
 	}
+	
+	@Override
+	protected <T> Page<T> getPage(int size) {
+		int _size = size, _index = 1;
+		if (request.getParameter("_size") != null) {
+			_size = Integer.parseInt(request.getParameter("_size"));
+		}
+		if (request.getParameter("_index") != null) {
+			int _offset = Integer.parseInt(request.getParameter("_index"));
+			_index = _offset / _size + 1;
+		}
+		return new Page<T>(_index, _size);
+	}
 }

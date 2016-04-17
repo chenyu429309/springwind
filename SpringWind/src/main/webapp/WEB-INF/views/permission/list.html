@@ -59,9 +59,10 @@ var dataColumns = [{
 	title: '描述'
 }];
 function dataQueryParams(params) {
+	console.log(params)
 	return {
 		_size: params.limit,  //页面大小
-		_index: params.offset + 1, //页码
+		_index: params.offset, //页码
 	};
 }
 </script>
