@@ -43,10 +43,12 @@ var dataColumns = [{
     field: 'description',
     title: '描述'
 }];
-var dataQueryParams =  {
-	_size: params.limit,  //页面大小
-	_index: params.offset + 1, //页码
-};
+function dataQueryParams(params) {
+	return {
+		_size: params.limit,  //页面大小
+		_index: params.offset + 1, //页码
+	};
+}
 </script>
 #end
 #extends("/common/base_list.html")
