@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baomidou.kisso.annotation.Action;
 import com.baomidou.kisso.annotation.Login;
+import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.springwind.service.IPermissionService;
 
 /**
@@ -26,6 +27,7 @@ public class IndexController extends BaseController {
 	/**
 	 * 首页
 	 */
+	@Permission(action = Action.Skip)
 	@RequestMapping("/index")
 	public String index(Model model) {
 		model.addAttribute("currentUser", userService.selectById(getCurrentUserId()));
@@ -37,6 +39,7 @@ public class IndexController extends BaseController {
 	 * 主页
 	 */
 	@Login(action = Action.Skip)
+	@Permission(action = Action.Skip)
 	@RequestMapping("/home")
 	public String home(Model model) {
 

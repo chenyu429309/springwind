@@ -5,7 +5,7 @@
 
 	<bean id="velocityEngine"
 		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
-		<property name="resourceLoaderPath" value="/WEB-INF/views/mail/" />
+		<property name="resourceLoaderPath" value="/WEB-INF/views/" />
 		<property name="velocityProperties">
 			<props>
 				<prop key="default.contentType">text/html; charset=utf-8</prop>
@@ -16,15 +16,17 @@
 	</bean>
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.qdba.net" />
+		<property name="host" value="smtp.sina.com" />
 		<property name="port" value="25" />
 		<property name="protocol" value="smtp" />
-		<property name="username" value="xxx@baomidou.com" />
-		<property name="password" value="xxxx" />
+		<property name="username" value="hispringwind@sina.com" />
+		
+		<!-- 请勿改动密码 -->
+		<property name="password" value="1q2w3e" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.starttls.enable">false</prop>
 				<prop key="mail.smtp.quitwait">false</prop>
 			</props>
 		</property>
@@ -33,7 +35,7 @@
 	<bean id="mailMail" class="com.baomidou.framework.mail.MailHelper">
 		<property name="velocityEngine" ref="velocityEngine" />
 		<property name="mailSender" ref="mailSender" />
-		<property name="mailTitle" value="苞米豆" />
-		<property name="mailFrom" value="xxx@baomidou.com" />
+		<property name="mailTitle" value="SpringWind" />
+		<property name="mailFrom" value="hispringwind@sina.com" />
 	</bean>
 </beans>

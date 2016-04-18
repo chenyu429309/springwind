@@ -13,6 +13,7 @@ import com.baomidou.kisso.SSOHelper;
 import com.baomidou.kisso.SSOToken;
 import com.baomidou.kisso.annotation.Action;
 import com.baomidou.kisso.annotation.Login;
+import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.kisso.common.encrypt.SaltEncoder;
 import com.baomidou.springwind.common.enums.UserType;
 import com.baomidou.springwind.entity.User;
@@ -36,6 +37,7 @@ public class AccountController extends BaseController {
 	 * 登录
 	 */
 	@Login(action = Action.Skip)
+	@Permission(action = Action.Skip)
 	@RequestMapping("/login")
 	public String index(String loginName, String password) {
 		if (isPost()) {
@@ -60,23 +62,28 @@ public class AccountController extends BaseController {
 	 */
 	@Login(action = Action.Skip)
 	@RequestMapping("/register")
-	public String register(User user) {
+	public String register(Model model, User user) {
 		if (isPost()) {
-			/* 演示不验证表单，用户名作为密码盐值 */
-			user.setPassword(SaltEncoder.md5SaltEncode(user.getLoginName(), user.getPassword()));
-			user.setType(UserType.MEMBER.key());
-			user.setCrTime(new Date());
-			user.setLastTime(user.getCrTime());
-			boolean rlt = userService.insertSelective(user);
-			if (rlt) {
-				/*
-				 * 注册成功，自动登录进入后台
-				 */
-				SSOToken st = new SSOToken(request);
-				st.setId(user.getId());
-				st.setData(user.getLoginName());
-				SSOHelper.setSSOCookie(request, response, st, true);
-				return redirectTo("/index.html");
+			User existUser = userService.selectByLoginName(user.getLoginName());
+			if (existUser == null) {
+				/* 演示不验证表单，用户名作为密码盐值 */
+				user.setPassword(SaltEncoder.md5SaltEncode(user.getLoginName(), user.getPassword()));
+				user.setType(UserType.MEMBER.key());
+				user.setCrTime(new Date());
+				user.setLastTime(user.getCrTime());
+				boolean rlt = userService.insertSelective(user);
+				if (rlt) {
+					/*
+					 * 注册成功，自动登录进入后台
+					 */
+					SSOToken st = new SSOToken(request);
+					st.setId(user.getId());
+					st.setData(user.getLoginName());
+					SSOHelper.setSSOCookie(request, response, st, true);
+					return redirectTo("/index.html");
+				}
+			} else {
+				model.addAttribute("tipMsg", "注册用户名【" + user.getLoginName() + "】已存在！");
 			}
 		}
 		return "/register";
@@ -86,6 +93,7 @@ public class AccountController extends BaseController {
 	 * 退出
 	 */
 	@Login(action = Action.Skip)
+	@Permission(action = Action.Skip)
 	@RequestMapping("/logout")
 	public String logout(Model model) {
 		SSOHelper.clearLogin(request, response);
@@ -96,6 +104,7 @@ public class AccountController extends BaseController {
 	 * 锁定
 	 */
 	@Login(action = Action.Skip)
+	@Permission(action = Action.Skip)
 	@RequestMapping("/lockscreen")
 	public String lockscreen(Model model, String password) {
 		HttpSession session = request.getSession();

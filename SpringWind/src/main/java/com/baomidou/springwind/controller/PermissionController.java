@@ -26,12 +26,14 @@ public class PermissionController extends BaseController {
 	@Autowired
 	private IPermissionService permissionService;
 
+	@com.baomidou.kisso.annotation.Permission("2003")
 	@RequestMapping("/list")
 	public String list(Model model) {
 		return "/permission/list";
 	}
 
 	@ResponseBody
+	@com.baomidou.kisso.annotation.Permission("2003")
 	@RequestMapping("/getPermissionList")
 	public String getPermissionList() {
 		Page<Permission> page = getPage();

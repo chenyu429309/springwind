@@ -58,6 +58,16 @@
 			<mvc:mapping path="/**" />
 			<bean class="com.baomidou.kisso.web.interceptor.SSOSpringInterceptor" />
 		</mvc:interceptor>
+		<!-- 权限拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.baomidou.kisso.web.interceptor.SSOPermissionInterceptor">
+				<property name="authorization">
+					<bean class="com.baomidou.springwind.service.impl.PermissionServiceImpl"/>
+				</property>
+				<property name="illegalUrl" value="/error/illegalAccess.html"/>
+			</bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<mvc:annotation-driven>

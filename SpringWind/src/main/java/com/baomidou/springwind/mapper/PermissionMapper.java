@@ -17,4 +17,6 @@ public interface PermissionMapper extends AutoMapper<Permission> {
 
 	List<MenuVO> selectMenuByUserId(@Param("userId") Long userId, @Param("pid") Long pid);
 
+	List<Permission> selectAllByUserId(@Param("userId") Long userId);
+
 }

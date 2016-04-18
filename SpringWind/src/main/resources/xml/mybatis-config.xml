@@ -31,20 +31,4 @@
 		<typeAlias alias="taskVo" type="xxx.vo.TaskVo" />
 		 -->
 	</typeAliases>
-	
-	<!-- 插件配置, spring 中配置，此处就可以不用配置。 -->
-        <!-- 
-    <plugins>
-         | 分页插件配置 
-         | 插件首先会根据方言查找实现类，如果未找到则使用自定义的实现类，两者均为配置则抛出异常
-         | dialectType 数据库方言  
-         |             默认支持  mysql|oracle
-         | dialectClazz 方言实现类
-         |              自定义需要实现 net.qdba.utils.mybatis.pagination.IDialect 接口
-        <plugin interceptor="net.qdba.utils.mybatis.pagination.plugins.PaginationInterceptor">
-            <property name="dialectType" value="mysql" />
-            <property name="dialectClazz" value="net.qdba.utils.mybatis.pagination.dialect.MySqlDialect" />
-        </plugin>
-    </plugins>
-         | -->
 </configuration>

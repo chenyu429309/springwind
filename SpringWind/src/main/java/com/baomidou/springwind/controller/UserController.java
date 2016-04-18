@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.entity.User;
 import com.baomidou.springwind.service.IUserService;
@@ -26,12 +27,14 @@ public class UserController extends BaseController {
 	@Autowired
 	private IUserService userService;
 
+	@Permission("2001")
 	@RequestMapping("/list")
 	public String list(Model model) {
 		return "/user/list";
 	}
 
 	@ResponseBody
+	@Permission("2001")
 	@RequestMapping("/getUserList")
 	public String getUserList() {
 		Page<User> page = getPage();

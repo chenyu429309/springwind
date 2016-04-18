@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.controller.SuperController;
+import com.baomidou.framework.mail.MailHelper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.service.IUserService;
 
@@ -19,6 +20,10 @@ public class BaseController extends SuperController {
 
 	@Autowired
 	protected IUserService userService;
+	
+	@Autowired
+	protected MailHelper mailHelper;
+	
 
 	/**
 	 * <p>

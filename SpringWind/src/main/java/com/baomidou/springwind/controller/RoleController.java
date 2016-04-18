@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.entity.Role;
 import com.baomidou.springwind.service.IRoleService;
@@ -26,12 +27,14 @@ public class RoleController extends BaseController {
 	@Autowired
 	private IRoleService roleService;
 
+	@Permission("2002")
 	@RequestMapping("/list")
 	public String list(Model model) {
 		return "/role/list";
 	}
 
 	@ResponseBody
+	@Permission("2002")
 	@RequestMapping("/getRoleList")
 	public String getUserList() {
 		Page<Role> page = getPage();
