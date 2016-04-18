@@ -61,6 +61,7 @@ public class AccountController extends BaseController {
 	 * 注册
 	 */
 	@Login(action = Action.Skip)
+	@Permission(action = Action.Skip)
 	@RequestMapping("/register")
 	public String register(Model model, User user) {
 		if (isPost()) {
