@@ -39,6 +39,16 @@
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	
+	<!-- 检测开发环境，/druid/index.html -->
+    <servlet>
+	    <servlet-name>druidStatView</servlet-name>
+	    <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>druidStatView</servlet-name>
+	    <url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
+	
 	<!-- 异常配置 -->
 	<error-page>
 		<error-code>404</error-code>
