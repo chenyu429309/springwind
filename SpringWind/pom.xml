@@ -9,6 +9,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<servlet-api.version>2.5</servlet-api.version>
 		<spring-wind.version>1.1</spring-wind.version>
 		<velocity.version>1.7</velocity.version>
 		<velocity-tools.version>2.0</velocity-tools.version>
@@ -27,6 +28,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>spring-wind</artifactId>
 			<version>${spring-wind.version}</version>
@@ -37,6 +44,28 @@
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity-tools</artifactId>
 			<version>${velocity-tools.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>dom4j</artifactId>
+					<groupId>dom4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>struts-core</artifactId>
+					<groupId>org.apache.struts</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>struts-tiles</artifactId>
+					<groupId>org.apache.struts</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>struts-taglib</artifactId>
+					<groupId>org.apache.struts</groupId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
