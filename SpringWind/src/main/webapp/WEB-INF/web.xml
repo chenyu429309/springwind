@@ -6,7 +6,7 @@
 	<!-- Spring 配置路径 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring/app-*.xml</param-value>
+		<param-value>classpath:spring/spring-framework.xml,classpath:spring/app-*.xml</param-value>
 	</context-param>
 	
 	<!-- LogBack 日志管理文件 -->
