@@ -52,9 +52,10 @@ http://git.oschina.net/juapk/spring-wind
 
 2、导入数据库 /SpringWind/src/test/resources/springwind.sql
 
-3、配置 host 为  127.0.0.1 demo.baomidou.com
+3、操作系统 host 添加一行设置 127.0.0.1 demo.baomidou.com
 
 4、访问：http://demo.baomidou.com:8080 登录账户默认：  admin 管理员，密码 123 ，普通会员 test 密码  123
+
 
 ```
 
@@ -67,6 +68,14 @@ http://git.oschina.net/juapk/spring-wind
 2、访问地址：http://demo.baomidou.com:8080/role/list.html
 ```
 
+
+> 404 异常
+
+```
+1、操作系统 host 需要与 /SpringWind/src/main/resources/properties/sso.properties 配置一致（配置好 host 重启浏览器）
+
+2、注意：访问项目名称问题 ，未配置无项目名称访问携带项目名称访问。
+```
 
 更多补充中。。。。。
 
