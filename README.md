@@ -3,7 +3,7 @@
 
 SSM 架构后台管理系统
 
-> 技术讨论 QQ 群 235079513 
+> 技术讨论 QQ 群 235079513
 
 [项目核心库 spring-wind 点击查看](http://git.oschina.net/juapk/spring-wind)
 
@@ -52,9 +52,11 @@ http://git.oschina.net/juapk/spring-wind
 
 2、导入数据库 /SpringWind/src/test/resources/springwind.sql
 
-3、操作系统 host 添加一行设置 127.0.0.1 demo.baomidou.com
+3、导入Quartz 相关表 /SpringWind/src/test/resources/quartz_mysql_innodb.sql
 
-4、访问：http://demo.baomidou.com:8080 登录账户默认：  admin 管理员，密码 123 ，普通会员 test 密码  123
+4、操作系统 host 添加一行设置 127.0.0.1 demo.baomidou.com
+
+5、访问：http://demo.baomidou.com:8080 登录账户默认：  admin 管理员，密码 123 ，普通会员 test 密码  123
 
 
 ```
@@ -95,7 +97,7 @@ http://git.oschina.net/juapk/spring-wind
 Features
 =======
 
-1、欢迎提出更好的意见，帮助完善 Spring-Wind 
+1、欢迎提出更好的意见，帮助完善 Spring-Wind
 
 Copyright
 ====================
