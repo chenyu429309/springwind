@@ -34,7 +34,7 @@ public class QuartzServiceImpl implements IQuartzService {
             jobName = "DemoJob";
         }
 
-        // 如果已经添加过Job
+        // 已经添加过job返回添加失败
         if (quartzJobManager.isJobAdded(jobName, "job_group")) {
             LOGGER.error("名称[" + jobName + "]的任务已存在]");
             return false;
