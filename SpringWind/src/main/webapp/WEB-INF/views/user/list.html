@@ -15,11 +15,11 @@
             </li>
         </ol>
     </div>
-    <div class="col-sm-8">
-        <div class="title-action">
-            <a href="empty_page.html" class="btn btn-primary">活动区域</a>
-        </div>
-    </div>
+    <!--<div class="col-sm-8">-->
+        <!--<div class="title-action">-->
+            <!--<a href="empty_page.html" class="btn btn-primary">活动区域</a>-->
+        <!--</div>-->
+    <!--</div>-->
 </div>
 
 <div class="wrapper wrapper-content">
@@ -29,39 +29,122 @@
         </div>
     </div>
 </div>
+
+<div class="btn-group hidden-xs" id="toolbar" role="group">
+    <button type="button" class="btn btn-outline btn-default">
+        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="btn btn-outline btn-default">
+        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="btn btn-outline btn-default">
+        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+    </button>
+</div>
 </body>
-#end  
+#end
 #override("js")
 <script type="text/javascript">
-var dataUrl="#springUrl('/user/getUserList.html')";
-var dataColumns = [{
-    field: 'id',
-    title: '序号'
-}, {
-    field: 'loginName',
-    title: '登录名'
-}, {
-    field: 'email',
-    title: '邮箱'
-},{
-    field: 'type',
-    title: '用户类型'
-}, {
-    field: 'status',
-    title: '状态'
-}, {
-    field: 'crTime',
-    title: '创建时间'
-}, {
-    field: 'lastTime',
-    title: '最后更新时间'
-}];
-function dataQueryParams(params) {
-	return {
-		_size: params.limit,  //页面大小
-		_index: params.offset, //页码
-	};
-}
+    var dataUrl = "#springUrl('/user/getUserList.html')";
+    var dataColumns = [{
+        field: 'id',
+        title: '序号'
+    }, {
+        field: 'loginName',
+        title: '登录名'
+    }, {
+        field: 'email',
+        title: '邮箱'
+    }, {
+        field: 'type',
+        title: '用户类型'
+    }, {
+        field: 'status',
+        title: '状态'
+    }, {
+        field: 'crTime',
+        title: '创建时间',
+        formatter: function (value, row, index) {
+            return formatDate(row.crTime);
+        }
+    }, {
+        field: 'lastTime',
+        title: '最后更新时间',
+        formatter: function (value, row, index) {
+            return formatDate(row.lastTime);
+        }
+    }, {
+        title: '#',
+        formatter: function (value, row, index) {
+            var id = row.id;
+            return '<a class="btn btn-xs btn-info" href="#springUrl('/user/addUser.html')"><i class="fa fa-pencil"></i>新增</a> '
+                    +'<a class="btn btn-xs btn-info" onclick="editUser(' + "'" + id + "'" + ')"><i class="fa fa-pencil"></i>编辑</a> '
+                    + '<a class="btn btn-xs btn-info" onclick="delUser(' + "'" + id + "'" + ')"><i class="fa fa-remove"></i>删除</a>';
+        }
+    }
+    ];
+    function dataQueryParams(params) {
+        return {
+            _size: params.limit,  //页面大小
+            _index: params.offset, //页码
+        };
+    }
+
+    function formatDate(time) {
+        if (time == '' || time == null || time == undefined) return '';
+        var datetime = new Date();
+        datetime.setTime(time);
+        var year = datetime.getFullYear();
+        var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+        var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+        var hour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
+        var minute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+        var second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+        return year + "年" + month + "月" + date + "日 " + hour + ":" + minute + ":" + second;
+    }
+
+    function delUser(userId) {
+        console.info(userId);
+        //询问框
+        layer.confirm('确定删除吗？', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                type: "POST",
+                url: "#springUrl('/user/delUser/')" + userId,
+                datatype: "text",
+                success: function (data) {
+                    if(data == 'true'){
+                        $('#dataTable').bootstrapTable('refresh',{url:dataUrl});
+                    }
+                    layer.closeAll();
+                }
+            });
+        }, function () {
+            return;
+        });
+    }
+
+    function editUser(userId,type){
+        var title;
+        if(type == 1){
+            title = "新增用户";
+        } else{
+            title = "编辑用户";
+        }
+        //iframe层
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: 0.8,
+            area: ['540px', '600px'],
+            fix: false, //不固定
+            maxmin: true,
+            //content: "http://www.baidu.com" //iframe的url
+            content: "#springUrl('/user/addUser/1')" //iframe的url
+        });
+    }
 </script>
 #end
 #extends("/common/base_list.html")

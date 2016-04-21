@@ -11,4 +11,5 @@ import com.baomidou.framework.service.ISuperService;
 public interface IRoleService extends ISuperService<Role> {
 
 
+    void deleteByUserId(Long userId);
 }

@@ -10,5 +10,5 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface UserRoleMapper extends AutoMapper<UserRole> {
 
-
+    void deleteByUserId(Long userId);
 }

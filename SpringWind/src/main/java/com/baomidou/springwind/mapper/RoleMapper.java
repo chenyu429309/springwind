@@ -10,5 +10,4 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface RoleMapper extends AutoMapper<Role> {
 
-
 }
