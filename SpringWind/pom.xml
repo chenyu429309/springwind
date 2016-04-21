@@ -181,12 +181,12 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.3.7.v20160115</version>
                 <configuration>
-                    <contextPath>/</contextPath>
-                    <connectors>
-                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                    <httpConnector>
                             <port>8080</port>
-                        </connector>
-                    </connectors>
+                    </httpConnector>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                    </webAppConfig>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
                 </configuration>
             </plugin>
