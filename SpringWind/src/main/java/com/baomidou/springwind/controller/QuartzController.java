@@ -1,18 +1,15 @@
 package com.baomidou.springwind.controller;
 
-import com.baomidou.kisso.annotation.Permission;
-import com.baomidou.springwind.jobs.DemoJob;
-import com.baomidou.springwind.service.IQuartzService;
-import org.apache.ibatis.logging.Log;
-import org.apache.ibatis.logging.LogFactory;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import java.text.ParseException;
+
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.text.ParseException;
+import com.baomidou.kisso.annotation.Permission;
+import com.baomidou.springwind.service.IQuartzService;
 
 /**
  * <p>
@@ -25,7 +22,6 @@ import java.text.ParseException;
 @Controller
 @RequestMapping("/quartz")
 public class QuartzController extends BaseController {
-    private static final Log LOGGER = LogFactory.getLog(DemoJob.class);
 
     @Autowired
     private IQuartzService quartzService;
