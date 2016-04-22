@@ -15,11 +15,11 @@
             </li>
         </ol>
     </div>
-    <!--<div class="col-sm-8">-->
-        <!--<div class="title-action">-->
-            <!--<a href="empty_page.html" class="btn btn-primary">活动区域</a>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="col-sm-8">
+        <div class="title-action">
+            <a href="empty_page.html" class="btn btn-primary">活动区域</a>
+        </div>
+    </div>
 </div>
 
 <div class="wrapper wrapper-content">
@@ -28,18 +28,6 @@
             <table id="dataTable"></table>
         </div>
     </div>
-</div>
-
-<div class="btn-group hidden-xs" id="toolbar" role="group">
-    <button type="button" class="btn btn-outline btn-default">
-        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-    </button>
-    <button type="button" class="btn btn-outline btn-default">
-        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-    </button>
-    <button type="button" class="btn btn-outline btn-default">
-        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-    </button>
 </div>
 </body>
 #end
@@ -88,19 +76,6 @@
             _size: params.limit,  //页面大小
             _index: params.offset, //页码
         };
-    }
-
-    function formatDate(time) {
-        if (time == '' || time == null || time == undefined) return '';
-        var datetime = new Date();
-        datetime.setTime(time);
-        var year = datetime.getFullYear();
-        var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
-        var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-        var hour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
-        var minute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
-        var second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-        return year + "年" + month + "月" + date + "日 " + hour + ":" + minute + ":" + second;
     }
 
     function delUser(userId) {
