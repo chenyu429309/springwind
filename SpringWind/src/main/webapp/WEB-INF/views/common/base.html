@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>#block("title")#end</title>
-	<meta name="keywords" content="SpringWind,后台管理系统,SSM框架">
-	<meta name="description" content="SpringWind 后台管理系统, 打造一个完美的 Spring，SpringMVC，MyBatis 架构生态圈。">
-	<link rel="shortcut icon" href="favicon.ico">
+	#parse("/common/header.html")
 	#block("css")#end
 </head>
 #block("body")#end
+<script src="#springUrl('/static/js/jquery-2.1.1.js')"></script>
+<script src="#springUrl('/static/js/bootstrap.min.js')"></script>
+#block("js")#end
 </html>

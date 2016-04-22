@@ -1,19 +1,9 @@
 #override("title")
 SpringWind 管理系统 - 登录
 #end
-#override("css")
-<!--[if lt IE 9]>
-<meta http-equiv="refresh" content="0;ie.html" />
-<![endif]-->
-<link href="#springUrl('/static/css/bootstrap.min14ed.css?v=3.3.6')" rel="stylesheet">
-<link href="#springUrl('/static/css/font-awesome.min93e3.css?v=4.4.0')" rel="stylesheet">
-<link href="#springUrl('/static/css/animate.min.css')" rel="stylesheet">
-<link href="#springUrl('/static/css/style.min862f.css?v=4.1.0')" rel="stylesheet">
-<script>if(window.top !== window.self){ window.top.location = window.location;}</script>
-#end
 #override("body")
 <body class="gray-bg">
-    <div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
                 <h1 class="logo-name">SW</h1>
@@ -27,13 +17,13 @@ SpringWind 管理系统 - 登录
                     <input type="password" name="password" class="form-control" placeholder="密码" required="">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
-                <p class="text-muted text-center"> <a href="#"><small>忘记密码了？</small></a> | <a href="#springUrl('/account/register.html')">注册一个新账号</a>
-                </p>
+
+                <a href="#"><small>忘记密码了？</small><br><br></a>
+                <a class="btn btn-sm btn-white btn-block" href="#springUrl('/account/register.html')">注册一个新账号</a>
             </form>
+            <p class="m-t"><small>&copy;baomidou</small> </p>
         </div>
     </div>
-    <script src="#springUrl('/static/js/jquery.min.js?v=2.1.4')"></script>
-    <script src="#springUrl('/static/js/bootstrap.min.js?v=3.3.6')"></script>
 </body>
 #end  
 #extends("/common/base.html")

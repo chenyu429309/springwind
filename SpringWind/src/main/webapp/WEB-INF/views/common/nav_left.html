@@ -1,23 +1,18 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="nav-close"><i class="fa fa-times-circle"></i>
-    </div>
     <div class="sidebar-collapse">
-        <ul class="nav" id="side-menu">
+        <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
-                <div class="dropdown profile-element">
-                    <span><img alt="image" class="img-circle" src="#springUrl('/static/img/profile_small.jpg')" /></span>
+                <div class="dropdown profile-element"> <span>
+                    <img alt="image" class="img-circle" src="#springUrl('/static/img/profile_small.jpg')" />
+                     </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="clear">
-                       		<span class="text-muted text-xs block">
-                        		<strong class="font-bold">$!{currentUser.loginName}</strong><b class="caret"></b>
-                      		</span>
-                        </span>
-                    </a>
+                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">$!{currentUser.loginName}</strong>
+                     </span> <span class="text-muted text-xs block">设置<b class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="J_menuItem" href="form_avatar.html">修改头像</a></li>
-                        <li><a class="J_menuItem" href="profile.html">个人资料</a></li>
-                        <li><a class="J_menuItem" href="contacts.html">联系我们</a></li>
-                        <li><a class="J_menuItem" href="mailbox.html">信箱</a></li>
+                        <li><a href="form_avatar.html">修改头像</a></li>
+                        <li><a href="profile.html">个人资料</a></li>
+                        <li><a href="contacts.html">联系我们</a></li>
+                        <li><a href="mailbox.html">信箱</a></li>
                         <li class="divider"></li>
                         <li><a href="#springUrl('/account/logout.html')">安全退出</a>
                         </li>
@@ -26,17 +21,18 @@
                 <div class="logo-element">SW</div>
             </li>
             #foreach( $menu in $menuList )
-            <li>
+            <li #if($velocityCount==1)class="active"#end>
                 <a href="#">
-                    <i class="${menu.icon}"></i>
-                    <span class="nav-label">${menu.title}</span>
-                    <span class="fa arrow"></span>
-                </a>
+                	<i class="${menu.icon}"></i>
+                	<span class="nav-label">${menu.title}</span>
+                	<span class="fa arrow"></span>
+               	</a>
                 <ul class="nav nav-second-level">
-                	#foreach( $m in $menu.mvList)
-                    <li>
-                        <a class="J_menuItem" href="#springUrl(${m.url})">${m.title}</a>
-                    </li>
+                	<!-- 
+                    <li class="active"><a href="index.html">Dashboard v.1</a></li>
+                	 -->
+                    #foreach( $m in $menu.mvList)
+                    <li><a href="#springUrl(${m.url})">${m.title}</a></li>
                     #end
                 </ul>
             </li>

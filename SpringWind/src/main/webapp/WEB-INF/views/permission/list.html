@@ -1,9 +1,11 @@
 #override("title")
-权限管理
+SpringWind - 权限管理
 #end
-#override("body")
-<body class="gray-bg">
-<div class="row wrapper border-bottom white-bg page-heading">
+#override("css")
+<link href="#springUrl('/static/css/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+#end
+#override("content")
+<div class="row">
     <div class="col-sm-4">
         <h2>标题</h2>
         <ol class="breadcrumb">
@@ -15,23 +17,21 @@
             </li>
         </ol>
     </div>
-    <!--<div class="col-sm-8">
-        <div class="title-action">
-            <a href="empty_page.html" class="btn btn-primary">活动区域</a>
-        </div>
-    </div>-->
 </div>
-
-<div class="wrapper wrapper-content">
+<div class="row">
     <div class="row">
         <div class="col-sm-12">
             <table id="dataTable"></table>
         </div>
     </div>
 </div>
-</body>
-#end  
+#end
 #override("js")
+<script src="#springUrl('/static/js/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/static/js/base_list.js')"></script>
+<script src="#springUrl('/static/js/common.js')"></script>
 <script type="text/javascript">
 var dataUrl="#springUrl('/permission/getPermissionList.html')";
 var dataColumns = [{
@@ -68,4 +68,4 @@ function dataQueryParams(params) {
 }
 </script>
 #end
-#extends("/common/base_list.html")
+#extends("/common/framework.html")
