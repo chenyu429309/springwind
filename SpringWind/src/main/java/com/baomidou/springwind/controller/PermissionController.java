@@ -20,7 +20,7 @@ import com.baomidou.springwind.service.IPermissionService;
  * @Date 2016-04-15
  */
 @Controller
-@RequestMapping("/permission")
+@RequestMapping("/perm/permission")
 public class PermissionController extends BaseController {
 
 	@Autowired

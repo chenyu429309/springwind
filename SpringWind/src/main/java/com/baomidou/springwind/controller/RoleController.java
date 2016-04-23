@@ -21,7 +21,7 @@ import com.baomidou.springwind.service.IRoleService;
  * @Date 2016-04-15
  */
 @Controller
-@RequestMapping("/role")
+@RequestMapping("/perm/role")
 public class RoleController extends BaseController {
 
 	@Autowired

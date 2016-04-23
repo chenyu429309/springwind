@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Date 2016/4/15 15:03
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/perm/user")
 public class UserController extends BaseController {
 
 	@Autowired

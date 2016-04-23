@@ -38,3 +38,9 @@
 </div>
 #end
 #end
+
+## 导航菜单选择宏
+#macro(currentClass $modulePath $className)
+#set($url=$request.getRequestURI())
+#if($modulePath && $modulePath != '' && ${url.contains($modulePath)})${className}#end
+#end

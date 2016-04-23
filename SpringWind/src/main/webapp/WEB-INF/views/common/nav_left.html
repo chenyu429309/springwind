@@ -21,18 +21,15 @@
                 <div class="logo-element">SW</div>
             </li>
             #foreach( $menu in $menuList )
-            <li #if($velocityCount==1)class="active"#end>
+            <li #currentClass($menu.url, "class='active'")>
                 <a href="#">
                 	<i class="${menu.icon}"></i>
                 	<span class="nav-label">${menu.title}</span>
                 	<span class="fa arrow"></span>
                	</a>
                 <ul class="nav nav-second-level">
-                	<!-- 
-                    <li class="active"><a href="index.html">Dashboard v.1</a></li>
-                	 -->
                     #foreach( $m in $menu.mvList)
-                    <li><a href="#springUrl(${m.url})">${m.title}</a></li>
+                    <li #currentClass($m.url, "class='active'")><a href="#springUrl(${m.url})">${m.title}</a></li>
                     #end
                 </ul>
             </li>
