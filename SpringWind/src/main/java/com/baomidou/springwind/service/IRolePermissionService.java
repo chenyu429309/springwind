@@ -10,5 +10,15 @@ import com.baomidou.framework.service.ISuperService;
  */
 public interface IRolePermissionService extends ISuperService<RolePermission> {
 
+	/**
+	 * <p>
+	 * 判断是否存在角色对应的权限
+	 * </p>
+	 * 
+	 * @param permissionId
+	 *            权限ID
+	 * @return
+	 */
+	boolean existRolePermission(Long permissionId);
 
 }

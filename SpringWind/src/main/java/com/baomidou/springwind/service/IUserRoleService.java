@@ -10,5 +10,15 @@ import com.baomidou.framework.service.ISuperService;
  */
 public interface IUserRoleService extends ISuperService<UserRole> {
 
+	/**
+	 * <p>
+	 * 判断是否存在角色对应的用户
+	 * </p>
+	 * 
+	 * @param roleId
+	 *            角色ID
+	 * @return
+	 */
+	boolean existRoleUser(Long roleId);
 
 }
