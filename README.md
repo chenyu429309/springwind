@@ -22,7 +22,7 @@ SSM 架构后台管理系统
 > 简单介绍
 
 ```
-该项目为 SSM 核心库 spring-wind 演示项目
+该项目为 SSM 核心库 spring-wind-core 演示项目
 
 http://git.oschina.net/juapk/spring-wind
 
