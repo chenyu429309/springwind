@@ -5,7 +5,7 @@ SSM 架构后台管理系统
 
 > 技术讨论 QQ 群 235079513
 
-[项目核心库 spring-wind 点击查看](http://git.oschina.net/juapk/spring-wind)
+[项目核心库 spring-wind-core 点击查看](http://git.oschina.net/juapk/spring-wind)
 
 ------------------------------------------------
 《春风》
