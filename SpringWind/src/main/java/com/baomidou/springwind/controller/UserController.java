@@ -1,5 +1,6 @@
 package com.baomidou.springwind.controller;
 
+import com.baomidou.kisso.annotation.Action;
 import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.common.enums.OptionType;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -68,4 +70,13 @@ public class UserController extends BaseController {
 		return userService.selectById(userId);
 	}
 
+
+	/**
+	 * 设置头像
+	 */
+	@Permission(action = Action.Skip)
+	@RequestMapping(value = "/setAvatar", method = RequestMethod.GET)
+	public String setAvatar() {
+		return "/user/avatar";
+	}
 }
