@@ -18,7 +18,10 @@ http://git.oschina.net/juapk/spring-wind
 
 2、导入数据库 /SpringWind/src/test/resources/springwind.sql
 
-3、导入Quartz 相关表 /SpringWind/src/test/resources/quartz_mysql_innodb.sql
+3、导入Quartz 相关表
+   a) MySql MyISAM引擎（默认）：/SpringWind/src/test/resources/quartz/quartz_mysql.sql
+   b) MySql InnoDB引擎：       /SpringWind/src/test/resources/quartz/quartz_mysql_innodb.sql
+   c) 其他数据库版本请到 http://www.quartz-scheduler.org/downloads/ 下载
 
 4、配置 host 为  127.0.0.1 demo.baomidou.com
 
