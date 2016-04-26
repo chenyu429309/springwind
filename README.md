@@ -56,7 +56,13 @@ http://git.oschina.net/juapk/spring-wind
 
 5、访问：http://demo.baomidou.com:8080 登录账户默认：  admin 管理员，密码 123 ，普通会员 test 密码  123
 
-6、必须配置 hosts 重启浏览器，未配置无项目名称访问 404 ， /SpringWind/src/main/resources/properties/sso.properties 配置修改为：sso.login.url=http://demo.baomidou.com:8080/SpringWind/account/login.html 访问：http://demo.baomidou.com:8080/SpringWind/account/login.html
+6、必须配置 hosts 重启浏览器，未配置无项目名称访问 404 ！！
+
+ /SpringWind/src/main/resources/properties/sso.properties 配置修改为：
+
+sso.login.url=http://demo.baomidou.com:8080/SpringWind/account/login.html 
+
+访问：http://demo.baomidou.com:8080/SpringWind/account/login.html
 
 ```
 
