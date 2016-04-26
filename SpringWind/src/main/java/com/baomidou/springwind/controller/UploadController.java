@@ -12,6 +12,10 @@ import com.baomidou.kisso.annotation.Permission;
  * <p>
  * 上传服务
  * </p>
+ * <p>
+ * 头像上传控件：<br>
+ * http://www.fullavatareditor.com/index.html
+ * </p>
  * 
  * @author hubin
  * @Date 2016-04-13

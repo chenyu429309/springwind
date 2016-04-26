@@ -7,40 +7,49 @@ SpringWind 修改头像
 #override("content")
 <div class="row">
 	<div class="form-group">
-	<OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-		codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"
-		WIDTH="650" HEIGHT="450" id="myMovieName">
-		<PARAM NAME=movie VALUE="#springUrl('/static/plugins/flash/avatar.swf')">
-		<PARAM NAME=quality VALUE=high>
-		<PARAM NAME=bgcolor VALUE=#FFFFFF>
-		<param name="flashvars" value="imgUrl=#springUrl('/static/img/spring-wind.png')&uploadUrl=#springUrl('/sys/upload/file.html?uploadSrc=false&showCame=false')" />
-		<EMBED src="#springUrl('/static/plugins/flash/avatar.swf')" quality=high bgcolor=#FFFFFF WIDTH="650" HEIGHT="450" wmode="transparent"
-			flashVars="imgUrl=#springUrl('/static/img/spring-wind.png')&uploadUrl=#springUrl('/sys/upload/file.html?uploadSrc=false&showCame=false')"
-			NAME="myMovieName" ALIGN="" TYPE="application/x-shockwave-flash" allowScriptAccess="always"
-			PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer">
-		</EMBED>
-	</OBJECT>
+		<div style="width:800px;margin: 0 auto;">
+            <div>
+                <p id="swfContainer">
+                    本组件需要安装Flash Player后才可使用，请从
+                    <a href="http://www.adobe.com/go/getflashplayer">这里</a>
+                    下载安装。
+                </p>
+            </div>
+        </div>
 	</div>
 </div>
 #end
 #override("js")
+<script type="text/javascript" src="#springUrl('/static/plugins/fullAvatarEditor-2.3/scripts/swfobject.js')"></script>
+<script type="text/javascript" src="#springUrl('/static/plugins/fullAvatarEditor-2.3/scripts/fullAvatarEditor.js')"></script>
 <script type="text/javascript">
-function uploadevent(status,picUrl,callbackdata){
-  //alert(picUrl); //后端存储图片
-//	alert(callbackdata);
-    status += '';
-    switch(status){
-     case '1':
-		console.log(picUrl);
-		break;
-     case '-1':
-	  	window.location.reload();
-     	break;
-     default:
-     	window.location.reload();
-   }
-   console.log(status);
-}
+swfobject.addDomLoadEvent(function () {
+    var swf = new fullAvatarEditor("#springUrl('/static/plugins/fullAvatarEditor-2.3/fullAvatarEditor.swf')", 
+    		"#springUrl('/static/plugins/fullAvatarEditor-2.3/expressInstall.swf')", "swfContainer", {
+            id : "swf",
+            upload_url : "#springUrl('/sys/upload/file.html')",
+            method : "post",
+            src_url : "#springUrl('/static/img/spring-wind.png')",
+            src_upload : 0
+        }, function (msg) {
+            switch(msg.code) {
+                case 3 :
+                    if(msg.type == 0) {  alert("摄像头已准备就绪且用户已允许使用。"); }
+                    else if(msg.type == 1) { alert("摄像头已准备就绪但用户未允许使用！"); }
+                    else { alert("摄像头被占用！"); }
+                break;
+                case 5 : 
+                    if(msg.type == 0) {
+                        if(msg.content.sourceUrl) {
+                            alert("原图片已成功保存至服务器，url为：\n" +　msg.content.sourceUrl);
+                        }
+                        alert("头像已成功保存至服务器，url为：\n" + msg.content.avatarUrls.join("\n"));
+                    }
+                break;
+            }
+        }
+    );
+});
 </script>
 #end
 #extends("/common/framework.html")
