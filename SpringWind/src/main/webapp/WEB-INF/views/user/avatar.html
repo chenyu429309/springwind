@@ -13,15 +13,35 @@ SpringWind 修改头像
 		<PARAM NAME=movie VALUE="#springUrl('/static/plugins/flash/avatar.swf')">
 		<PARAM NAME=quality VALUE=high>
 		<PARAM NAME=bgcolor VALUE=#FFFFFF>
-		<param name="flashvars" value="imgUrl=#springUrl('/static/img/spring-wind.png')&uploadUrl=#springUrl('/sys/upload/file.html')" />
+		<param name="flashvars" value="imgUrl=#springUrl('/static/img/spring-wind.png')&uploadUrl=#springUrl('/sys/upload/file.html?uploadSrc=false&showCame=false')" />
 		<EMBED src="#springUrl('/static/plugins/flash/avatar.swf')" quality=high bgcolor=#FFFFFF WIDTH="650" HEIGHT="450" wmode="transparent"
-			flashVars="imgUrl=#springUrl('/static/img/spring-wind.png')&uploadUrl=#springUrl('/sys/upload/file.html')"
+			flashVars="imgUrl=#springUrl('/static/img/spring-wind.png')&uploadUrl=#springUrl('/sys/upload/file.html?uploadSrc=false&showCame=false')"
 			NAME="myMovieName" ALIGN="" TYPE="application/x-shockwave-flash" allowScriptAccess="always"
 			PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer">
 		</EMBED>
 	</OBJECT>
 	</div>
 </div>
+#end
+#override("js")
+<script type="text/javascript">
+function uploadevent(status,picUrl,callbackdata){
+  //alert(picUrl); //后端存储图片
+//	alert(callbackdata);
+    status += '';
+    switch(status){
+     case '1':
+		console.log(picUrl);
+		break;
+     case '-1':
+	  	window.location.reload();
+     	break;
+     default:
+     	window.location.reload();
+   }
+   console.log(status);
+}
+</script>
 #end
 #extends("/common/framework.html")
 
