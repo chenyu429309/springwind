@@ -54,9 +54,9 @@ http://git.oschina.net/juapk/spring-wind
 
 4、操作系统 host 添加一行设置 127.0.0.1 demo.baomidou.com
 
-5、访问：http://demo.baomidou.com:8080 登录账户默认：  admin 管理员，密码 123 ，普通会员 test 密码  123
+5、配置 无项目名称的 访问：http://demo.baomidou.com:8080 登录账户默认：  admin 管理员，密码 123 ，普通会员 test 密码  123
 
-6、必须配置 hosts 重启浏览器，未配置无项目名称访问 404 ！！
+6、必须配置 hosts 重启浏览器，**未配置无项目名称**访问 404 ！！
 
  /SpringWind/src/main/resources/properties/sso.properties 配置修改为：
 
