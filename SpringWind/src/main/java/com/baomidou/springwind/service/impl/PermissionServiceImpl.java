@@ -30,13 +30,13 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 
 	@Override
 	public List<MenuVO> selectMenuVOByUserId(Long userId) {
-		List<MenuVO> perList = autoMapper.selectMenuByUserId(userId, 0L);
+		List<MenuVO> perList = baseMapper.selectMenuByUserId(userId, 0L);
 		if (perList == null || perList.isEmpty()) {
 			return null;
 		}
 		List<MenuVO> mvList = new ArrayList<MenuVO>();
 		for (MenuVO mv : perList) {
-			mv.setMvList(autoMapper.selectMenuByUserId(userId, mv.getId()));
+			mv.setMvList(baseMapper.selectMenuByUserId(userId, mv.getId()));
 			mvList.add(mv);
 		}
 		return mvList;
@@ -64,7 +64,7 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 	@Override
 	@Cacheable(value = "permissionCache", key = "#userId")
 	public List<Permission> selectAllByUserId(Long userId) {
-		return autoMapper.selectAllByUserId(userId);
+		return baseMapper.selectAllByUserId(userId);
 	}
 
 }
