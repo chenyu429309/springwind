@@ -28,6 +28,7 @@ import com.baomidou.springwind.service.support.BaseServiceImpl;
 public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Permission>
 		implements IPermissionService, SSOAuthorization {
 
+	@Cacheable(value = "permissionCache", key = "#userId")
 	@Override
 	public List<MenuVO> selectMenuVOByUserId(Long userId) {
 		List<MenuVO> perList = baseMapper.selectMenuByUserId(userId, 0L);
@@ -61,8 +62,8 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 		return false;
 	}
 
-	@Override
 	@Cacheable(value = "permissionCache", key = "#userId")
+	@Override
 	public List<Permission> selectAllByUserId(Long userId) {
 		return baseMapper.selectAllByUserId(userId);
 	}
