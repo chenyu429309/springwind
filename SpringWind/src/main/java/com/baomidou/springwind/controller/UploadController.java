@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baomidou.framework.common.util.DateUtil;
 import com.baomidou.framework.upload.CosFile;
 import com.baomidou.framework.upload.CosMultipartRequest;
 import com.baomidou.framework.upload.UploadMsg;
 import com.baomidou.kisso.annotation.Action;
 import com.baomidou.kisso.annotation.Permission;
-import com.baomidou.kisso.common.util.DateUtil;
 
 /**
  * <p>
@@ -82,7 +82,7 @@ public class UploadController extends BaseController {
 	private static String getSaveDir() {
 		StringBuffer filePath = new StringBuffer(System.getProperty("user.dir"));
 		filePath.append(File.separator);
-		filePath.append(DateUtil.formatDate(new Date(), "yyyy"));
+		filePath.append(DateUtil.format(new Date(), "yyyy"));
 		filePath.append(File.separator);
 		File file = new File(filePath.toString());
 		if ( !file.exists() ) {

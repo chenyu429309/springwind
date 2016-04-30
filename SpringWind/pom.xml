@@ -38,6 +38,18 @@
 			<groupId>com.baomidou</groupId>
 			<artifactId>spring-wind</artifactId>
 			<version>${spring-wind.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>kisso</artifactId>
+					<groupId>com.baomidou</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>kisso</artifactId>
+			<version>3.6.10</version>
 		</dependency>
 
 		<!-- velocity begin -->
