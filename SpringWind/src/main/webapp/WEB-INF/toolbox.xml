@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <toolbox>
 	<tool>
+		<key>SSOPermission</key>
+		<scope>application</scope>
+		<class>com.baomidou.springwind.common.SSOPermissionTool</class>
+	</tool>
+	<tool>
 		<key>date</key>
 		<scope>application</scope>
 		<class>org.apache.velocity.tools.generic.DateTool</class>

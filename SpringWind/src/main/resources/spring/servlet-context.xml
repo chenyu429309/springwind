@@ -46,6 +46,9 @@
 	<!-- 网站图标，注意 ！favicon.ico 放在 webapp 目录 -->
 	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
 	
+	<!-- 获取ApplicationContext上下文 -->
+	<bean id="springContextHolder" class="com.baomidou.framework.spring.SpringContextHolder" />
+
 	<!-- KISSO 初始化 -->
 	<bean id="kissoInit" class="com.baomidou.kisso.web.WebKissoConfigurer" init-method="initKisso">
 		<property name="ssoPropPath" value="properties/sso.properties" />

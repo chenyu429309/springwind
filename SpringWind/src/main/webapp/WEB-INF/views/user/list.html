@@ -56,7 +56,10 @@ SpringWind - 用户管理
             var id = row.id;
             return '<a class="btn btn-xs btn-primary" onclick="editUser(' + "'" + id + "'" + ')"><i class="fa fa-pencil"></i>新增</a> '
                     +'<a class="btn btn-xs btn-info" onclick="editUser(' + "'" + id + "'" + ')"><i class="fa fa-pencil"></i>编辑</a> '
-                    + '<a class="btn btn-xs btn-danger" onclick="delUser(' + "'" + id + "'" + ')"><i class="fa fa-remove"></i>删除</a>';
+                    <!-- 此处按钮级别权限控制，目前只有 admin 拥有该权限！ -->
+                    #if($SSOPermission.isActionable("10010"))
+                    + '<a class="btn btn-xs btn-danger" onclick="delUser(' + "'" + id + "'" + ')"><i class="fa fa-remove"></i>删除</a>'
+                    #end;
         }
     }
     ];

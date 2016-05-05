@@ -45,8 +45,9 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 
 	@Override
 	public boolean isPermitted(Token token, String permission) {
-		/*
-		 * 权限验证
+		/**
+		 * 
+		 * 菜单级别、权限验证，生产环境建议加上缓存处理。
 		 * 
 		 */
 		if (StringUtils.isNotBlank(permission)) {
@@ -66,6 +67,22 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 	@Override
 	public List<Permission> selectAllByUserId(Long userId) {
 		return baseMapper.selectAllByUserId(userId);
+	}
+
+	@Override
+	public boolean isActionable( Token token, String permission ) {
+		/**
+		 * 
+		 * 按钮级别、权限验证，生产环境建议加上缓存处理。
+		 * <br>
+		 * 演示  admin 返回 true
+		 * 
+		 */
+		System.err.println(" isActionable =" + permission);
+		if ( token.getId() == 1L ) {
+			return true;
+		}
+		return false;
 	}
 
 }
