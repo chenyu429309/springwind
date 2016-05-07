@@ -1,6 +1,7 @@
 package com.baomidou.springwind.service.impl;
 
 import com.baomidou.springwind.entity.Role;
+import com.baomidou.springwind.entity.UserRole;
 import com.baomidou.springwind.mapper.RoleMapper;
 import com.baomidou.springwind.mapper.UserRoleMapper;
 import com.baomidou.springwind.service.IRoleService;
@@ -16,11 +17,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implements IRoleService {
 
-    @Autowired
-    private UserRoleMapper userRoleMapper;
+	@Autowired
+	private UserRoleMapper userRoleMapper;
 
-    @Override
-    public void deleteByUserId(Long userId) {
-        userRoleMapper.deleteByUserId(userId);
-    }
+	@Override
+	public void deleteByUserId(Long userId) {
+		UserRole ur = new UserRole();
+		ur.setUid(userId);
+		userRoleMapper.deleteSelective(ur);
+	}
 }
