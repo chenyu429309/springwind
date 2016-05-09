@@ -1,11 +1,12 @@
 package com.baomidou.springwind.service.impl;
 
-import com.baomidou.springwind.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baomidou.framework.annotations.Log;
 import com.baomidou.springwind.entity.User;
 import com.baomidou.springwind.mapper.UserMapper;
+import com.baomidou.springwind.service.IRoleService;
 import com.baomidou.springwind.service.IUserService;
 import com.baomidou.springwind.service.support.BaseServiceImpl;
 
@@ -19,7 +20,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 
 	@Autowired
 	private IRoleService  roleService;
-
+	
+    @Log("登录")
 	@Override
 	public User selectByLoginName(String loginName) {
 		User user = new User();
@@ -27,6 +29,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		return super.selectOne(user);
 	}
 
+    @Log("删除用户")
 	@Override
 	public void deleteUser(Long userId) {
 		//删除用户角色，再删除用户
@@ -34,4 +37,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		super.deleteById(userId);
 	}
 
+    @Log("添加用户")
+    @Override
+    public boolean insertSelective(User entity) {
+    	System.err.println(" 覆盖父类方法 ");
+    	return super.insertSelective(entity);
+    }
 }
