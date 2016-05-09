@@ -38,7 +38,8 @@ http://git.oschina.net/juapk/spring-wind
 9、cos （优化、支持头文件字节检查、图片剪切、视频处理、文档处理）
 10、Sigar （系统信息收集）
 11、pingyin4j（中文转拼音库 ）
-12、表单重复提交aop 辅助工具类 等..
+12、oauth2.0  weibo  github 登录支持
+13、表单重复提交aop 辅助工具类 等..
 
 ```
 
