@@ -99,6 +99,10 @@ sso.login.url=http://demo.baomidou.com:8080/SpringWind/account/login.html
 
 ![监控效果](http://git.oschina.net/uploads/images/2016/0423/182059_de36d868_12260.png "监控效果")
 
+![修改头像](http://git.oschina.net/uploads/images/2016/0509/224121_d6f7a3ca_12260.png "修改头像")
+
+![日志管理](http://git.oschina.net/uploads/images/2016/0509/224142_5a4f847e_12260.png "日志管理")
+
 ![锁定效果](http://git.oschina.net/uploads/images/2016/0415/233245_dc44f2f9_12260.png "锁定效果")
 
 
