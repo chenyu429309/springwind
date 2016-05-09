@@ -3,8 +3,6 @@ package com.baomidou.springwind.common;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.velocity.tools.config.DefaultKey;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.baomidou.framework.spring.SpringContextHolder;
 import com.baomidou.kisso.SSOHelper;
@@ -18,7 +16,7 @@ public class SSOPermissionTool {
 	 * 按钮级别权限判断
 	 */
 	public boolean isActionable(String permission) {
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();  
+		HttpServletRequest request = HttpHelper.getHttpServletRequest();
 		Token token = SSOHelper.attrToken(request);
 		if ( token == null ) {
 			return false;

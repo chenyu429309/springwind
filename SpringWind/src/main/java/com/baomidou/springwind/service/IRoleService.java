@@ -1,7 +1,7 @@
 package com.baomidou.springwind.service;
 
-import com.baomidou.springwind.entity.Role;
 import com.baomidou.framework.service.ISuperService;
+import com.baomidou.springwind.entity.Role;
 
 /**
  *
@@ -9,7 +9,6 @@ import com.baomidou.framework.service.ISuperService;
  *
  */
 public interface IRoleService extends ISuperService<Role> {
-
 
     void deleteByUserId(Long userId);
 }
