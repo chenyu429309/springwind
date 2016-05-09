@@ -3,7 +3,7 @@ package com.baomidou.springwind.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.springwind.common.aspect.Log;
+import com.baomidou.framework.annotations.Log;
 import com.baomidou.springwind.entity.User;
 import com.baomidou.springwind.mapper.UserMapper;
 import com.baomidou.springwind.service.IRoleService;
@@ -37,4 +37,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		super.deleteById(userId);
 	}
 
+    @Log("添加用户")
+    @Override
+    public boolean insertSelective(User entity) {
+    	System.err.println(" 覆盖父类方法 ");
+    	return super.insertSelective(entity);
+    }
 }

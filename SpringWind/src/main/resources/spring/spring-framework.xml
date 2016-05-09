@@ -20,10 +20,14 @@
 	<aop:aspectj-autoproxy proxy-target-class="true" /> 
 
 	<!-- 扫描切面包路径 -->
-	<bean id="logAspect" class="com.baomidou.springwind.common.aspect.LogAspect" />
+	<bean id="logAspect" class="com.baomidou.framework.aop.LogAspect">
+		<property name="logPoint">
+			<bean class="com.baomidou.springwind.service.impl.SysLogServiceImpl" />
+		</property>
+	</bean>
 	<aop:config>
 		<aop:aspect ref="logAspect">
-			<aop:pointcut id="logPointCut" expression="@annotation(com.baomidou.springwind.common.aspect.Log)" />
+			<aop:pointcut id="logPointCut" expression="@annotation(com.baomidou.framework.annotations.Log)" />
 			<aop:around pointcut-ref="logPointCut" method="saveLog" />
 		</aop:aspect>
 	</aop:config>

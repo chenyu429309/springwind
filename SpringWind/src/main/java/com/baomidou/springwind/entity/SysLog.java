@@ -32,7 +32,7 @@ public class SysLog implements Serializable {
 	private String operation;
 
 	/** 创建时间 */
-	private Date crtime;
+	private Date crTime;
 
 	public Long getId() {
 		return this.id;
@@ -66,12 +66,12 @@ public class SysLog implements Serializable {
 		this.operation = operation;
 	}
 
-	public Date getCrtime() {
-		return this.crtime;
+	public Date getCrTime() {
+		return this.crTime;
 	}
 
-	public void setCrtime(Date crtime) {
-		this.crtime = crtime;
+	public void setCrTime(Date crTime) {
+		this.crTime = crTime;
 	}
 
 }
