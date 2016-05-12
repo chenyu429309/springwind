@@ -22,7 +22,8 @@ SpringWind 管理系统 - 登录
 				<div class="form-group form-inline">
 					 <input type="hidden" name="ctoken" value="$!{ctoken}">
 	                 <input type="text" name="captcha" class="form-control" style="width: 195px;" placeholder="验证码" required="">
-	                 <img alt="测试验证" src="/captcha/image.html?ctoken=$!{ctoken}" onclick="this.src=('/captcha/image.html?ctoken=$!{ctoken}&reload='+(new Date()).getTime())">
+	                 #set($captchaUrl ="/captcha/image.html?ctoken="+$!{ctoken}+"&t=")
+	                 <img alt="测试验证" src="#springUrl($captchaUrl)" onclick="this.src=('#springUrl($captchaUrl)'+(new Date()).getTime())">
 	            </div>
                 <div class="form-group form-inline">
                     <div class="checkbox i-checks"><label><input type="checkbox" name="rememberMe"><i></i>&nbsp;记住我</label></div>
