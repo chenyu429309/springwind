@@ -1,11 +1,7 @@
 package com.baomidou.springwind.controller;
 
-import com.baomidou.kisso.annotation.Action;
-import com.baomidou.kisso.annotation.Permission;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.springwind.common.enums.OptionType;
-import com.baomidou.springwind.entity.User;
-import com.baomidou.springwind.service.IUserService;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.baomidou.kisso.annotation.Action;
+import com.baomidou.kisso.annotation.Permission;
+import com.baomidou.kisso.common.encrypt.SaltEncoder;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.springwind.entity.User;
+import com.baomidou.springwind.service.IRoleService;
+import com.baomidou.springwind.service.IUserService;
 
 /**
  * <p>
@@ -30,6 +34,9 @@ public class UserController extends BaseController {
 	@Autowired
 	private IUserService userService;
 
+	@Autowired
+	private IRoleService roleService;
+
 	@Permission("2001")
 	@RequestMapping("/list")
 	public String list(Model model) {
@@ -37,15 +44,32 @@ public class UserController extends BaseController {
 	}
 
     @Permission("2001")
-    @RequestMapping("/addUser/{op}")
-    public String addUser(Model model,@PathVariable Integer op) {
-        if(op == OptionType.OP_INSERT.getOp()){
-            model.addAttribute("op","1");
-        } else {
-            model.addAttribute("op","2");
-        }
-        return "/user/add";
+    @RequestMapping("/edit")
+    public String edit(Model model, Long id ) {
+    	if ( id != null ) {
+			model.addAttribute("user", userService.selectById(id));
+		}
+    	model.addAttribute("roleList", roleService.selectList(null));
+        return "/user/edit";
     }
+    
+	@ResponseBody
+	@Permission("2001")
+	@RequestMapping("/editUser")
+	public String editUser( User user ) {
+		boolean rlt = false;
+		if ( user != null ) {
+			if ( user.getId() != null ) {
+				rlt = userService.updateSelectiveById(user);
+			} else {
+				user.setPassword(SaltEncoder.md5SaltEncode(user.getLoginName(), user.getPassword()));
+				user.setCrTime(new Date());
+				user.setLastTime(user.getCrTime());
+				rlt = userService.insertSelective(user);
+			}
+		}
+		return callbackSuccess(rlt);
+	}
 
 	@ResponseBody
 	@Permission("2001")
