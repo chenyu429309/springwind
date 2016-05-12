@@ -31,9 +31,9 @@ public class CaptchaController extends BaseController {
 	@Login(action = Action.Skip)
 	@Permission(action = Action.Skip)
 	@RequestMapping("/image")
-	public void image() {
+	public void image(String ctoken) {
 		try {
-			CaptchaHelper.outputImage(request, response.getOutputStream());
+			CaptchaHelper.outputImage(request, response.getOutputStream(), ctoken);
 		} catch ( IOException e ) {
 			e.printStackTrace();
 		}

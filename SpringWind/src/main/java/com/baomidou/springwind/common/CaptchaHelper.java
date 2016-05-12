@@ -25,7 +25,8 @@ import com.baomidou.kisso.common.captcha.utils.encoder.EncoderHelper;
  */
 public class CaptchaHelper {
 
-	private static final String SSO_CAPTCHA = "sso_captcha";
+	public static final String CAPTCHA_TOKEN = "ctoken";
+	private static final String CAPTCHA_CACHE = "captchaCache";
 
 
 	/**
@@ -33,11 +34,14 @@ public class CaptchaHelper {
 	 * 判断验证码是否正确
 	 * </p>
 	 * @param request
+	 * @param ctoken
+	 * 				验证码票据
 	 * @param captcha
 	 * 				验证码内容
 	 */
-	public static boolean captchaValid( HttpServletRequest request, String captcha ) {
-		if ( captcha != null && captcha.equalsIgnoreCase((String) request.getSession().getAttribute(SSO_CAPTCHA)) ) {
+	public static boolean captchaValid( HttpServletRequest request, String ctoken, String captcha ) {
+		Object obj = EhcacheHelper.get(CAPTCHA_CACHE, ctoken);
+		if ( obj != null && String.valueOf(obj).equalsIgnoreCase(captcha) ) {
 			return true;
 		}
 		return false;
@@ -49,10 +53,12 @@ public class CaptchaHelper {
 	 * 验证码图片，设置验证码内容至 session
 	 * </p>
 	 * @param request
+	 * @param ctoken
+	 * 				验证码票据
 	 * @param captcha
 	 * 				验证码内容
 	 */
-	public static void outputImage( HttpServletRequest request, OutputStream out ) throws IOException {
+	public static void outputImage( HttpServletRequest request, OutputStream out, String ctoken ) throws IOException {
 		ConfigurableCaptchaService cs = new ConfigurableCaptchaService();
 		// 验证码宽高
 		cs.setWidth(100);
@@ -108,6 +114,6 @@ public class CaptchaHelper {
 
 		// 输出验证图片
 		String captcha = EncoderHelper.getChallangeAndWriteImage(cs, "png", out);
-		request.getSession().setAttribute(SSO_CAPTCHA, captcha);
+		EhcacheHelper.put(CAPTCHA_CACHE, ctoken, captcha);
 	}
 }
