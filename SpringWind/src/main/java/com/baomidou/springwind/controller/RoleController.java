@@ -32,11 +32,13 @@ public class RoleController extends BaseController {
 	@Autowired
 	private IUserRoleService userRoleService;
 
+
 	@Permission("2002")
 	@RequestMapping("/list")
-	public String list(Model model) {
+	public String list( Model model ) {
 		return "/role/list";
 	}
+
 
 	@ResponseBody
 	@Permission("2002")
@@ -46,14 +48,41 @@ public class RoleController extends BaseController {
 		return jsonPage(roleService.selectPage(page, null));
 	}
 
+
 	@ResponseBody
 	@Permission("2003")
 	@RequestMapping("/delete/{roleId}")
-	public String delete(@PathVariable Long roleId) {
+	public String delete( @PathVariable Long roleId ) {
 		boolean exist = userRoleService.existRoleUser(roleId);
-		if (exist) {
+		if ( exist ) {
 			return "false";
 		}
 		return booleanToString(roleService.deleteById(roleId));
+	}
+
+
+	@Permission("2002")
+	@RequestMapping("/edit")
+	public String edit( Model model, Long id ) {
+		if ( id != null ) {
+			model.addAttribute("role", roleService.selectById(id));
+		}
+		return "/role/edit";
+	}
+
+
+	@ResponseBody
+	@Permission("2002")
+	@RequestMapping("/editRole")
+	public String editRole( Role role ) {
+		boolean rlt = false;
+		if ( role != null ) {
+			if ( role.getId() != null ) {
+				rlt = roleService.updateById(role);
+			} else {
+				rlt = roleService.insertSelective(role);
+			}
+		}
+		return callbackSuccess(rlt);
 	}
 }

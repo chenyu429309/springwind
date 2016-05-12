@@ -9,10 +9,20 @@ SpringWind - 角色管理
 #end
 #override("content")
 <div class="row">
-    <div class="row">
-        <div class="col-sm-12">
-            <table id="dataTable"></table>
-        </div>
+	<div class="ibox-content text-right form-inline">
+		<div class="input-group">
+			<input type="text" class="form-control">
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-info">搜索</button>
+			</span>
+		</div>
+		<button class="btn btn-primary" onclick="editRole(null)" type="button">
+		<i class="fa fa-pencil"></i>&nbsp;添加角色</button>
+	</div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table id="dataTable"></table>
     </div>
 </div>
 #end
@@ -38,8 +48,7 @@ var dataColumns = [{
     title: '操作',
     formatter: function (value, row, index) {
         var id = row.id;
-        return '<a class="btn btn-xs btn-primary" onclick="editRole(' + "'" + id + "'" + ')"><i class="fa fa-pencil"></i>新增</a> '
-                +'<a class="btn btn-xs btn-info" onclick="editRole(' + "'" + id + "'" + ')"><i class="fa fa-pencil"></i>编辑</a> '
+        return '<a class="btn btn-xs btn-warning" onclick="editRole(' + "'" + id + "'" + ')"><i class="fa fa-pencil"></i>编辑</a> '
                 + '<a class="btn btn-xs btn-danger" onclick="delRole(' + "'" + id + "'" + ')"><i class="fa fa-remove"></i>删除</a>';
     }
 }];
@@ -49,14 +58,14 @@ function dataQueryParams(params) {
 		_index: params.offset, //页码
 	};
 }
-function delRole(roleId) {
+function delRole(id) {
     //询问框
     layer.confirm('确定删除吗？', {
         btn: ['确定', '取消'] //按钮
     }, function () {
         $.ajax({
             type: "POST",
-            url: "#springUrl('/perm/role/delete/')" + roleId,
+            url: "#springUrl('/perm/role/delete/')" + id,
             datatype: "text",
             success: function (data) {
                 if(data == 'true'){
@@ -69,24 +78,22 @@ function delRole(roleId) {
         return;
     });
 }
-
-function editRole(RoleId,type){
-    var title;
-    if(type == 1){
-        title = "新增用户";
-    } else{
-        title = "编辑用户";
-    }
-    //iframe层
+function editRole(id) {
+   	var title = "新增角色";
+   	var url = "#springUrl('/perm/role/edit.html')";
+   	if(id!=null){
+   		title = "编辑角色";
+   		url = url + "?id=" + id;
+   	}
     layer.open({
         type: 2,
         title: title,
         shadeClose: true,
         shade: 0.8,
-        area: ['540px', '600px'],
-        fix: false, //不固定
+        area: ['550px', '430px'],
+        fix: false,
         maxmin: true,
-        content: "#springUrl('/perm/user/addUser/1')" //iframe的url
+        content: url
     });
 }
 </script>
