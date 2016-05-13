@@ -59,10 +59,10 @@ public class UserController extends BaseController {
 	public String editUser( User user ) {
 		boolean rlt = false;
 		if ( user != null ) {
+			user.setPassword(SaltEncoder.md5SaltEncode(user.getLoginName(), user.getPassword()));
 			if ( user.getId() != null ) {
 				rlt = userService.updateSelectiveById(user);
 			} else {
-				user.setPassword(SaltEncoder.md5SaltEncode(user.getLoginName(), user.getPassword()));
 				user.setCrTime(new Date());
 				user.setLastTime(user.getCrTime());
 				rlt = userService.insertSelective(user);
