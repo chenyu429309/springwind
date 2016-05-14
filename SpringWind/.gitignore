@@ -17,7 +17,6 @@ hibernate.reveng.xml
 # Others
 target/
 logs/
-doc/
 bak/
 reports/
 RemoteSystemsTempFiles/
