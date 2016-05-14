@@ -1,5 +1,5 @@
-
-![spring-wind](http://git.oschina.net/uploads/images/2016/0410/215321_0c4657f5_12260.png "SSM架构核心库")
+# SpringWind 核心依赖
+![SW 核心依赖](http://git.oschina.net/uploads/images/2016/0514/164339_89690838_12260.png "SW 核心依赖")
 
 SSM 架构后台管理系统
 
