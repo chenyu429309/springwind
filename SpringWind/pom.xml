@@ -24,7 +24,13 @@
 		<mysql-connector-java.version>5.1.38</mysql-connector-java.version>
 		<mail.version>1.4.7</mail.version>
 		<ehcache.version>2.6.11</ehcache.version>
-        <quartz.version>2.2.2</quartz.version>
+		<quartz.version>2.2.2</quartz.version>
+
+		<!-- search -->
+		<elasticsearch.version>2.3.2</elasticsearch.version>
+
+		<!-- test -->
+		<junit.version>4.12</junit.version>
 	</properties>
 
 	<dependencies>
@@ -118,24 +124,39 @@
 		</dependency>
 
 
-        <!-- scheduler begin -->
+		<!-- scheduler begin -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
 			<version>${quartz.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz-jobs</artifactId>
 			<version>${quartz.version}</version>
 		</dependency>
 		<!-- scheduler end -->
+
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>${elasticsearch.version}</version>
+		</dependency>
+
+		<!-- test begin -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- test end -->
 	</dependencies>
 
 	<profiles>
@@ -167,30 +188,36 @@
 				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <!-- <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.7.v20160115</version>
-                <configuration>
-                    <httpConnector>
-                            <port>8080</port>
-                    </httpConnector>
-                    <webAppConfig>
-                        <contextPath>/</contextPath>
-                    </webAppConfig>
-                    <scanIntervalSeconds>0</scanIntervalSeconds>
-                </configuration>
-            </plugin> -->
-            <plugin>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!--jetty 插件，mvn jetty:run -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.3.7.v20160115</version>
+				<configuration>
+					<webApp>
+						<contextPath>/</contextPath>
+						<descriptor>${basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
+					</webApp>
+					<stopKey>exit</stopKey>
+					<stopPort>9091</stopPort>
+					<webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
+					<scanIntervalSeconds>0</scanIntervalSeconds>
+					<httpConnector>
+						<port>8080</port>
+					</httpConnector>
+				</configuration>
+			</plugin>
+			<!-- tomcat 插件，mvn tomcat:run -->
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.1</version>
@@ -201,7 +228,7 @@
 					<warFile>${project.build.directory}/${project.build.finalName}.war</warFile>
 				</configuration>
 			</plugin>
-        </plugins>
+		</plugins>
 
 	</build>
 </project>
