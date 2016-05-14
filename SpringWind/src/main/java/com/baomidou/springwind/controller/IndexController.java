@@ -34,8 +34,16 @@ public class IndexController extends BaseController {
 	@Login(action = Action.Skip)
 	@Permission(action = Action.Skip)
 	@RequestMapping("/home")
-	public String home(Model model) {
-
+	public String home() {
 		return "/home";
+	}
+
+	/**
+	 * SW 捐赠
+	 */
+	@Permission(action = Action.Skip)
+	@RequestMapping("/donate")
+	public String donate() {
+		return "/donate";
 	}
 }
