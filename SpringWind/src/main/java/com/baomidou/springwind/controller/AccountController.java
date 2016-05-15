@@ -20,7 +20,7 @@ import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.kisso.common.encrypt.SaltEncoder;
 import com.baomidou.kisso.common.util.RandomUtil;
 import com.baomidou.kisso.web.waf.request.WafRequestWrapper;
-import com.baomidou.springwind.common.CaptchaHelper;
+import com.baomidou.springwind.common.MyCaptcha;
 import com.baomidou.springwind.common.enums.UserType;
 import com.baomidou.springwind.entity.User;
 import com.baomidou.springwind.service.IUserService;
@@ -60,7 +60,7 @@ public class AccountController extends SuperController {
 			String captcha = wr.getParameter("captcha");
 			if (StringUtils.isNotBlank(ctoken) 
 					&& StringUtils.isNotBlank(captcha)
-					&& CaptchaHelper.captchaValid(request,ctoken,captcha)) {
+					&& MyCaptcha.getInstance().verification(wr, ctoken, captcha)) {
 				String loginName = wr.getParameter("loginName"); 
 				String password = wr.getParameter("password");
 				/**
@@ -90,7 +90,7 @@ public class AccountController extends SuperController {
 			}
 			model.addAttribute("errorMsg", errorMsg);
 		}
-		model.addAttribute(CaptchaHelper.CAPTCHA_TOKEN, RandomUtil.get32UUID());
+		model.addAttribute(MyCaptcha.CAPTCHA_TOKEN, RandomUtil.get32UUID());
 		return "/login";
 	}
 

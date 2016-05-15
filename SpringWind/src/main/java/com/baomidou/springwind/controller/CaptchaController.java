@@ -1,6 +1,5 @@
 package com.baomidou.springwind.controller;
 
-
 import java.io.IOException;
 
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.baomidou.kisso.annotation.Action;
 import com.baomidou.kisso.annotation.Login;
 import com.baomidou.kisso.annotation.Permission;
-import com.baomidou.springwind.common.CaptchaHelper;
+import com.baomidou.springwind.common.MyCaptcha;
 
 /**
  * <p>
@@ -23,7 +22,7 @@ import com.baomidou.springwind.common.CaptchaHelper;
 @Controller
 @RequestMapping("/captcha")
 public class CaptchaController extends BaseController {
-	
+
 	/**
 	 * 生成图片
 	 */
@@ -33,8 +32,8 @@ public class CaptchaController extends BaseController {
 	@RequestMapping("/image")
 	public void image(String ctoken) {
 		try {
-			CaptchaHelper.outputImage(request, response.getOutputStream(), ctoken);
-		} catch ( IOException e ) {
+			MyCaptcha.getInstance().generate(request, response.getOutputStream(), ctoken);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
