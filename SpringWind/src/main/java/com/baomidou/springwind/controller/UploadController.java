@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.framework.common.util.DateUtil;
-import com.baomidou.framework.upload.CosFile;
-import com.baomidou.framework.upload.CosMultipartRequest;
+import com.baomidou.framework.upload.UploadFile;
 import com.baomidou.framework.upload.UploadMsg;
+import com.baomidou.framework.upload.UploadMultipartRequest;
 import com.baomidou.kisso.annotation.Action;
 import com.baomidou.kisso.annotation.Permission;
 
@@ -48,13 +48,13 @@ public class UploadController extends BaseController {
 	public String file() {
 		UploadMsg msg = new UploadMsg();
 		try {
-			CosMultipartRequest cos = new CosMultipartRequest(request, getSaveDir(), MAX_POST_SIZE);
-			cos.setFileHeaderExts("ffd8ff.jpg");
-			cos.upload();
-			Enumeration<?> files = cos.getFileNames();
+			UploadMultipartRequest umr = new UploadMultipartRequest(request, getSaveDir(), MAX_POST_SIZE);
+			umr.setFileHeaderExts("ffd8ff.jpg");
+			umr.upload();
+			Enumeration<?> files = umr.getFileNames();
 			while ( files.hasMoreElements() ) {
 				String name = (String) files.nextElement();
-				CosFile cf = cos.getCosFile(name);
+				UploadFile cf = umr.getUploadFile(name);
 				if ( cf != null ) {
 					/**
 					 * 上传成功

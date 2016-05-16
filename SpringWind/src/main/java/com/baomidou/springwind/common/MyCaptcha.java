@@ -4,14 +4,14 @@ import java.awt.image.BufferedImageOp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.baomidou.framework.captcha.DefaultCaptcha;
+import com.baomidou.framework.captcha.ICaptchaStore;
 import com.baomidou.kisso.common.captcha.background.LineNoiseBackgroundFactory;
 import com.baomidou.kisso.common.captcha.filter.ConfigurableFilterFactory;
 import com.baomidou.kisso.common.captcha.filter.library.AbstractImageOp;
 import com.baomidou.kisso.common.captcha.filter.library.WobbleImageOp;
 import com.baomidou.kisso.common.captcha.font.RandomFontFactory;
 import com.baomidou.kisso.common.captcha.service.ConfigurableCaptchaService;
-import com.baomidou.springwind.captcha.DefaultCaptcha;
-import com.baomidou.springwind.captcha.ICaptchaStore;
 
 /**
  * 
@@ -25,6 +25,12 @@ public class MyCaptcha extends DefaultCaptcha {
 	public static final String CAPTCHA_TOKEN = "ctoken";
 	private static final String CAPTCHA_CACHE = "captchaCache";
 
+	/**
+	 * <p>
+	 * 换掉验证码库， 继承  AbstractCaptcha 
+	 * 实现 writeImage 方法即可
+	 * </p>
+	 */
 	public static MyCaptcha getInstance() {
 		MyCaptcha mc = new MyCaptcha();
 		mc.setCaptchaService(getMyConfigurableCaptchaService());
