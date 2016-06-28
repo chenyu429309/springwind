@@ -39,7 +39,9 @@ http://git.oschina.net/juapk/spring-wind
 10、Sigar （系统信息收集）
 11、pingyin4j（中文转拼音库 ）
 12、oauth2.0  weibo  github 登录支持
-13、表单重复提交aop 辅助工具类 等..
+13、表单重复提交aop 辅助工具类
+14、日志组件 logback 动态环境配置支持
+15、 等..
 
 ```
 
