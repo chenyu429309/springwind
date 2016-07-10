@@ -3,7 +3,7 @@
 
 SSM 架构后台管理系统
 
-> 技术讨论 QQ 群 235079513
+> 技术讨论 QQ 群 235079513[（有钱的捧个钱场【点击捐赠】, 没钱的捧个人场）](http://git.oschina.net/uploads/images/2015/1222/211207_0acab44e_12260.png)
 
 [项目核心库 spring-wind-core 点击查看](http://git.oschina.net/juapk/spring-wind)
 
