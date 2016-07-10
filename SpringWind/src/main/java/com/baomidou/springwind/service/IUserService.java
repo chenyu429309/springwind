@@ -1,5 +1,7 @@
 package com.baomidou.springwind.service;
 
+import java.util.List;
+
 import com.baomidou.framework.service.ISuperService;
 import com.baomidou.springwind.entity.User;
 
@@ -12,5 +14,5 @@ public interface IUserService extends ISuperService<User> {
 
 	User selectByLoginName(String loginName);
 
-	boolean deleteByUserId(Long userId);
+	boolean deleteByUserId(List<Long> userIds);
 }

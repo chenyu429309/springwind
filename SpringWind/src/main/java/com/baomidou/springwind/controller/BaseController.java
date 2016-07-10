@@ -1,7 +1,6 @@
 package com.baomidou.springwind.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.controller.SuperController;
@@ -24,27 +23,6 @@ public class BaseController extends SuperController {
 
 	@Autowired
 	protected IUserService userService;
-
-	/**
-	 * 判断是否为合法的视图地址
-	 * <p>
-	 * 
-	 * @param modelAndView
-	 *            spring 视图对象
-	 * @return boolean
-	 */
-	protected boolean isLegalView(ModelAndView modelAndView) {
-		boolean legal = false;
-		if (modelAndView != null) {
-			String viewUrl = modelAndView.getViewName();
-			if (viewUrl != null && viewUrl.contains("redirect:")) {
-				legal = false;
-			} else {
-				legal = true;
-			}
-		}
-		return legal;
-	}
 
 	/**
 	 * <p>

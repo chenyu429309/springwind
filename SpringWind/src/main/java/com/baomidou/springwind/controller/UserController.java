@@ -1,6 +1,7 @@
 package com.baomidou.springwind.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.kisso.annotation.Action;
@@ -85,10 +87,10 @@ public class UserController extends BaseController {
 	@ResponseBody
 	@Permission("2001")
 	@RequestMapping("/delUser")
-	public String delUser(Long userId) {
+	public String delUser(@RequestParam("ids[]") List<Long> userIds) {
 		boolean rlt = false;
-		if (userId != null) {
-			rlt = userService.deleteByUserId(userId);
+		if (userIds != null) {
+			rlt = userService.deleteByUserId(userIds);
 		}
 		return callbackResult(rlt);
 	}

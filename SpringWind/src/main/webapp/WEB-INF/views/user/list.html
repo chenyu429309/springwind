@@ -1,15 +1,14 @@
 <!DOCTYPE HTML>
 <html>
- <head>
-  <title> 搜索表单</title>
-   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="/static/css/dpl-min.css" rel="stylesheet" type="text/css" />
-    <link href="/static/css/bui-min.css" rel="stylesheet" type="text/css" />
-    <link href="/static/css/page-min.css" rel="stylesheet" type="text/css" /> 
- </head>
- <body>
-  
-  <div class="container">
+<head>
+<title>用户管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/css/dpl-min.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/bui-min.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/page-min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="container">
     <div class="row">
       <form id="searchForm" class="form-horizontal span24">
         <div class="row">
@@ -88,84 +87,104 @@
 <script type="text/javascript" src="/static/js/bui-min.js"></script>
 <script type="text/javascript" src="/static/js/config-min.js"></script>
 <script type="text/javascript">
-  BUI.use('common/page');
+ BUI.use('common/page');
 </script>
 <script type="text/javascript">
-  BUI.use('common/search',function (Search) {
-    var enumObj = {"1":"正常","0":"禁用"},
-      editing = new BUI.Grid.Plugins.DialogEditing({
-        contentId : 'content', //设置隐藏的Dialog内容
-        autoSave : true, //添加数据或者修改数据时，自动保存
-        triggerCls : 'btn-edit'
-      }),
-      columns = [
-          {title:'登录名',dataIndex:'loginName',width:100},
-          {title:'状态',dataIndex:'status',width:60,renderer:BUI.Grid.Format.enumRenderer(enumObj)},
-          {title:'类型',dataIndex:'type',width:100},
-          {title:'创建时间',dataIndex:'crTime',width:100,renderer:BUI.Grid.Format.dateRenderer},
-          {title:'最后登录时间',dataIndex:'lastTime',width:160,renderer:BUI.Grid.Format.datetimeRenderer}
-        ],
-      store = Search.createStore('/perm/user/getUserList.html',{
-        proxy : {
-          save : { //也可以是一个字符串，那么增删改，都会往那么路径提交数据，同时附加参数saveType
-            addUrl : 'http://www.builive.com/apps/default/data/add.json',
-            updateUrl : 'http://www.builive.com/apps/default/data/edit.json',
-            removeUrl : '/perm/user/delUser.html'
-          }/*,
-          method : 'POST'*/
-        },
-        autoSync : true //保存数据后，自动更新
-      }),
-      gridCfg = Search.createGridCfg(columns,{
-        tbar : {
-          items : [
-            {text : '<i class="icon-plus"></i>新建',btnCls : 'button button-small',handler:addFunction},
-            {text : '<i class="icon-edit"></i>编辑',btnCls : 'button button-small',handler:function(){alert('编辑');}},
-            {text : '<i class="icon-remove"></i>删除',btnCls : 'button button-small',handler : delFunction}
-          ]
-        },
-        plugins : [editing,BUI.Grid.Plugins.CheckSelection,BUI.Grid.Plugins.AutoFit] // 插件形式引入多选表格
-      });
+BUI.use('common/search',function (Search) {
+   var enumObj = {"1":"正常","0":"禁用"},
+     editing = new BUI.Grid.Plugins.DialogEditing({
+       contentId : 'content', //设置隐藏的Dialog内容
+       autoSave : true, //添加数据或者修改数据时，自动保存
+       triggerCls : 'btn-edit'
+     }),
+     columns = [
+         {title:'登录名',dataIndex:'loginName',width:100},
+         {title:'状态',dataIndex:'status',width:60,renderer:BUI.Grid.Format.enumRenderer(enumObj)},
+         {title:'类型',dataIndex:'type',width:100},
+         {title:'创建时间',dataIndex:'crTime',width:100,renderer:BUI.Grid.Format.dateRenderer},
+         {title:'最后登录时间',dataIndex:'lastTime',width:160,renderer:BUI.Grid.Format.datetimeRenderer}
+       ],
+     store = Search.createStore('/perm/user/getUserList.html',{
+       proxy : {
+         save : { //也可以是一个字符串，那么增删改，都会往那么路径提交数据，同时附加参数saveType
+           addUrl : 'http://www.builive.com/apps/default/data/add.json',
+           updateUrl : 'http://www.builive.com/apps/default/data/edit.json',
+           removeUrl : '/perm/user/delUser.html'
+         }/*,
+         method : 'POST'*/
+       },
+       autoSync : true //保存数据后，自动更新
+       ,pageSize:10
+     }),
+     gridCfg = Search.createGridCfg(columns,{
+       tbar : {
+         items : [
+           {text : '<i class="icon-plus"></i>新建',btnCls : 'button button-small',handler:addFunction},
+           {text : '<i class="icon-edit"></i>编辑',btnCls : 'button button-small',handler:editFunction},
+           {text : '<i class="icon-remove"></i>删除',btnCls : 'button button-small',handler : delFunction}
+         ]
+       },
+       plugins : [editing,BUI.Grid.Plugins.CheckSelection,BUI.Grid.Plugins.AutoFit] // 插件形式引入多选表格
+   });	
 
-    var search = new Search({
-        store : store,
-        gridCfg : gridCfg
-      }),
-      grid = search.get('grid');
+   //搜索操作
+   var search = new Search({
+     	store : store,
+     	gridCfg : gridCfg
+   }),
+   grid = search.get('grid');
+	
+   //添加操作
+   function addFunction(){
+     	var newData = {isNew : true}; //标志是新增加的记录
+     	editing.add(newData,'name'); //添加记录后，直接编辑
+   }
+	
+   //编辑操作
+   function editFunction(){
+     	var items = grid.getSelection();
+		var ids = [];
+		BUI.each(items, function(item) {
+			ids.push(item.id);
+		});
+	
+		if (ids.length) {
+			BUI.Message.Confirm('确认要编辑选中的记录么？', function() {
+				store.save('remove', {
+					ids : ids
+				});
+			}, 'question');
+		} else {
+			BUI.Message.Alert('请选择编辑数据！','error');
+		}
+	}
 
-    function addFunction(){
-      var newData = {isNew : true}; //标志是新增加的记录
-      editing.add(newData,'name'); //添加记录后，直接编辑
-    }
+   //删除操作
+   function delFunction(){
+     	var items = grid.getSelection();
+		var ids = [];
+		BUI.each(items, function(item) {
+			ids.push(item.id);
+		});
+	
+		if (ids.length) {
+			BUI.Message.Confirm('确认要删除选中的记录么？', function() {
+				store.save('remove', {ids:ids});
+			}, 'question');
+		} else {
+			BUI.Message.Alert('请选择删除数据！','error');
+		}
+	}
 
-    //删除操作
-    function delFunction(){
-      var selections = grid.getSelection();
-      delItems(selections);
-    }
-
-    function delItems(items){
-      var ids = [];
-      BUI.each(items,function(item){
-        ids.push(item.id);
-      });
-
-      if(ids.length){
-        BUI.Message.Confirm('确认要删除选中的记录么？',function(){
-          store.save('remove',{ids : ids});
-        },'question');
-      }
-    }
-
-    //监听事件，删除一条记录
-    grid.on('cellclick',function(ev){
-      var sender = $(ev.domTarget); //点击的Dom
-      if(sender.hasClass('btn-del')){
-        var record = ev.record;
-        delItems([record]);
-      }
-    });
-  });
+	//监听事件，删除一条记录
+	grid.on('cellclick', function(ev) {
+		var sender = $(ev.domTarget); //点击的Dom
+		if (sender.hasClass('btn-del')) {
+			var record = ev.record;
+			delItems([ record ]);
+		}
+	});
+});
 </script>
 <body>
 </html>  
