@@ -10,10 +10,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.framework.aop.LogPoint;
+import com.baomidou.framework.spring.SpringHelper;
 import com.baomidou.kisso.SSOHelper;
 import com.baomidou.kisso.Token;
 import com.baomidou.kisso.common.IpHelper;
-import com.baomidou.springwind.common.HttpHelper;
 import com.baomidou.springwind.entity.SysLog;
 import com.baomidou.springwind.mapper.SysLogMapper;
 import com.baomidou.springwind.service.ISysLogService;
@@ -34,7 +34,7 @@ public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> imp
 		/**
 		 * 日志入库  
 		 */
-		HttpServletRequest request = HttpHelper.getHttpServletRequest();
+		HttpServletRequest request = SpringHelper.getHttpServletRequest();
 		SysLog sl = new SysLog();
 		Token tk = SSOHelper.attrToken(request);
 		if ( tk != null ) {

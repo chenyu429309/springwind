@@ -57,7 +57,7 @@ public class RoleController extends BaseController {
 		if ( exist ) {
 			return "false";
 		}
-		return booleanToString(roleService.deleteById(roleId));
+		return callbackResult(roleService.deleteById(roleId));
 	}
 
 

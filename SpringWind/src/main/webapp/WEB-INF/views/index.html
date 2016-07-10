@@ -1,20 +1,97 @@
-#override("title")
-SpringWind 管理系统 SSM 框架
-#end
-#override("breadcrumb")
-<li class="active"><strong>介绍说明</strong></li>
-#end
-#override("content")
-<div class="row">
-	<img alt="spring-wind" src="#springUrl('/static/img/spring-wind.png')">
-</div>
-<div class="row">
-	<br> <br>SSM 架构核心库，打造一个完美的 Spring，SpringMVC，MyBatis 架构生态圈。<br>
-	<br>
-</div>
-<div class="row">
-	<br>《春风》<br> 春风如贵客，一到便繁华。<br> 来扫千山雪，归留万国花。<br>
-	<br><br><br>
-</div>
-#end
-#extends("/common/framework.html")
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>SpringWind 后台管理系统</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link href="/static/css/dpl-min.css" rel="stylesheet" type="text/css" />
+  <link href="/static/css/bui-min.css" rel="stylesheet" type="text/css" />
+   <link href="/static/css/main-min.css" rel="stylesheet" type="text/css" />
+ </head>
+ <body>
+	<div class="header">
+		<div class="dl-title">
+			<span class="lp-title-port">SpringWind</span>
+			<span class="dl-title-text">后台管理系统</span>
+		</div>
+		<div class="dl-log">
+			欢迎您，<span class="dl-log-user">$springWind.currentUser().loginName</span>
+			<a href="#springUrl('/account/logout.html')" title="退出系统" class="dl-log-quit">[退出]</a>
+		</div>
+	</div>
+	<div class="content">
+		<div class="dl-main-nav">
+			<div class="dl-inform">
+				<div class="dl-inform-title">
+					贴心小秘书<s class="dl-inform-icon dl-up"></s>
+				</div>
+			</div>
+			<ul id="J_Nav" class="nav-list ks-clear">
+				<li class="nav-item dl-selected"><div class="nav-item-inner nav-order">功能管理</div></li>
+				<li class="nav-item"><div class="nav-item-inner nav-inventory">系统管理</div></li>
+				<li class="nav-item"><div class="nav-item-inner nav-marketing">统计分析</div></li>
+			</ul>
+		</div>
+		<ul id="J_NavContent" class="dl-tab-conten"></ul>
+	</div>
+	<script type="text/javascript" src="/static/js/jquery-1.8.1.min.js"></script>
+  <script type="text/javascript" src="/static/js/bui.js"></script>
+  <script type="text/javascript" src="/static/js/config.js"></script>
+  <script>
+    BUI.use('common/main',function(){
+      var config = [{
+          id:'menu', 
+          homePage : 'code',
+          menu:[{
+              text:'首页内容',
+              items:[
+                {id:'code',text:'首页代码',href:'/donate.html',closeable : false},
+                {id:'main-menu',text:'顶部导航',href:'main/menu.html'},
+                {id:'second-menu',text:'右边菜单',href:'main/second-menu.html'},
+                {id:'dyna-menu',text:'动态菜单',href:'main/dyna-menu.html'}
+              ]
+            },{
+              text:'页面操作',
+              items:[
+                {id:'operation',text:'页面常见操作',href:'main/operation.html'},
+                {id:'quick',text:'页面操作快捷方式',href:'main/quick.html'}  
+              ]
+            },{
+              text:'文件结构',
+              items:[
+                {id:'resource',text:'资源文件结构',href:'main/resource.html'},
+                {id:'loader',text:'引入JS方式',href:'main/loader.html'}  
+              ]
+            }]
+          },{
+            id:'search',
+            menu:[{
+                text:'功能权限',
+                items:[
+                  {id:'code',text:'用户管理',href:'/perm/user/list.html'},
+                  {id:'example',text:'角色管理',href:'/perm/role/list.html'},
+                  {id:'example-dialog',text:'权限管理',href:'/perm/permission/list.html'},
+                ]
+              },{
+                text : '系统日志',
+                items : [
+                  {id : 'tab',text : '操作日志',href : '/log/list.html'}
+                ]
+              }]
+          },{
+            id : 'chart',
+            menu : [{
+              text : '图表',
+              items:[
+                  {id:'line',text:'折线图',href:'/sys/echarts/line.html'},
+                  {id:'code',text:'散列图',href:'/sys/echarts/scatter.html'},
+                  {id:'radar',text:'雷达图',href:'/sys/echarts/radar.html'}
+              ]
+            }]
+          }];
+      new PageUtil.MainPage({
+        modulesConfig : config
+      });
+    });
+  </script>
+ </body>
+</html>

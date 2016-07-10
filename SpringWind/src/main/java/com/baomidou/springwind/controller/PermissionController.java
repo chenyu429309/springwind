@@ -53,7 +53,7 @@ public class PermissionController extends BaseController {
 		if (exist) {
 			return "false";
 		}
-		return booleanToString(permissionService.deleteById(permId));
+		return callbackResult(permissionService.deleteById(permId));
 	}
 
 }

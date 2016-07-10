@@ -10,5 +10,5 @@ import com.baomidou.springwind.entity.Role;
  */
 public interface IRoleService extends ISuperService<Role> {
 
-    void deleteByUserId(Long userId);
+    boolean deleteByUserId(Long userId);
 }

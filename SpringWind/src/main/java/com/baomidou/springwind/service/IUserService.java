@@ -12,5 +12,5 @@ public interface IUserService extends ISuperService<User> {
 
 	User selectByLoginName(String loginName);
 
-	void deleteUser(Long userId);
+	boolean deleteByUserId(Long userId);
 }

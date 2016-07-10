@@ -71,7 +71,6 @@
 				<property name="illegalUrl" value="/error/illegalAccess.html"/>
 			</bean>
 		</mvc:interceptor>
-		<bean class="com.baomidou.framework.spring.DataLoadingInterceptor" />
 	</mvc:interceptors>
 	
 	<mvc:annotation-driven>

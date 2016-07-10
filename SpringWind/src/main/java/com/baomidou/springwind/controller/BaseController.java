@@ -1,17 +1,12 @@
 package com.baomidou.springwind.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.controller.SuperController;
 import com.baomidou.framework.mail.MailHelper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.springwind.service.IPermissionService;
 import com.baomidou.springwind.service.IUserService;
 
 /**
@@ -22,39 +17,13 @@ import com.baomidou.springwind.service.IUserService;
  * @author hubin
  * @Date 2016-04-13
  */
-public class BaseController extends SuperController implements HandlerInterceptor {
+public class BaseController extends SuperController {
 
 	@Autowired
 	protected MailHelper mailHelper;
 
 	@Autowired
 	protected IUserService userService;
-
-	@Autowired
-	private IPermissionService permissionService;
-
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		return true;
-	}
-
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		/*
-		 * 方法调用后调用该方法，返回数据给请求页
-		 */
-		if (isLegalView(modelAndView)) {
-			modelAndView.addObject("currentUser", userService.selectById(getCurrentUserId()));
-			modelAndView.addObject("menuList", permissionService.selectMenuVOByUserId(getCurrentUserId()));
-		}
-	}
-
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-	}
 
 	/**
 	 * 判断是否为合法的视图地址
@@ -88,26 +57,29 @@ public class BaseController extends SuperController implements HandlerIntercepto
 	 */
 	protected String jsonPage(Page<?> page) {
 		JSONObject jo = new JSONObject();
-		jo.put("total", page.getTotal());
 		jo.put("rows", page.getRecords());
+		jo.put("results", page.getTotal());
 		return toJson(jo);
 	}
 
 	@Override
 	protected <T> Page<T> getPage(int size) {
 		int _size = size, _index = 1;
-		if (request.getParameter("_size") != null) {
-			_size = Integer.parseInt(request.getParameter("_size"));
+		if (request.getParameter("limit") != null) {
+			_size = Integer.parseInt(request.getParameter("limit"));
 		}
-		if (request.getParameter("_index") != null) {
-			int _offset = Integer.parseInt(request.getParameter("_index"));
+		if (request.getParameter("start") != null) {
+			int _offset = Integer.parseInt(request.getParameter("start"));
 			_index = _offset / _size + 1;
 		}
 		return new Page<T>(_index, _size);
 	}
 
-	protected String booleanToString(boolean rlt) {
-		return rlt ? "true" : "false";
+	protected String callbackResult(boolean reslut) {
+		if (reslut) {
+			return callbackSuccess(null);
+		}
+		return callbackFail(null);
 	}
 
 }

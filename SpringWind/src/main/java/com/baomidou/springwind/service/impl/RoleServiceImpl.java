@@ -21,9 +21,11 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
 	private UserRoleMapper userRoleMapper;
 
 	@Override
-	public void deleteByUserId(Long userId) {
+	public boolean deleteByUserId(Long userId) {
 		UserRole ur = new UserRole();
 		ur.setUid(userId);
-		userRoleMapper.deleteSelective(ur);
+		int rlt = userRoleMapper.deleteSelective(ur);
+		return retBool(rlt);
 	}
+
 }

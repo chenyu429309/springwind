@@ -9,7 +9,7 @@ import com.baomidou.kisso.annotation.Permission;
 
 /**
  * <p>
- * 图表演示
+ * 图表演示（ http://echarts.baidu.com/echarts2/ ）
  * </p>
  * 
  * @author hubin
@@ -20,13 +20,30 @@ import com.baomidou.kisso.annotation.Permission;
 public class EchartsController extends BaseController {
 
 	/**
-	 * 地图
+	 * 折线图
 	 */
 	@Permission(action = Action.Skip)
-	@RequestMapping("/map")
-	public String map(Model model) {
-		
-		return "/echarts/map";
+	@RequestMapping("/line")
+	public String line(Model model) {
+		return "/echarts/line";
+	}
+	
+	/**
+	 * 散列图
+	 */
+	@Permission(action = Action.Skip)
+	@RequestMapping("/scatter")
+	public String scatter(Model model) {
+		return "/echarts/scatter";
+	}
+	
+	/**
+	 * 散列图
+	 */
+	@Permission(action = Action.Skip)
+	@RequestMapping("/radar")
+	public String radar(Model model) {
+		return "/echarts/radar";
 	}
 
 }

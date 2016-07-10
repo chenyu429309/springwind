@@ -31,10 +31,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 
     @Log("删除用户")
 	@Override
-	public void deleteUser(Long userId) {
+	public boolean deleteByUserId(Long userId) {
 		//删除用户角色，再删除用户
 		roleService.deleteByUserId(userId);
-		super.deleteById(userId);
+		return super.deleteById(userId);
 	}
 
     @Log("添加用户")

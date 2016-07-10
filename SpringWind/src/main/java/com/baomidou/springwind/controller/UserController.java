@@ -43,24 +43,24 @@ public class UserController extends BaseController {
 		return "/user/list";
 	}
 
-    @Permission("2001")
-    @RequestMapping("/edit")
-    public String edit(Model model, Long id ) {
-    	if ( id != null ) {
+	@Permission("2001")
+	@RequestMapping("/edit")
+	public String edit(Model model, Long id) {
+		if (id != null) {
 			model.addAttribute("user", userService.selectById(id));
 		}
-    	model.addAttribute("roleList", roleService.selectList(null));
-        return "/user/edit";
-    }
-    
+		model.addAttribute("roleList", roleService.selectList(null));
+		return "/user/edit";
+	}
+
 	@ResponseBody
 	@Permission("2001")
 	@RequestMapping("/editUser")
-	public String editUser( User user ) {
+	public String editUser(User user) {
 		boolean rlt = false;
-		if ( user != null ) {
+		if (user != null) {
 			user.setPassword(SaltEncoder.md5SaltEncode(user.getLoginName(), user.getPassword()));
-			if ( user.getId() != null ) {
+			if (user.getId() != null) {
 				rlt = userService.updateSelectiveById(user);
 			} else {
 				user.setCrTime(new Date());
@@ -79,12 +79,18 @@ public class UserController extends BaseController {
 		return jsonPage(userService.selectPage(page, null));
 	}
 
+	/**
+	 * 根据 ID 删除用户信息
+	 */
 	@ResponseBody
 	@Permission("2001")
-	@RequestMapping("/delUser/{userId}")
-	public String delUser(@PathVariable Long userId) {
-        userService.deleteUser(userId);
-		return Boolean.TRUE.toString();
+	@RequestMapping("/delUser")
+	public String delUser(Long userId) {
+		boolean rlt = false;
+		if (userId != null) {
+			rlt = userService.deleteByUserId(userId);
+		}
+		return callbackResult(rlt);
 	}
 
 	@ResponseBody
@@ -93,7 +99,6 @@ public class UserController extends BaseController {
 	public User getUser(@PathVariable Long userId) {
 		return userService.selectById(userId);
 	}
-
 
 	/**
 	 * 设置头像

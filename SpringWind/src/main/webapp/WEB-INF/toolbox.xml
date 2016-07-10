@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <toolbox>
 	<tool>
-		<key>SSOPermission</key>
+		<key>springWind</key>
 		<scope>application</scope>
-		<class>com.baomidou.springwind.common.SSOPermissionTool</class>
+		<class>com.baomidou.springwind.common.SpringWindTool</class>
 	</tool>
 	<tool>
 		<key>date</key>
