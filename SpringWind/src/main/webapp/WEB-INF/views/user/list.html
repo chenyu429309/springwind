@@ -42,13 +42,23 @@
         <input type="hidden" name="a" value="3">
         <div class="row">
           <div class="control-group span8">
-            <label class="control-label"><s>*</s>学生姓名</label>
+            <label class="control-label"><s>*</s>登录名</label>
             <div class="controls">
               <input name="name" type="text" data-rules="{required:true}" class="input-normal control-text">
             </div>
           </div>
+        </div>
+        <div class="row">
           <div class="control-group span8">
-            <label class="control-label"><s>*</s>学生性别：</label>
+            <label class="control-label"><s>*</s>密 码</label>
+            <div class="controls">
+              <input name="grad" type="text" data-rules="{required:true}" class="input-normal control-text">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="control-group span8">
+            <label class="control-label"><s>*</s>类 型：</label>
             <div class="controls">
               <select  data-rules="{required:true}"  name="sex" class="input-normal"> 
                 <option value="">请选择</option>
@@ -60,24 +70,9 @@
         </div>
         <div class="row">
           <div class="control-group span8">
-            <label class="control-label"><s>*</s>学生班级</label>
+            <label class="control-label"><s>*</s>电子邮箱</label>
             <div class="controls">
-              <input name="grad" type="grade" data-rules="{required:true}" class="input-normal control-text">
-            </div>
-          </div>
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>生日</label>
-            <div class="controls">
-              <input name="birthday" type="text" data-rules="{required:true}" class="calendar">
-            </div>
-          </div>
-          
-        </div>
-        <div class="row">
-          <div class="control-group span15">
-            <label class="control-label">学生家庭住址</label>
-            <div class="controls control-row4">
-              <textarea name="address" class="input-large" type="text"></textarea>
+              <input name="grad" type="text" data-rules="{required:true}" class="input-normal control-text">
             </div>
           </div>
         </div>
@@ -91,18 +86,27 @@
 </script>
 <script type="text/javascript">
 BUI.use('common/search',function (Search) {
-   var enumObj = {"1":"正常","0":"禁用"},
+   var enumObj = {"1":"<font color='blue'>正常</font>","0":"<font color='red'>正常</font>"},
      editing = new BUI.Grid.Plugins.DialogEditing({
+    	 title:'模态窗口',
        contentId : 'content', //设置隐藏的Dialog内容
        autoSave : true, //添加数据或者修改数据时，自动保存
        triggerCls : 'btn-edit'
      }),
      columns = [
          {title:'登录名',dataIndex:'loginName',width:100},
+         {title:'电子邮箱',dataIndex:'email',width:120},
          {title:'状态',dataIndex:'status',width:60,renderer:BUI.Grid.Format.enumRenderer(enumObj)},
          {title:'类型',dataIndex:'type',width:100},
          {title:'创建时间',dataIndex:'crTime',width:100,renderer:BUI.Grid.Format.dateRenderer},
-         {title:'最后登录时间',dataIndex:'lastTime',width:160,renderer:BUI.Grid.Format.datetimeRenderer}
+         {title:'最后登录时间',dataIndex:'lastTime',width:160,renderer:BUI.Grid.Format.datetimeRenderer},
+         {title:'操作',dataIndex:'',width:80,renderer : function(value,obj){
+             var op = '<button class="button button-success">恢复</button>';
+             if(obj.status == 1) {
+               op = '<button class="button button-warning">禁用</button>';
+             }
+             return op;
+           }}
        ],
      store = Search.createStore('/perm/user/getUserList.html',{
        proxy : {
