@@ -1,10 +1,12 @@
 package com.baomidou.springwind.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.plugins.Page;
@@ -45,15 +47,35 @@ public class PermissionController extends BaseController {
 		return jsonPage(permissionService.selectPage(page, null));
 	}
 
+	/**
+	 * 根据 ID 删除权限
+	 */
 	@ResponseBody
 	@com.baomidou.kisso.annotation.Permission("2003")
-	@RequestMapping("/delete/{permId}")
-	public String delete(@PathVariable Long permId) {
-		boolean exist = rolePermissionService.existRolePermission(permId);
-		if (exist) {
-			return "false";
+	@RequestMapping("/delPermission")
+	public String delPermission(@RequestParam("ids[]") List<Long> permIds) {
+		boolean rlt = false;
+		if (permIds != null) {
+			rlt = permissionService.deleteBatchIds(permIds);
 		}
-		return callbackResult(permissionService.deleteById(permId));
+		return callbackResult(rlt);
 	}
 
+	/**
+	 * 添加、编辑权限
+	 */
+	@ResponseBody
+	@com.baomidou.kisso.annotation.Permission("2003")
+	@RequestMapping("/editPermission")
+	public String editPermission( Permission perm ) {
+		boolean rlt = false;
+		if ( perm != null ) {
+			if ( perm.getId() != null ) {
+				rlt = permissionService.updateById(perm);
+			} else {
+				rlt = permissionService.insertSelective(perm);
+			}
+		}
+		return callbackSuccess(rlt);
+	}
 }

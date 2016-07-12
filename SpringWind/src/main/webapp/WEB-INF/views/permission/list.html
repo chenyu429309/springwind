@@ -8,13 +8,12 @@
     <link href="/static/css/page-min.css" rel="stylesheet" type="text/css" /> 
  </head>
  <body>
-  
   <div class="container">
     <div class="row">
       <form id="searchForm" class="form-horizontal span24">
         <div class="row">
           <div class="control-group span8">
-            <label class="control-label">登录名：</label>
+            <label class="control-label">标题：</label>
             <div class="controls">
               <input type="text" class="control-text" name="loginName">
             </div>
@@ -39,46 +38,64 @@
     </div>
   </div>
   <div id="content" class="hide">
-      <form id="J_Form" class="form-horizontal" action="http://www.builive.com/apps/default/data/edit.php?a=1">
+      <form id="J_Form" class="form-horizontal" action="/perm/permission/editPermission.html">
         <input type="hidden" name="a" value="3">
         <div class="row">
           <div class="control-group span8">
-            <label class="control-label"><s>*</s>学生姓名</label>
+            <label class="control-label"><s>*</s>标 题：</label>
             <div class="controls">
-              <input name="name" type="text" data-rules="{required:true}" class="input-normal control-text">
+              <input name="title" type="text" data-rules="{required:true}" class="input-normal control-text">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="control-group span8">
+            <label class="control-label"><s>*</s>类 型：</label>
+            <div class="controls">
+              <select data-rules="{required:true}" name="type" class="input-normal"> 
+                <option value="">请选择</option>
+                <option value="0">菜单</option>
+                <option value="1">功能</option>
+              </select>
             </div>
           </div>
           <div class="control-group span8">
-            <label class="control-label"><s>*</s>学生性别：</label>
+            <label class="control-label"><s>*</s>状 态：</label>
             <div class="controls">
-              <select  data-rules="{required:true}"  name="sex" class="input-normal"> 
-                <option value="">请选择</option>
-                <option value="1">男</option>
-                <option value="0">女</option>
+              <select name="state" class="input-normal"> 
+                <option value="0">正常</option>
+                <option value="1">禁用</option>
               </select>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="control-group span8">
-            <label class="control-label"><s>*</s>学生班级</label>
+            <label class="control-label"><s>*</s>地 址：</label>
             <div class="controls">
-              <input name="grad" type="grade" data-rules="{required:true}" class="input-normal control-text">
+              <input name="url" type="text" data-rules="{required:true}" class="input-normal control-text">
             </div>
           </div>
           <div class="control-group span8">
-            <label class="control-label"><s>*</s>生日</label>
+            <label class="control-label"><s>*</s>排 序：</label>
             <div class="controls">
-              <input name="birthday" type="text" data-rules="{required:true}" class="calendar">
+              <input name="sort" type="text" data-rules="{number:true}" class="input-normal control-text">
             </div>
           </div>
-          
+        </div>
+        <div class="row">
+          <div class="control-group span8">
+            <label class="control-label"><s>*</s>权限编码：</label>
+            <div class="controls">
+              <input name="permCode" type="text" data-rules="{required:true}" class="input-normal control-text">
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="control-group span15">
-            <label class="control-label">学生家庭住址</label>
+            <label class="control-label">描 述：</label>
             <div class="controls control-row4">
-              <textarea name="address" class="input-large" type="text"></textarea>
+              <textarea name="description" class="input-large" type="text"></textarea>
             </div>
           </div>
         </div>
@@ -92,7 +109,8 @@
 </script>
 <script type="text/javascript">
   BUI.use('common/search',function (Search) {
-    var enumObj = {"1":"正常","0":"禁用"},
+    var enumState={"0":"<font color='green'>正常</font>","1":"<font color='red'>禁用</font>"},
+    	enumType={"0":"菜单","1":"<font color='blue'>功能</font>"},
       editing = new BUI.Grid.Plugins.DialogEditing({
         contentId : 'content', //设置隐藏的Dialog内容
         autoSave : true, //添加数据或者修改数据时，自动保存
@@ -100,8 +118,8 @@
       }),
       columns = [
           {title:'标题',dataIndex:'title',width:100},
-          {title:'状态',dataIndex:'status',width:60,renderer:BUI.Grid.Format.enumRenderer(enumObj)},
-          {title:'类型',dataIndex:'type',width:60},
+          {title:'状态',dataIndex:'state',width:60,renderer:BUI.Grid.Format.enumRenderer(enumState)},
+          {title:'类型',dataIndex:'type',width:60,renderer:BUI.Grid.Format.enumRenderer(enumType)},
           {title:'地址',dataIndex:'url',width:260},
           {title:'权限编码',dataIndex:'permCode',width:100},
           {title:'描述',dataIndex:'description',width:160}
@@ -109,9 +127,9 @@
       store = Search.createStore('/perm/permission/getPermissionList.html',{
         proxy : {
           save : { //也可以是一个字符串，那么增删改，都会往那么路径提交数据，同时附加参数saveType
-            addUrl : 'http://www.builive.com/apps/default/data/add.json',
-            updateUrl : 'http://www.builive.com/apps/default/data/edit.json',
-            removeUrl : '/perm/user/delUser.html'
+            addUrl : '/perm/permission/editPermission.html',
+            updateUrl : '/perm/permission/editPermission.html',
+            removeUrl : '/perm/permission/delPermission.html'
           }/*,
           method : 'POST'*/
         },

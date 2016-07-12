@@ -1,10 +1,12 @@
 package com.baomidou.springwind.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.kisso.annotation.Permission;
@@ -48,29 +50,23 @@ public class RoleController extends BaseController {
 		return jsonPage(roleService.selectPage(page, null));
 	}
 
-
+	/**
+	 * 根据 ID 删除角色
+	 */
 	@ResponseBody
 	@Permission("2003")
-	@RequestMapping("/delete/{roleId}")
-	public String delete( @PathVariable Long roleId ) {
-		boolean exist = userRoleService.existRoleUser(roleId);
-		if ( exist ) {
-			return "false";
+	@RequestMapping("/delRole")
+	public String delRole(@RequestParam("ids[]") List<Long> roleIds) {
+		boolean rlt = false;
+		if (roleIds != null) {
+			rlt = roleService.deleteBatchIds(roleIds);
 		}
-		return callbackResult(roleService.deleteById(roleId));
+		return callbackResult(rlt);
 	}
 
-
-	@Permission("2002")
-	@RequestMapping("/edit")
-	public String edit( Model model, Long id ) {
-		if ( id != null ) {
-			model.addAttribute("role", roleService.selectById(id));
-		}
-		return "/role/edit";
-	}
-
-
+	/**
+	 * 添加、编辑角色
+	 */
 	@ResponseBody
 	@Permission("2002")
 	@RequestMapping("/editRole")

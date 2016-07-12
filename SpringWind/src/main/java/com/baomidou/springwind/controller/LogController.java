@@ -1,10 +1,13 @@
 package com.baomidou.springwind.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.kisso.annotation.Permission;
@@ -49,4 +52,19 @@ public class LogController extends BaseController {
 		sysLogService.deleteById(id);
 		return Boolean.TRUE.toString();
 	}
+
+	/**
+	 * 根据 ID 删除日志
+	 */
+	@ResponseBody
+	@com.baomidou.kisso.annotation.Permission("4001")
+	@RequestMapping("/delLog")
+	public String delLog(@RequestParam("ids[]") List<Long> logIds) {
+		boolean rlt = false;
+		if (logIds != null) {
+			rlt = sysLogService.deleteBatchIds(logIds);
+		}
+		return callbackResult(rlt);
+	}
+
 }

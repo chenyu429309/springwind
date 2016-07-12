@@ -30,51 +30,34 @@
     </div>
   </div>
   <div id="content" class="hide">
-      <form id="J_Form" class="form-horizontal" action="http://www.builive.com/apps/default/data/edit.php?a=1">
-        <input type="hidden" name="a" value="3">
-        <div class="row">
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>学生姓名</label>
-            <div class="controls">
-              <input name="name" type="text" data-rules="{required:true}" class="input-normal control-text">
-            </div>
-          </div>
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>学生性别：</label>
-            <div class="controls">
-              <select  data-rules="{required:true}"  name="sex" class="input-normal"> 
-                <option value="">请选择</option>
-                <option value="1">男</option>
-                <option value="0">女</option>
-              </select>
-            </div>
+    <form id="J_Form" class="form-horizontal" action="/perm/role/editRole.html">
+      <input type="hidden" name="a" value="3">
+      <div class="row">
+        <div class="control-group span8">
+          <label class="control-label"><s>*</s>角 色</label>
+          <div class="controls">
+            <input name="name" type="text" data-rules="{required:true}" class="input-normal control-text">
           </div>
         </div>
-        <div class="row">
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>学生班级</label>
-            <div class="controls">
-              <input name="grad" type="grade" data-rules="{required:true}" class="input-normal control-text">
-            </div>
-          </div>
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>生日</label>
-            <div class="controls">
-              <input name="birthday" type="text" data-rules="{required:true}" class="calendar">
-            </div>
-          </div>
-          
-        </div>
-        <div class="row">
-          <div class="control-group span15">
-            <label class="control-label">学生家庭住址</label>
-            <div class="controls control-row4">
-              <textarea name="address" class="input-large" type="text"></textarea>
-            </div>
+      </div>
+      <div class="row">
+        <div class="control-group span8">
+          <label class="control-label"><s>*</s>排 序</label>
+          <div class="controls">
+            <input name="sort" type="text" data-rules="{number:true}" class="input-normal control-text">
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+      <div class="row">
+        <div class="control-group span8">
+          <label class="control-label"><s>*</s>描 述</label>
+          <div class="controls">
+            <input name="description" type="text" data-rules="{required:true}" class="input-normal control-text">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 <script type="text/javascript" src="/static/js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="/static/js/bui-min.js"></script>
 <script type="text/javascript" src="/static/js/config-min.js"></script>
@@ -96,9 +79,9 @@
       store = Search.createStore('/perm/role/getRoleList',{
         proxy : {
           save : { //也可以是一个字符串，那么增删改，都会往那么路径提交数据，同时附加参数saveType
-            addUrl : 'http://www.builive.com/apps/default/data/add.json',
-            updateUrl : 'http://www.builive.com/apps/default/data/edit.json',
-            removeUrl : '/perm/user/delUser.html'
+            addUrl : '/perm/role/editRole.html',
+            updateUrl : '/perm/role/editRole.html',
+            removeUrl : '/perm/role/delRole.html'
           }/*,
           method : 'POST'*/
         },
@@ -110,7 +93,7 @@
           items : [
             {text : '<i class="icon-plus"></i>新建',btnCls : 'button button-small',handler:addFunction},
             {text : '<i class="icon-edit"></i>编辑',btnCls : 'button button-small',handler:function(){alert('编辑');}},
-            {text : '<i class="icon-remove"></i>删除',btnCls : 'button button-small',handler : delFunction}
+            {text : '<i class="icon-remove"></i>删除',btnCls : 'button button-small',handler:delFunction}
           ]
         },
         plugins : [editing,BUI.Grid.Plugins.CheckSelection,BUI.Grid.Plugins.AutoFit] // 插件形式引入多选表格
@@ -129,32 +112,30 @@
 
     //删除操作
     function delFunction(){
-      var selections = grid.getSelection();
-      delItems(selections);
-    }
+      	var items = grid.getSelection();
+ 		var ids = [];
+ 		BUI.each(items, function(item) {
+ 			ids.push(item.id);
+ 		});
+ 	
+ 		if (ids.length) {
+ 			BUI.Message.Confirm('确认要删除选中的记录么？', function() {
+ 				store.save('remove', {ids:ids});
+ 			}, 'question');
+ 		} else {
+ 			BUI.Message.Alert('请选择删除数据！','error');
+ 		}
+ 	}
 
-    function delItems(items){
-      var ids = [];
-      BUI.each(items,function(item){
-        ids.push(item.id);
-      });
-
-      if(ids.length){
-        BUI.Message.Confirm('确认要删除选中的记录么？',function(){
-          store.save('remove',{ids : ids});
-        },'question');
-      }
-    }
-
-    //监听事件，删除一条记录
-    grid.on('cellclick',function(ev){
-      var sender = $(ev.domTarget); //点击的Dom
-      if(sender.hasClass('btn-del')){
-        var record = ev.record;
-        delItems([record]);
-      }
-    });
-  });
+ 	//监听事件，删除一条记录
+ 	grid.on('cellclick', function(ev) {
+ 		var sender = $(ev.domTarget); //点击的Dom
+ 		if (sender.hasClass('btn-del')) {
+ 			var record = ev.record;
+ 			delItems([ record ]);
+ 		}
+ 	});
+});
 </script>
 <body>
 </html>  
