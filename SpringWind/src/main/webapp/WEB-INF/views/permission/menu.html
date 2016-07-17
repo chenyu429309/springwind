@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<title>菜单管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/css/dpl-min.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/bui-min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="demo-content" style="margin: 60px;">
+	<div class="row">
+		<div class="span24" >
+			<button id="addLeaf" class="button button-primary">添加</button>
+	    <button id="edit" class="button button-info">编辑</button>
+	    <button id="remove" class="button button-danger">删除</button>
+		</div>
+	</div>
+  	<div class="row" style="margin-top: 10px;">
+	    <div class="span8">
+	      <div id="t1">
+	      </div>
+	      <h2>点击的节点</h2>
+	      <div class="log well"></div>
+	    </div>
+  	</div>
+</div>
+<script type="text/javascript" src="/static/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/static/js/bui-min.js"></script>
+<!-- script start --> 
+    <script type="text/javascript">
+        BUI.use('bui/tree',function (Tree) {
+        
+      //树节点数据，
+      //text : 文本，
+      //id : 节点的id,
+      //leaf ：标示是否叶子节点，可以不提供，根据childern,是否为空判断
+      //expanded ： 是否默认展开
+      var data = [ 
+          {text : '1',id : '1',expanded : true,children: [{text : '11',id : '11'}]},
+          {text : '2',id : '2',expanded : true,children : [
+              {text : '21',id : '21',expanded : true,children : [{text : '211',id : '211'},{text : '212',id : '212'}]},
+              {text : '22',id : '22'}
+          ]},
+          {text : '3',id : '3'},
+          {text : '4',id : '4'}
+        ];
+      //由于这个树，不显示根节点，所以可以不指定根节点
+      var tree = new Tree.TreeList({
+        render : '#t1',
+        nodes : data
+      });
+      tree.render();
+ 
+      tree.on('itemclick',function(ev){
+        var item = ev.item;
+        $('.log').text(item.text);
+      });
+    });
+    </script>
+<!-- script end -->
+</body>
+</html>

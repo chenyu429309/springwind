@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
  *
  */
 @TableName(value = "permission")
-public class Permission implements Serializable {
+public class SysPermission implements Serializable {
 
 	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;

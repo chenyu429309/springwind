@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.kisso.SSOAuthorization;
 import com.baomidou.kisso.Token;
-import com.baomidou.springwind.entity.Permission;
+import com.baomidou.springwind.entity.SysPermission;
 import com.baomidou.springwind.entity.vo.MenuVO;
-import com.baomidou.springwind.mapper.PermissionMapper;
-import com.baomidou.springwind.service.IPermissionService;
+import com.baomidou.springwind.mapper.SysPermissionMapper;
+import com.baomidou.springwind.service.ISysPermissionService;
 import com.baomidou.springwind.service.support.BaseServiceImpl;
 
 /**
@@ -25,8 +25,8 @@ import com.baomidou.springwind.service.support.BaseServiceImpl;
  *
  */
 @Service
-public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Permission>
-		implements IPermissionService, SSOAuthorization {
+public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionMapper, SysPermission>
+		implements ISysPermissionService, SSOAuthorization {
 
 	@Cacheable(value = "permissionCache", key = "#userId")
 	@Override
@@ -51,9 +51,9 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 		 * 
 		 */
 		if (StringUtils.isNotBlank(permission)) {
-			List<Permission> pl = this.selectAllByUserId(token.getId());
+			List<SysPermission> pl = this.selectAllByUserId(token.getId());
 			if (pl != null) {
-				for (Permission p : pl) {
+				for (SysPermission p : pl) {
 					if (permission.equals(p.getPermCode())) {
 						return true;
 					}
@@ -65,21 +65,20 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionMapper, Per
 
 	@Cacheable(value = "permissionCache", key = "#userId")
 	@Override
-	public List<Permission> selectAllByUserId(Long userId) {
+	public List<SysPermission> selectAllByUserId(Long userId) {
 		return baseMapper.selectAllByUserId(userId);
 	}
 
 	@Override
-	public boolean isActionable( Token token, String permission ) {
+	public boolean isActionable(Token token, String permission) {
 		/**
 		 * 
-		 * 按钮级别、权限验证，生产环境建议加上缓存处理。
-		 * <br>
-		 * 演示  admin 返回 true
+		 * 按钮级别、权限验证，生产环境建议加上缓存处理。 <br>
+		 * 演示 admin 返回 true
 		 * 
 		 */
 		System.err.println(" isActionable =" + permission);
-		if ( token.getId() == 1L ) {
+		if (token.getId() == 1L) {
 			return true;
 		}
 		return false;

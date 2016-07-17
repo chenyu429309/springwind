@@ -7,7 +7,7 @@ import com.baomidou.framework.spring.SpringHelper;
 import com.baomidou.kisso.SSOHelper;
 import com.baomidou.kisso.Token;
 import com.baomidou.springwind.entity.User;
-import com.baomidou.springwind.service.IPermissionService;
+import com.baomidou.springwind.service.ISysPermissionService;
 import com.baomidou.springwind.service.IUserService;
 
 /**
@@ -42,7 +42,7 @@ public class SpringWindTool {
 			return false;
 		}
 		// 数据库判断按钮权限是否合法，生产环境此处建议加缓存判断逻辑。
-		IPermissionService psi = SpringContextHolder.getBean(IPermissionService.class);
+		ISysPermissionService psi = SpringContextHolder.getBean(ISysPermissionService.class);
 		return psi.isActionable(token, permission);
 	}
 }
