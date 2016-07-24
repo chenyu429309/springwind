@@ -124,12 +124,12 @@
           {title:'权限编码',dataIndex:'permCode',width:100},
           {title:'描述',dataIndex:'description',width:160}
         ],
-      store = Search.createStore('/perm/permission/getPermissionList.html',{
+      store = Search.createStore('/permission/getPermissionList.html',{
         proxy : {
           save : { //也可以是一个字符串，那么增删改，都会往那么路径提交数据，同时附加参数saveType
             addUrl : '/perm/permission/editPermission.html',
             updateUrl : '/perm/permission/editPermission.html',
-            removeUrl : '/perm/permission/delPermission.html'
+            removeUrl : '/permission/delPermission.html'
           }/*,
           method : 'POST'*/
         },

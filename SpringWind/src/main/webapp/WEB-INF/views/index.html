@@ -42,26 +42,19 @@
     BUI.use('common/main',function(){
       var config = [{
           id:'menu', 
-          homePage : 'code',
+          homePage : 'donate',
           menu:[{
-              text:'首页内容',
+              text:'支 持',
               items:[
-                {id:'code',text:'捐赠作者',href:'/donate.html',closeable : false},
-                {id:'main-menu',text:'顶部导航',href:'main/menu.html'},
-                {id:'second-menu',text:'右边菜单',href:'main/second-menu.html'},
-                {id:'dyna-menu',text:'动态菜单',href:'main/dyna-menu.html'}
+                {id:'donate',text:'捐赠 - 作者',href:'/donate.html',closeable : false},
+                {id:'donate-list',text:'捐赠 - 列表',href:'main/menu.html'}
               ]
             },{
-              text:'页面操作',
+              text:'异 常',
               items:[
-                {id:'operation',text:'页面常见操作',href:'main/operation.html'},
-                {id:'quick',text:'页面操作快捷方式',href:'main/quick.html'}  
-              ]
-            },{
-              text:'文件结构',
-              items:[
-                {id:'resource',text:'资源文件结构',href:'main/resource.html'},
-                {id:'loader',text:'引入JS方式',href:'main/loader.html'}  
+                {id:'error-403',text:'403',href:'/error/403.html'},
+                {id:'error-404',text:'404',href:'/error/404.html'},
+                {id:'error-500',text:'500',href:'/error/500.html'}
               ]
             }]
           },{
@@ -71,8 +64,8 @@
                 items:[
                   {id:'code',text:'用户管理',href:'/perm/user/list.html'},
                   {id:'example',text:'角色管理',href:'/perm/role/list.html'},
-                  {id:'example-dialog',text:'权限管理',href:'/perm/permission/list.html'},
-                  {id:'example-dialog',text:'菜单管理',href:'/perm/permission/menu.html'},
+                  {id:'example-dialog',text:'权限管理',href:'/permission/list.html'},
+                  {id:'menu',text:'菜单管理',href:'/permission/menu.html'},
                 ]
               },{
                 text : '系统日志',

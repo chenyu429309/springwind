@@ -4,14 +4,12 @@ import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
  *
  * 权限表
  *
  */
-@TableName(value = "permission")
 public class SysPermission implements Serializable {
 
 	@TableField(exist = false)

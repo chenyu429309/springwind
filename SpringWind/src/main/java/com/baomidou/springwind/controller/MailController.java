@@ -21,7 +21,7 @@ public class MailController extends BaseController {
 	/**
 	 * 发送
 	 */
-	@Permission("1001")
+	@Permission("1000")
 	@RequestMapping("/send")
 	public String send(Model model, String email) {
 		if (isPost()) {

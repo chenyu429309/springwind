@@ -2,13 +2,16 @@ package com.baomidou.springwind.common.enums;
 
 import com.baomidou.framework.common.IEnum;
 
-public enum PermissionType implements IEnum {
-	MENU(0, "菜单"), OPERATION(1, "功能");
+/**
+ * 操作状态
+ */
+public enum OperateState implements IEnum {
+	NORMAL(0, "正常"), DISABLE(1, "禁用");
 
 	private final int key;
 	private final String desc;
 
-	PermissionType(final int key, final String desc) {
+	OperateState(final int key, final String desc) {
 		this.key = key;
 		this.desc = desc;
 	}

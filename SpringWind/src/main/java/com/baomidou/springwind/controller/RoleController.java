@@ -25,7 +25,7 @@ import com.baomidou.springwind.service.IUserRoleService;
  * @Date 2016-04-15
  */
 @Controller
-@RequestMapping("/perm/role")
+@RequestMapping("/role")
 public class RoleController extends BaseController {
 
 	@Autowired
@@ -35,7 +35,7 @@ public class RoleController extends BaseController {
 	private IUserRoleService userRoleService;
 
 
-	@Permission("2002")
+	@Permission("2000")
 	@RequestMapping("/list")
 	public String list( Model model ) {
 		return "/role/list";
@@ -43,7 +43,7 @@ public class RoleController extends BaseController {
 
 
 	@ResponseBody
-	@Permission("2002")
+	@Permission("2000")
 	@RequestMapping("/getRoleList")
 	public String getUserList() {
 		Page<Role> page = getPage();
@@ -54,7 +54,7 @@ public class RoleController extends BaseController {
 	 * 根据 ID 删除角色
 	 */
 	@ResponseBody
-	@Permission("2003")
+	@Permission("2000")
 	@RequestMapping("/delRole")
 	public String delRole(@RequestParam("ids[]") List<Long> roleIds) {
 		boolean rlt = false;
@@ -68,7 +68,7 @@ public class RoleController extends BaseController {
 	 * 添加、编辑角色
 	 */
 	@ResponseBody
-	@Permission("2002")
+	@Permission("2000")
 	@RequestMapping("/editRole")
 	public String editRole( Role role ) {
 		boolean rlt = false;

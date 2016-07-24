@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.kisso.SSOAuthorization;
 import com.baomidou.kisso.Token;
 import com.baomidou.springwind.entity.SysPermission;
+import com.baomidou.springwind.entity.vo.MenuTreeVO;
 import com.baomidou.springwind.entity.vo.MenuVO;
 import com.baomidou.springwind.mapper.SysPermissionMapper;
 import com.baomidou.springwind.service.ISysPermissionService;
@@ -44,6 +45,34 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionMappe
 	}
 
 	@Override
+	public List<MenuTreeVO> getMenuTree() {
+		/*
+		 * 从根节点开始查询，一级菜单
+		 */
+		List<MenuTreeVO> menuTreeList = new ArrayList<MenuTreeVO>();
+		menuTreeList.add(new MenuTreeVO(0L, -1L, "菜单", true));/* 设置菜单根节点 */
+		List<MenuTreeVO> mtvl = baseMapper.selectByPid(0L);
+		for (MenuTreeVO m : mtvl) {
+			m.setOpen(true);
+			menuTreeList.add(m);
+
+			/* 二级菜单 */
+			List<MenuTreeVO> mt1 = baseMapper.selectByPid(m.getId());
+			for (MenuTreeVO m1 : mt1) {
+				m1.setOpen(true);
+				menuTreeList.add(m1);
+
+				/* 三级菜单 */
+				List<MenuTreeVO> mt2 = baseMapper.selectByPid(m1.getId());
+				if (!mt2.isEmpty()) {
+					menuTreeList.addAll(mt2);
+				}
+			}
+		}
+		return menuTreeList;
+	}
+
+	@Override
 	public boolean isPermitted(Token token, String permission) {
 		/**
 		 * 
@@ -54,7 +83,7 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionMappe
 			List<SysPermission> pl = this.selectAllByUserId(token.getId());
 			if (pl != null) {
 				for (SysPermission p : pl) {
-					if (permission.equals(p.getPermCode())) {
+					if (null != p && permission.equals(p.getPermCode())) {
 						return true;
 					}
 				}

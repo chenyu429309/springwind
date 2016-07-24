@@ -39,13 +39,13 @@ public class UserController extends BaseController {
 	@Autowired
 	private IRoleService roleService;
 
-	@Permission("2001")
+	@Permission("2000")
 	@RequestMapping("/list")
 	public String list(Model model) {
 		return "/user/list";
 	}
 
-	@Permission("2001")
+	@Permission("2000")
 	@RequestMapping("/edit")
 	public String edit(Model model, Long id) {
 		if (id != null) {
@@ -56,7 +56,7 @@ public class UserController extends BaseController {
 	}
 
 	@ResponseBody
-	@Permission("2001")
+	@Permission("2000")
 	@RequestMapping("/editUser")
 	public String editUser(User user) {
 		boolean rlt = false;
@@ -74,7 +74,7 @@ public class UserController extends BaseController {
 	}
 
 	@ResponseBody
-	@Permission("2001")
+	@Permission("2000")
 	@RequestMapping("/getUserList")
 	public String getUserList() {
 		Page<User> page = getPage();
@@ -85,7 +85,7 @@ public class UserController extends BaseController {
 	 * 根据 ID 删除用户信息
 	 */
 	@ResponseBody
-	@Permission("2001")
+	@Permission("2000")
 	@RequestMapping("/delUser")
 	public String delUser(@RequestParam("ids[]") List<Long> userIds) {
 		boolean rlt = false;
@@ -96,7 +96,7 @@ public class UserController extends BaseController {
 	}
 
 	@ResponseBody
-	@Permission("2001")
+	@Permission("2000")
 	@RequestMapping("/{userId}")
 	public User getUser(@PathVariable Long userId) {
 		return userService.selectById(userId);

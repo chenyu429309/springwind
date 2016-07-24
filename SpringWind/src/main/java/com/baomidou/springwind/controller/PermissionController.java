@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.springwind.common.enums.OperateState;
+import com.baomidou.springwind.common.enums.SYsPermissionType;
 import com.baomidou.springwind.entity.SysPermission;
 import com.baomidou.springwind.service.IRolePermissionService;
 import com.baomidou.springwind.service.ISysPermissionService;
@@ -25,7 +28,7 @@ import com.baomidou.springwind.service.ISysPermissionService;
  * @Date 2016-04-15
  */
 @Controller
-@RequestMapping("/perm/permission")
+@RequestMapping("/permission")
 public class PermissionController extends BaseController {
 
 	@Autowired
@@ -37,20 +40,31 @@ public class PermissionController extends BaseController {
 	/**
 	 * 菜单管理
 	 */
-	@Permission("2003")
+	@Permission("2000")
 	@RequestMapping("/menu")
 	public String menu(Model model) {
+		model.addAttribute("menuTreeJson", toJson(sysPermissionService.getMenuTree()));
 		return "/permission/menu";
 	}
-	
-	@Permission("2003")
+
+	/**
+	 * 添加菜单
+	 */
+	@Permission("2000")
+	@RequestMapping("/menu/add")
+	public String addMenu(Model model) {
+		model.addAttribute("type", SYsPermissionType.MENU.key());
+		return "/permission/edit";
+	}
+
+	@Permission("2000")
 	@RequestMapping("/list")
 	public String list(Model model) {
 		return "/permission/list";
 	}
 
 	@ResponseBody
-	@Permission("2003")
+	@Permission("2000")
 	@RequestMapping("/getPermissionList")
 	public String getPermissionList() {
 		Page<SysPermission> page = getPage();
@@ -61,7 +75,7 @@ public class PermissionController extends BaseController {
 	 * 根据 ID 删除权限
 	 */
 	@ResponseBody
-	@Permission("2003")
+	@Permission("2000")
 	@RequestMapping("/delPermission")
 	public String delPermission(@RequestParam("ids[]") List<Long> permIds) {
 		boolean rlt = false;
@@ -74,13 +88,14 @@ public class PermissionController extends BaseController {
 	/**
 	 * 添加、编辑权限
 	 */
+	@Permission("2000")
 	@ResponseBody
-	@Permission("2003")
-	@RequestMapping("/editPermission")
-	public String editPermission( SysPermission perm ) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String edit(SysPermission perm) {
 		boolean rlt = false;
-		if ( perm != null ) {
-			if ( perm.getId() != null ) {
+		if (perm != null) {
+			perm.setState(OperateState.NORMAL.key());
+			if (perm.getId() != null) {
 				rlt = sysPermissionService.updateById(perm);
 			} else {
 				rlt = sysPermissionService.insertSelective(perm);
@@ -88,4 +103,5 @@ public class PermissionController extends BaseController {
 		}
 		return callbackSuccess(rlt);
 	}
+
 }
