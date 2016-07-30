@@ -5,14 +5,12 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
  *
  * 用户表
  *
  */
-@TableName(value = "user")
 public class User implements Serializable {
 
 	@TableField(exist = false)

@@ -30,7 +30,7 @@ import com.baomidou.springwind.service.IUserService;
  * @Date 2016/4/15 15:03
  */
 @Controller
-@RequestMapping("/perm/user")
+@RequestMapping("/user")
 public class UserController extends BaseController {
 
 	@Autowired

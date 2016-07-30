@@ -4,24 +4,22 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		 id, pid, title, type, state, sort, url, permCode, icon, description
+		 id, pid, text, type, state, sort, href, code, description
 	</sql>
 
-	<select id="selectMenuByUserId" resultType="MenuVO">
-		SELECT id, title, url, permCode, icon FROM sys_permission p RIGHT JOIN
-		(SELECT DISTINCT r.pid FROM role_permission r WHERE EXISTS (
-		SELECT 1 FROM user_role u WHERE u.uid=#{userId} AND r.rid=u.rid )) a ON p.id=a.pid
-		WHERE p.pid = #{pid} AND type=0 ORDER BY sort
-	</select>
-
 	<select id="selectAllByUserId" resultType="SysPermission">
-		SELECT id, title, url, permCode, icon FROM sys_permission p RIGHT JOIN
+		SELECT id, text, href, code FROM sys_permission p RIGHT JOIN
 		(SELECT DISTINCT r.pid FROM role_permission r WHERE EXISTS (
 		SELECT 1 FROM user_role u WHERE u.uid=#{userId} AND r.rid=u.rid )) a ON p.id=a.pid
 	</select>
 
-	<select id="selectByPid" resultType="MenuTreeVO">
-		SELECT id,pid AS pId,title AS name FROM sys_permission 
+	<select id="selectMenuByPid" resultType="Menu">
+		SELECT id,text,href FROM sys_permission 
+		WHERE pid=#{pid} AND type=0 AND state=0 ORDER BY sort
+	</select>
+
+	<select id="selectMenuTreeByPid" resultType="MenuZtreeVO">
+		SELECT id,pid AS pId,text AS name FROM sys_permission 
 		WHERE pid=#{pid} AND type=0 AND state=0 ORDER BY sort
 	</select>
 </mapper>

@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
  * 角色权限表
  *
  */
-@TableName(value = "role_permission")
+@TableName("role_permission")
 public class RolePermission implements Serializable {
 
 	@TableField(exist = false)

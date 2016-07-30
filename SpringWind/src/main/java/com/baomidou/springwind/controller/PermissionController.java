@@ -15,7 +15,6 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.common.enums.OperateState;
 import com.baomidou.springwind.common.enums.SYsPermissionType;
 import com.baomidou.springwind.entity.SysPermission;
-import com.baomidou.springwind.service.IRolePermissionService;
 import com.baomidou.springwind.service.ISysPermissionService;
 
 /**
@@ -34,16 +33,13 @@ public class PermissionController extends BaseController {
 	@Autowired
 	private ISysPermissionService sysPermissionService;
 
-	@Autowired
-	private IRolePermissionService rolePermissionService;
-
 	/**
 	 * 菜单管理
 	 */
 	@Permission("2000")
 	@RequestMapping("/menu")
 	public String menu(Model model) {
-		model.addAttribute("menuTreeJson", toJson(sysPermissionService.getMenuTree()));
+		model.addAttribute("menuTreeJson", toJson(sysPermissionService.getMenuZtree()));
 		return "/permission/menu";
 	}
 

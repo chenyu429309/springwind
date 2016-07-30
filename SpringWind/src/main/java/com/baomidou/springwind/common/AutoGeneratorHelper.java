@@ -1,6 +1,5 @@
 package com.baomidou.springwind.common;
 
-import com.baomidou.kisso.common.util.EnvUtil;
 import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.ConfigGenerator;
@@ -30,11 +29,7 @@ public class AutoGeneratorHelper {
 		cg.setServicePackage("com.baomidou.springwind.service");
 		cg.setSuperServiceImpl("com.baomidou.springwind.service.support.BaseServiceImpl");
 		cg.setIdType(IdType.ID_WORKER);
-		if (EnvUtil.isLinux()) {
-			cg.setSaveDir("/Users/hubin/springwind/");
-		} else {
-			cg.setSaveDir("D:/springwind/");
-		}
+		cg.setSaveDir("D:/springwind/");
 		cg.setDbDriverName("com.mysql.jdbc.Driver");
 		cg.setDbUser("root");
 		cg.setDbPassword("");

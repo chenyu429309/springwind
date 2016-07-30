@@ -22,72 +22,32 @@
 	</div>
 	<div class="content">
 		<div class="dl-main-nav">
-			<div class="dl-inform">
-				<div class="dl-inform-title">
-					贴心小秘书<s class="dl-inform-icon dl-up"></s>
-				</div>
-			</div>
 			<ul id="J_Nav" class="nav-list ks-clear">
-				<li class="nav-item dl-selected"><div class="nav-item-inner nav-order">功能管理</div></li>
-				<li class="nav-item"><div class="nav-item-inner nav-inventory">系统管理</div></li>
-				<li class="nav-item"><div class="nav-item-inner nav-marketing">统计分析</div></li>
+				#foreach($menu in $menuList)
+				<li class="nav-item"><div class="nav-item-inner nav-order">$!{menu.text}</div></li>
+				#end
 			</ul>
 		</div>
 		<ul id="J_NavContent" class="dl-tab-conten"></ul>
 	</div>
-	<script type="text/javascript" src="/static/js/jquery-1.8.1.min.js"></script>
-  <script type="text/javascript" src="/static/js/bui.js"></script>
-  <script type="text/javascript" src="/static/js/config.js"></script>
-  <script>
-    BUI.use('common/main',function(){
-      var config = [{
-          id:'menu', 
-          homePage : 'donate',
-          menu:[{
-              text:'支 持',
-              items:[
-                {id:'donate',text:'捐赠 - 作者',href:'/donate.html',closeable : false},
-                {id:'donate-list',text:'捐赠 - 列表',href:'main/menu.html'}
-              ]
-            },{
-              text:'异 常',
-              items:[
-                {id:'error-403',text:'403',href:'/error/403.html'},
-                {id:'error-404',text:'404',href:'/error/404.html'},
-                {id:'error-500',text:'500',href:'/error/500.html'}
-              ]
-            }]
-          },{
-            id:'search',
-            menu:[{
-                text:'功能权限',
-                items:[
-                  {id:'code',text:'用户管理',href:'/perm/user/list.html'},
-                  {id:'example',text:'角色管理',href:'/perm/role/list.html'},
-                  {id:'example-dialog',text:'权限管理',href:'/permission/list.html'},
-                  {id:'menu',text:'菜单管理',href:'/permission/menu.html'},
-                ]
-              },{
-                text : '系统日志',
-                items : [
-                  {id : 'tab',text : '操作日志',href : '/log/list.html'}
-                ]
-              }]
-          },{
-            id : 'chart',
-            menu : [{
-              text : '图表',
-              items:[
-                  {id:'line',text:'折线图',href:'/sys/echarts/line.html'},
-                  {id:'code',text:'散列图',href:'/sys/echarts/scatter.html'},
-                  {id:'radar',text:'雷达图',href:'/sys/echarts/radar.html'}
-              ]
-            }]
-          }];
-      new PageUtil.MainPage({
-        modulesConfig : config
-      });
-    });
-  </script>
- </body>
+<script type="text/javascript" src="/static/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/static/js/bui.js"></script>
+<script type="text/javascript" src="/static/js/config.js"></script>
+<script>
+BUI.use('common/main',function(){
+  new PageUtil.MainPage({
+    modulesConfig : $!{menuTreeJson}
+  });
+});
+$(document).ready(function() { 
+	$(document).bind("keydown",function(e){ 
+	e=window.event||e; 
+	if(e.keyCode==116){ 
+	e.keyCode = 0; 
+	return false; 
+	} 
+	}); 
+	}); 
+</script>
+</body>
 </html>

@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.baomidou.framework.service.ISuperService;
 import com.baomidou.kisso.Token;
+import com.baomidou.springwind.entity.Menu;
 import com.baomidou.springwind.entity.SysPermission;
 import com.baomidou.springwind.entity.vo.MenuTreeVO;
-import com.baomidou.springwind.entity.vo.MenuVO;
+import com.baomidou.springwind.entity.vo.MenuZtreeVO;
 
 /**
  *
@@ -15,16 +16,23 @@ import com.baomidou.springwind.entity.vo.MenuVO;
  */
 public interface ISysPermissionService extends ISuperService<SysPermission> {
 
-	List<MenuVO> selectMenuVOByUserId(Long userId);
-
 	List<SysPermission> selectAllByUserId(Long userId);
+
+	List<Menu> getMenuByPid(Long pid);
 
 	/**
 	 * <p>
 	 * 获取菜单树列表
 	 * </p>
 	 */
-	List<MenuTreeVO> getMenuTree();
+	List<MenuTreeVO> getMenuTree(List<Menu> menuList);
+
+	/**
+	 * <p>
+	 * 获取 zTree 菜单树列表
+	 * </p>
+	 */
+	List<MenuZtreeVO> getMenuZtree();
 
 	/**
 	 * <p>

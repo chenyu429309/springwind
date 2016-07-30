@@ -1,1 +1,213 @@
-define("common/search",["bui/common","bui/grid","bui/form","bui/data","bui/overlay"],function(e){var g=e("bui/common"),b=e("bui/grid"),f=e("bui/data"),a=e("bui/overlay"),d=e("bui/form");function c(h){c.superclass.constructor.call(this,h);this._init()}c.ATTRS={autoSearch:{value:true},gridId:{value:"grid"},formId:{value:"searchForm"},btnId:{value:"btnSearch"},formCfg:{value:{}},gridCfg:{},form:{},grid:{},store:{}};g.extend(c,g.Base);g.augment(c,{_init:function(){var h=this;h._initForm();h._initStoreEvent();h._initGrid();h._initEvent();h._initData()},_initEvent:function(){this._initDomEvent();this._initFormEvent();this._initGridEvent()},_initDomEvent:function(){var h=this,k=h.get("btnId"),i=h.get("store"),j=h.get("form");$("#"+k).on("click",function(l){l.preventDefault();j.valid();if(j.isValid()){h.load(true)}})},_initForm:function(){var h=this,j=h.get("form");if(!j){var i=g.merge(h.get("formCfg"),{srcNode:"#"+h.get("formId")});j=new d.HForm(i);j.render();h.set("form",j)}},_initFormEvent:function(){},_initGrid:function(){var h=this,k=h.get("grid");if(!k){var i=h.get("gridCfg"),j=h.get("store");i.store=j;i.render="#"+h.get("gridId"),k=new b.Grid(i);k.render();h.set("grid",k)}},_initGridEvent:function(){},_initData:function(){var h=this,i=h.get("autoSearch");if(i){h.load(true)}},_initStoreEvent:function(){var h=this,i=h.get("store");i.on("exception",function(j){g.Message.Alert(j.error)})},load:function(k){var h=this,j=h.get("form"),i=h.get("store"),l=j.serializeToObject();if(k){l.start=0;l.pageIndex=0}i.load(l)}});c.createStore=function(i,h){h=g.merge({autoLoad:false,url:i,pageSize:30},h);return new f.Store(h)};c.createGridCfg=function(i,h){h=g.merge({columns:i,loadMask:true,bbar:{pagingBar:true}},h);return h};c.createLink=function(h){var i='<span class="page-action grid-command" data-id="{id}" data-href="{href}" title="{title}">{text}</span>';return g.substitute(i,h)};return c});
+/**
+ * @fileOverview 搜索页面业务控件
+ * @ignore
+ */
+
+define('common/search',['bui/common','bui/grid','bui/form','bui/data','bui/overlay'],function (require) {
+  var BUI = require('bui/common'),
+    Grid = require('bui/grid'),
+    Data = require('bui/data'),
+    Overlay = require('bui/overlay'),
+    Form = require('bui/form');
+
+  /**
+   * @class Search
+   * 搜索页类
+   */
+  function Search(config){
+
+    Search.superclass.constructor.call(this, config);
+    this._init();
+  }
+
+  Search.ATTRS = {
+    /**
+     * 是否自动查询，打开页面时未点击查询按钮时是否自动查询
+     * @type {Boolean}
+     */
+    autoSearch :{
+      value : true
+    },
+    /**
+     * grid 容器的 id
+     * @type {String}
+     */
+    gridId : {
+      value : 'grid'
+    },
+    /**
+     * 表单的容器的id
+     * @type {String}
+     */
+    formId : {
+      value : 'searchForm'
+    },
+    /**
+     * 查询按钮的id
+     * @type {Object}
+     */
+    btnId : {
+      value : 'btnSearch'
+    },
+    /**
+     * 表单的配置项
+     * @type {Object}
+     */
+    formCfg : {
+      value : {}
+    },
+    /**
+     * grid 表格的配置项
+     * @type {Object}
+     */
+    gridCfg : {
+
+    },
+    /**
+     * 表单对象
+     * @type {Object}
+     */
+    form : {
+
+    },
+    /**
+     * 表格对象
+     * @type {Object}
+     */
+    grid : {
+
+    },
+    /**
+     * 数据缓冲类
+     * @type {Object}
+     */
+    store : {
+
+    }
+  }
+
+  BUI.extend(Search,BUI.Base);
+
+  BUI.augment(Search,{
+    _init : function(){
+      var _self = this;
+
+      _self._initForm();
+      _self._initStoreEvent();
+      _self._initGrid();
+      _self._initEvent();
+      _self._initData();
+    },
+    //初始化事件
+    _initEvent : function(){
+      this._initDomEvent();
+      this._initFormEvent();
+      this._initGridEvent();
+    },
+    _initDomEvent : function(){
+      var _self = this,
+        btnId = _self.get('btnId'),
+        store = _self.get('store'),
+        form = _self.get('form');
+      $('#'+btnId).on('click',function(ev){
+        ev.preventDefault();
+        form.valid();
+        if(form.isValid()){
+          _self.load(true);
+        }
+      });
+    },
+    //初始化form
+    _initForm : function(){
+      var _self = this,
+        form = _self.get('form');
+      if(!form){
+        var formCfg = BUI.merge(_self.get('formCfg'),{
+          srcNode : '#' + _self.get('formId')
+        });
+        form = new Form.HForm(formCfg);
+        form.render();
+        _self.set('form',form);
+      }
+    },
+    _initFormEvent : function(){
+
+    },
+    //初始化表格
+    _initGrid : function(){
+      var _self = this,
+        grid = _self.get('grid');
+      if(!grid){
+        var gridCfg = _self.get('gridCfg'),
+          store = _self.get('store');
+        gridCfg.store = store;
+        gridCfg.render = '#' +_self.get('gridId'),
+        grid = new Grid.Grid(gridCfg);
+        grid.render();
+        _self.set('grid',grid);
+      }
+    },
+    _initGridEvent : function(){
+
+    },
+    _initData : function(){
+      var _self = this,
+        autoSearch = _self.get('autoSearch');
+      if(autoSearch){
+        _self.load(true);
+      }
+    },
+    //初始化数据加载事件
+    _initStoreEvent : function(){
+      var _self = this,
+        store = _self.get('store');
+      //处理异常
+      store.on('exception',function(ev){
+        BUI.Message.Alert(ev.error);
+      });
+    },
+    /**
+     * 加载数据
+     * @param {Boolean} reset 是否重置表格查询的页数
+     */
+    load : function(reset){
+      var _self =this,
+        form = _self.get('form'),
+        store = _self.get('store'),
+        param = form.serializeToObject();
+      if(reset){
+        param.start=0;
+        param.pageIndex = 0;
+      }
+      store.load(param);
+    }
+  });
+
+  Search.createStore = function(url,cfg){
+
+    cfg = BUI.merge({
+      autoLoad : false,
+      url : url,
+      pageSize : 30
+    },cfg);
+    return new Data.Store(cfg);
+  };
+
+  Search.createGridCfg = function(columns,cfg){
+    cfg = BUI.merge({
+      columns : columns,
+      loadMask : true,
+      bbar:{
+        pagingBar:true
+      }
+    },cfg);
+    
+    return cfg;
+  };
+
+  Search.createLink = function(cfg){
+    var temp = '<span class="page-action grid-command" data-id="{id}" data-href="{href}" title="{title}">{text}</span>';
+    return BUI.substitute(temp,cfg);
+  }
+  return Search;
+});

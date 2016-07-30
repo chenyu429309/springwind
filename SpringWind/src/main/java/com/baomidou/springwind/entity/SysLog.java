@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
  * 操作日志表
  *
  */
-@TableName(value = "sys_log")
+@TableName("sys_log")
 public class SysLog implements Serializable {
 
 	@TableField(exist = false)

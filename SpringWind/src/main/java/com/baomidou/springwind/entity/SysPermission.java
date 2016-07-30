@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
  *
  * 权限表
  *
  */
+@TableName("sys_permission")
 public class SysPermission implements Serializable {
 
 	@TableField(exist = false)
@@ -23,7 +25,7 @@ public class SysPermission implements Serializable {
 	private Long pid;
 
 	/** 标题 */
-	private String title;
+	private String text;
 
 	/** 类型 0、菜单 1、功能 */
 	private Integer type;
@@ -35,13 +37,10 @@ public class SysPermission implements Serializable {
 	private Integer sort;
 
 	/** 地址 */
-	private String url;
+	private String href;
 
 	/** 权限编码 */
-	private String permCode;
-
-	/** 图标 */
-	private String icon;
+	private String code;
 
 	/** 描述 */
 	private String description;
@@ -62,12 +61,12 @@ public class SysPermission implements Serializable {
 		this.pid = pid;
 	}
 
-	public String getTitle() {
-		return this.title;
+	public String getText() {
+		return this.text;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public Integer getType() {
@@ -94,28 +93,20 @@ public class SysPermission implements Serializable {
 		this.sort = sort;
 	}
 
-	public String getUrl() {
-		return this.url;
+	public String getHref() {
+		return this.href;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setHref(String href) {
+		this.href = href;
 	}
 
-	public String getPermCode() {
-		return this.permCode;
+	public String getCode() {
+		return this.code;
 	}
 
-	public void setPermCode(String permCode) {
-		this.permCode = permCode;
-	}
-
-	public String getIcon() {
-		return this.icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getDescription() {

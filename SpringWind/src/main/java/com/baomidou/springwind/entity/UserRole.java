@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
  * 用户角色表
  *
  */
-@TableName(value = "user_role")
+@TableName("user_role")
 public class UserRole implements Serializable {
 
 	@TableField(exist = false)

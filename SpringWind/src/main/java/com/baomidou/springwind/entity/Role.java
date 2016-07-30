@@ -4,14 +4,12 @@ import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
  *
  * 角色表
  *
  */
-@TableName(value = "role")
 public class Role implements Serializable {
 
 	@TableField(exist = false)
