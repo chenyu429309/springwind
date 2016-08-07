@@ -36,6 +36,12 @@ public class SysPermission implements Serializable {
 	/** 排序 */
 	private Integer sort;
 
+	/** 菜单ID */
+	private String mid;
+
+	/** 菜单是否可关闭 0、否 1、是 */
+	private boolean closeable;
+
 	/** 地址 */
 	private String href;
 
@@ -91,6 +97,22 @@ public class SysPermission implements Serializable {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	public String getMid() {
+		return this.mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
+	public boolean isCloseable() {
+		return closeable;
+	}
+
+	public void setCloseable(boolean closeable) {
+		this.closeable = closeable;
 	}
 
 	public String getHref() {

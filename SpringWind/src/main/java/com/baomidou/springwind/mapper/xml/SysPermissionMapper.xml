@@ -4,17 +4,17 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		 id, pid, text, type, state, sort, href, code, description
+		 id, pid, text, type, state, sort, mid, closeable, href, code, description
 	</sql>
 
 	<select id="selectAllByUserId" resultType="SysPermission">
-		SELECT id, text, href, code FROM sys_permission p RIGHT JOIN
+		SELECT id, text, href, code FROM sys_permission p LEFT JOIN
 		(SELECT DISTINCT r.pid FROM role_permission r WHERE EXISTS (
 		SELECT 1 FROM user_role u WHERE u.uid=#{userId} AND r.rid=u.rid )) a ON p.id=a.pid
 	</select>
 
 	<select id="selectMenuByPid" resultType="Menu">
-		SELECT id,text,href FROM sys_permission 
+		SELECT id AS tid,mid AS id,text,href,closeable FROM sys_permission 
 		WHERE pid=#{pid} AND type=0 AND state=0 ORDER BY sort
 	</select>
 

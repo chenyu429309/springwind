@@ -32,9 +32,6 @@ import com.baomidou.springwind.service.IUserService;
 @RequestMapping("/account")
 public class AccountController extends SuperController {
 
-	// 锁定用户标记
-	private static final String LOCKSCREEN_USER_FLAG = "LockscreenUserFlag";
-
 	@Autowired
 	protected IUserService userService;
 
@@ -79,7 +76,7 @@ public class AccountController extends SuperController {
 						request.setAttribute(SSOConfig.SSO_COOKIE_MAXAGE, 604800);
 					}
 
-					SSOHelper.setSSOCookie(request, response, st, true);
+					SSOHelper.setSSOCookie(request, response, st, false);
 					return redirectTo("/index.html");
 				}
 			} else {

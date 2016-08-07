@@ -16,7 +16,7 @@ import com.baomidou.kisso.annotation.Permission;
  * @Date 2016-05-11
  */
 @Controller
-@RequestMapping("/echarts")
+@RequestMapping("/analysis/echarts")
 public class EchartsController extends BaseController {
 
 	/**

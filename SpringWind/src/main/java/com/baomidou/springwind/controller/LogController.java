@@ -31,14 +31,14 @@ public class LogController extends BaseController {
 	@Autowired
 	private ISysLogService sysLogService;
 
-	@Permission("4001")
+	@Permission("3000")
 	@RequestMapping("/list")
 	public String list(Model model) {
 		return "/log/list";
 	}
 
 	@ResponseBody
-	@Permission("4001")
+	@Permission("3000")
 	@RequestMapping("/getLogList")
 	public String getUserList() {
 		Page<SysLog> page = getPage();
@@ -46,7 +46,7 @@ public class LogController extends BaseController {
 	}
 
 	@ResponseBody
-	@Permission("4001")
+	@Permission("3000")
 	@RequestMapping("/delete/{id}")
 	public String delUser(@PathVariable Long id) {
 		sysLogService.deleteById(id);
@@ -57,7 +57,7 @@ public class LogController extends BaseController {
 	 * 根据 ID 删除日志
 	 */
 	@ResponseBody
-	@com.baomidou.kisso.annotation.Permission("4001")
+	@com.baomidou.kisso.annotation.Permission("3000")
 	@RequestMapping("/delLog")
 	public String delLog(@RequestParam("ids[]") List<Long> logIds) {
 		boolean rlt = false;

@@ -5,19 +5,32 @@ package com.baomidou.springwind.entity;
  */
 public class Menu {
 	/** 主键 */
-	private Long id;
+	private Long tid;
+
+	/** 菜单ID */
+	private String id;
 
 	/** 标题 */
 	private String text;
 
 	/** 地址 */
 	private String href;
+	/** 菜单是否可关闭 0、否 1、是 */
+	private boolean closeable;
 
-	public Long getId() {
+	public Long getTid() {
+		return tid;
+	}
+
+	public void setTid(Long tid) {
+		this.tid = tid;
+	}
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -35,6 +48,14 @@ public class Menu {
 
 	public void setHref(String href) {
 		this.href = href;
+	}
+
+	public boolean isCloseable() {
+		return closeable;
+	}
+
+	public void setCloseable(boolean closeable) {
+		this.closeable = closeable;
 	}
 
 }

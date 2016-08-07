@@ -15,7 +15,7 @@ import com.baomidou.kisso.annotation.Permission;
  * @Date 2016-04-13
  */
 @Controller
-@RequestMapping("/sys/mail")
+@RequestMapping("/mail")
 public class MailController extends BaseController {
 
 	/**

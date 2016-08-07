@@ -43,16 +43,17 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionMappe
 			/* 一级菜单 */
 			MenuTreeVO mtv = new MenuTreeVO();
 			mtv.setId(menu.getId());
+			mtv.setHomePage(menu.getHref());
 
 			/* 二级菜单 */
 			List<MenuVO> mvl = new ArrayList<MenuVO>();
-			List<Menu> ml = baseMapper.selectMenuByPid(menu.getId());
+			List<Menu> ml = baseMapper.selectMenuByPid(menu.getTid());
 			for (Menu m1 : ml) {
 				MenuVO mv = new MenuVO();
 				mv.setText(m1.getText());
 
 				/* 三级菜单 */
-				mv.setItems(baseMapper.selectMenuByPid(m1.getId()));
+				mv.setItems(baseMapper.selectMenuByPid(m1.getTid()));
 				mvl.add(mv);
 			}
 			mtv.setMenu(mvl);
@@ -67,7 +68,7 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionMappe
 		 * 从根节点开始查询，一级菜单
 		 */
 		List<MenuZtreeVO> menuTreeList = new ArrayList<MenuZtreeVO>();
-		menuTreeList.add(new MenuZtreeVO(0L, -1L, "菜单", true));/* 设置菜单根节点 */
+		menuTreeList.add(new MenuZtreeVO(0L, -1L, "菜单 Root", true));/* 设置菜单根节点 */
 		List<MenuZtreeVO> mtvl = baseMapper.selectMenuTreeByPid(0L);
 		for (MenuZtreeVO m : mtvl) {
 			m.setOpen(true);

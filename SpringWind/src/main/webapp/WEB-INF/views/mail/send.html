@@ -1,36 +1,31 @@
-#override("title")
-SpringWind 邮件发送
-#end
-#override("breadcrumb")
-<li><a>功能管理</a></li><li class="active"><strong>发送邮件测试</strong></li>
-#end
-#override("content")
-<div class="row" style="height: 600px;">
-	<div class="form-group"><br><br>
-		<div class="col-sm-10">邮件发送功能测试</div><br><br>
-	</div>
-	<form action="#springUrl('/sys/mail/send.html')" method="post">
-	<div class="form-group">
-       <div class="col-sm-10">
-           <div class="input-group">
-               <input type="text" name="email" class="form-control" placeholder="请输入您用来测试的E-mail" required="">
-               <span class="input-group-btn">
-               <button type="submit" class="btn btn-primary">发送</button>
-               </span>
-           </div>
-       </div>
-       <br>
-  	</div>
-	</form>
-	#if($!{tipMsg})
-	<div class="form-group">
-		<br>
-		<div class="col-sm-10">
-			<div class="alert alert-success">$!{tipMsg}</div>
-		</div>
-	</div>
-	#end
-</div>
-#end
-#extends("/common/framework.html")
-
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>SpringWind 邮件发送</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/css/dpl-min.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/bui-min.css" rel="stylesheet" type="text/css" />
+<link href="/static/plugins/nice-validator-0.10.11/jquery.validator.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="container">
+    <form id="myForm" class="form-horizontal span24" action="#springUrl('/mail/send.html')" method="post" autocomplete="off">
+    <div class="row" style="margin-top: 100px;">
+	    #if($!{tipMsg})<p><span class="label label-important">$!{tipMsg}</span></p>#end
+	    <p><span class="label label-success">邮件测试</span>&nbsp;输入合法电子邮箱，点击发送！</p>
+	    <input name="email" type="text" data-rule="required;email;" class="input-normal control-text" placeholder="电子邮箱">
+	    <br><br>
+	    <button id="sendBtn" type="submit" class="button button-primary">发 送</button>
+    </div>
+    </form>
+  </div>
+<script type="text/javascript" src="/static/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/static/plugins/nice-validator-0.10.11/jquery.validator.min.js"></script>
+<script type="text/javascript" src="/static/plugins/nice-validator-0.10.11/local/zh-CN.js"></script>
+<script type="text/javascript">
+$('#myForm').on('click', '#sendBtn', function(e){
+    $(e.delegateTarget).trigger("validate");
+});
+</script>
+<body>
+</html>
