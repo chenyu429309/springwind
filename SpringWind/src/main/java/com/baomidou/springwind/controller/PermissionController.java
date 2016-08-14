@@ -48,7 +48,20 @@ public class PermissionController extends BaseController {
 	 */
 	@Permission("2000")
 	@RequestMapping("/menu/add")
-	public String addMenu(Model model) {
+	public String addMenu(Model model, Long id, boolean edit) {
+		if (edit) {
+			/*
+			 * 编辑
+			 */
+			
+		} else {
+			/*
+			 * 添加
+			 */
+			model.addAttribute("pid", id);
+		}
+
+		/* 菜单 */
 		model.addAttribute("type", SYsPermissionType.MENU.key());
 		return "/permission/edit";
 	}
@@ -64,7 +77,7 @@ public class PermissionController extends BaseController {
 	@RequestMapping("/getPermissionList")
 	public String getPermissionList() {
 		Page<SysPermission> page = getPage();
-		return jsonPage(sysPermissionService.selectPage(page, null));
+		return jsonPage(sysPermissionService.selectPage(page, null, null, null));
 	}
 
 	/**

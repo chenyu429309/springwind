@@ -10,19 +10,28 @@
 <form id="J_Form" class="form-horizontal" action="/permission/edit.html" method="post">
 <div class="demo-content" style="margin: 50px;">
     <input type="hidden" name="type" value="$!{type}">
+	#if($!{pid})
+    <input type="hidden" name="pid" value="${pid}">
+    #end
     <div class="row">
       <div class="control-group span24">
         <label class="control-label"><s>*</s>标 题：</label>
         <div class="controls">
-          <input name="title" type="text" data-rules="{required:true}" class="input-normal control-text">
+          <input name="text" type="text" data-rules="{required:true}" class="input-normal control-text">
         </div>
       </div>
     </div>
     <div class="row">
       <div class="control-group span24">
+        <label class="control-label"><s>*</s>菜单ID：</label>
+        <div class="controls">
+          <input name="mid" type="text" data-rules="{required:true}" class="input-normal control-text">
+        </div>
+      </div>
+      <div class="control-group span24">
         <label class="control-label"><s>*</s>地 址：</label>
         <div class="controls">
-          <input name="url" type="text" data-rules="{required:true}" class="input-normal control-text">
+          <input name="href" type="text" data-rules="{required:true}" class="input-normal control-text">
         </div>
       </div>
       <div class="control-group span24">
@@ -36,7 +45,7 @@
       <div class="control-group span24">
         <label class="control-label"><s>*</s>权限编码：</label>
         <div class="controls">
-          <input name="permCode" type="text" data-rules="{required:true}" class="input-normal control-text">
+          <input name="code" type="text" data-rules="{required:true}" class="input-normal control-text">
         </div>
       </div>
     </div>

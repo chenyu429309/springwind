@@ -51,7 +51,7 @@ public class UserController extends BaseController {
 		if (id != null) {
 			model.addAttribute("user", userService.selectById(id));
 		}
-		model.addAttribute("roleList", roleService.selectList(null));
+		model.addAttribute("roleList", roleService.selectList(null,null,null,null));
 		return "/user/edit";
 	}
 
@@ -78,7 +78,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/getUserList")
 	public String getUserList() {
 		Page<User> page = getPage();
-		return jsonPage(userService.selectPage(page, null));
+		return jsonPage(userService.selectPage(page,null,null,null));
 	}
 
 	/**

@@ -47,7 +47,7 @@ public class RoleController extends BaseController {
 	@RequestMapping("/getRoleList")
 	public String getUserList() {
 		Page<Role> page = getPage();
-		return jsonPage(roleService.selectPage(page, null));
+		return jsonPage(roleService.selectPage(page, null, null, null));
 	}
 
 	/**
