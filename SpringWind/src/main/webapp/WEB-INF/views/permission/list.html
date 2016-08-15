@@ -77,8 +77,14 @@ function delPermission(permId) {
             success: function (data) {
                 if(data == 'true'){
                     $('#dataTable').bootstrapTable('refresh',{url:dataUrl});
+                    layer.alert('删除成功', {icon: 1},function(index){
+                    	  layer.closeAll();
+                    	});       
+                }else{
+                	layer.alert('删除失败,需要删除的菜单存在关联角色', {icon: 2},function(index){
+                  	  layer.closeAll();
+                  	});
                 }
-                layer.closeAll();
             }
         });
     }, function () {
