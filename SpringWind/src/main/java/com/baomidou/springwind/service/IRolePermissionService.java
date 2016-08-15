@@ -1,5 +1,7 @@
 package com.baomidou.springwind.service;
 
+import java.util.List;
+
 import com.baomidou.springwind.entity.RolePermission;
 import com.baomidou.framework.service.ISuperService;
 
@@ -20,5 +22,12 @@ public interface IRolePermissionService extends ISuperService<RolePermission> {
 	 * @return
 	 */
 	boolean existRolePermission(Long permissionId);
+
+	/**
+	 * 根据角色ID获取对应的所有关联权限的ID
+	 * @param id
+	 * @return
+	 */
+	List<Long> selecPermissionIdsByRoleId(Long id);
 
 }

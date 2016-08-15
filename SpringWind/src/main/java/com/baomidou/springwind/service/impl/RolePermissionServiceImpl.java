@@ -1,5 +1,8 @@
 package com.baomidou.springwind.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.framework.annotations.Log;
@@ -17,6 +20,9 @@ import com.baomidou.springwind.service.support.BaseServiceImpl;
 public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermissionMapper, RolePermission>
 		implements IRolePermissionService {
 
+	@Autowired
+	private RolePermissionMapper rolePermissionMapper;
+	
 	@Log("菜单查询")
 	@Override
 	public boolean existRolePermission(Long permissionId) {
@@ -24,6 +30,12 @@ public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermissionMap
 		rp.setPid(permissionId);
 		int rlt = baseMapper.selectCount(rp);
 		return rlt >= 1;
+	}
+
+	@Log("角色关联菜单查询")
+	@Override
+	public List<Long> selecPermissionIdsByRoleId(Long id) {
+		return rolePermissionMapper.selecPermissionIdsByRoleId(id);
 	}
 
 }
