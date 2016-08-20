@@ -30,7 +30,7 @@ public class SysPermission implements Serializable {
 	/** 类型 0、菜单 1、功能 */
 	private Integer type;
 
-	/** 状态 0、正常 1、禁用 */
+	/** 状态 0、禁用 1、正常 */
 	private Integer state;
 
 	/** 排序 */

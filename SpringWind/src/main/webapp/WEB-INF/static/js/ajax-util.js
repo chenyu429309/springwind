@@ -1,11 +1,13 @@
 /**
- * AJAX 封装，依赖 jQuery 、 layer
+ * AJAX 封装，依赖 jQuery 、 layer 
+ * 
  * AjaxUtil.request({
-			url: '/sample/delete?ids=' + id,
-			callback: function() {
-				refreshTable('删除成功！');
-			}
-		});
+ * 		url: '/sample/delete?ids=' + id,
+ * 		callback: function(data) {
+ * 			alert(data);
+ * 		}
+ * });
+ * 
  * @Author hubin
  */
 var AjaxUtil = {
@@ -15,7 +17,8 @@ var AjaxUtil = {
 		method : "POST",
 		url : "",
 		params : "",
-		callback : function() {
+		async : false,
+		callback : function(data) {
 		}//回调函数 required
 	},
 	//设置基础选项
@@ -36,15 +39,16 @@ var AjaxUtil = {
 			url : opts.url,
 			type : opts.method,
 			data : opts.params,
-			async:false,
+			async: opts.async,
 			error : function(jqXHR, status, error) {
 				layer.msg("操作失败，请联系系统管理员或稍后再试！", {icon : 5});
 			},
 			success : function(data) {
-				if (data.success) {
-					ajaxObj.options.callback();
+				var obj = $.parseJSON(data);
+				if (obj.success) {
+					ajaxObj.options.callback(obj);
 				} else {
-					layer.msg(data.desc, {icon : 5});
+					layer.msg(obj.message, {icon : 5});
 				}
 			}
 		});

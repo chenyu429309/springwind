@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.springwind.common.enums.OperateState;
 import com.baomidou.springwind.common.enums.SYsPermissionType;
 import com.baomidou.springwind.entity.SysPermission;
 import com.baomidou.springwind.service.ISysPermissionService;
@@ -48,17 +47,17 @@ public class PermissionController extends BaseController {
 	 */
 	@Permission("2000")
 	@RequestMapping("/menu/add")
-	public String addMenu(Model model, Long id, boolean edit) {
-		if (edit) {
-			/*
-			 * 编辑
-			 */
-			
-		} else {
+	public String addMenu(Model model, Long id, boolean add) {
+		if (add) {
 			/*
 			 * 添加
 			 */
 			model.addAttribute("pid", id);
+		} else {
+			/*
+			 * 编辑
+			 */
+			model.addAttribute("sysPermission", sysPermissionService.selectById(id));
 		}
 
 		/* 菜单 */
@@ -77,7 +76,7 @@ public class PermissionController extends BaseController {
 	@RequestMapping("/getPermissionList")
 	public String getPermissionList() {
 		Page<SysPermission> page = getPage();
-		return jsonPage(sysPermissionService.selectPage(page, null, null, null));
+		return jsonPage(sysPermissionService.selectPage(page, null));
 	}
 
 	/**
@@ -85,11 +84,11 @@ public class PermissionController extends BaseController {
 	 */
 	@ResponseBody
 	@Permission("2000")
-	@RequestMapping("/delPermission")
-	public String delPermission(@RequestParam("ids[]") List<Long> permIds) {
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String delete(@RequestParam("ids[]") List<Long> ids) {
 		boolean rlt = false;
-		if (permIds != null) {
-			rlt = sysPermissionService.deleteBatchIds(permIds);
+		if (ids != null) {
+			rlt = sysPermissionService.deleteBatchIds(ids);
 		}
 		return callbackResult(rlt);
 	}
@@ -103,9 +102,8 @@ public class PermissionController extends BaseController {
 	public String edit(SysPermission perm) {
 		boolean rlt = false;
 		if (perm != null) {
-			perm.setState(OperateState.NORMAL.key());
 			if (perm.getId() != null) {
-				rlt = sysPermissionService.updateById(perm);
+				rlt = sysPermissionService.updateSelectiveById(perm);
 			} else {
 				rlt = sysPermissionService.insertSelective(perm);
 			}

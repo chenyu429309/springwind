@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.kisso.SSOAuthorization;
 import com.baomidou.kisso.Token;
+import com.baomidou.springwind.common.CacheableValues;
 import com.baomidou.springwind.entity.Menu;
 import com.baomidou.springwind.entity.SysPermission;
 import com.baomidou.springwind.entity.vo.MenuTreeVO;
@@ -62,6 +64,7 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionMappe
 		return mtvl;
 	}
 
+	@CacheEvict(value = CacheableValues.PERMISSION)
 	@Override
 	public List<MenuZtreeVO> getMenuZtree() {
 		/*
@@ -110,7 +113,7 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionMappe
 		return false;
 	}
 
-	@Cacheable(value = "permissionCache", key = "#userId")
+	@Cacheable(value = CacheableValues.PERMISSION, key = "#userId")
 	@Override
 	public List<SysPermission> selectAllByUserId(Long userId) {
 		return baseMapper.selectAllByUserId(userId);

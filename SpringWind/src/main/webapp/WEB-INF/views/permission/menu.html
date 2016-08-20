@@ -25,53 +25,65 @@
 <script type="text/javascript" src="/static/js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="/static/plugins/zTree_v3-3.5.24/js/jquery.ztree.all.min.js"></script>
 <script type="text/javascript" src="/static/plugins/layer-v2.4/layer.js"></script>
+<script type="text/javascript" src="/static/js/ajax-util.js"></script>
 <script type="text/javascript">
 //菜单树
 $(document).ready(function(){
 	var setting = {data: {simpleData: {enable: true}}};
 	$.fn.zTree.init($("#menuTree"), setting, $!{menuTreeJson});
-	$('#addLeaf').on('click', function(){editMenu(false)});
-	$('#editLeaf').on('click', function(){editMenu(true)});
+	$('#addLeaf').on('click', function(){editMenu(true)});
+	$('#editLeaf').on('click', function(){editMenu(false)});
 	$('#removeLeaf').on('click', function(){removeMenu()});
 });
+
 //编辑菜单
-function editMenu(edit) {
-	console.log(edit)
+function editMenu(add) {
 	var zTree = $.fn.zTree.getZTreeObj("menuTree"),
 		nodes = zTree.getSelectedNodes();
-	if (nodes.length == 0) {
+	var treeNode = nodes[0];
+	console.log(treeNode)
+	if (treeNode.level >= 3 && add) {
 		layer.msg('请选择父级菜单 ！', {icon: 5});
 	} else {
-		var node = nodes[0];
-		console.log(node)
-		if (node.check_Child_State >=0) {
-			var index = layer.open({
-				title:"添加菜单",
-				type: 2,
-			  	area: ['700px', '530px'],
-				maxmin: true,
-			  	content: '/permission/menu/add.html?id=' + node.id + '&edit=' + edit
-			});
-			layer.full(index);
-		} else {
-		  	layer.msg('请选择正确的父级菜单 ！', {icon: 5});
-		}
+		var index = layer.open({
+			title:"添加菜单",
+			type: 2,
+		  	area: ['700px', '530px'],
+			maxmin: true,
+		  	content: '/permission/menu/add.html?id=' + treeNode.id + '&edit=' + add
+		});
+		layer.full(index);
 	}
 }
+
+//刷新菜单树
+function refreshTree(tip) {
+	layer.msg(tip, {icon: 1});
+	//$.fn.zTree.getZTreeObj("menuTree").refresh();
+}
+
 //删除菜单
 function removeMenu() {
 	var zTree = $.fn.zTree.getZTreeObj("menuTree"),
-		nodes = zTree.getSelectedNodes();
+	nodes = zTree.getSelectedNodes();
 	if (nodes.length == 0) {
 		layer.msg('请选择删除的菜单 ！', {icon: 5});
 	} else {
-		if (nodes[0].check_Child_State >=0) {
+		var treeNode = nodes[0];
+		if (treeNode.check_Child_State >=0) {
 		  	layer.msg('请选择子菜单删除 ！', {icon: 5});
 		} else {
 			layer.confirm('确定删除该菜单 ？', {
 				  btn: ['确定', '取消']
 			}, function() {
-			  	layer.msg('的确很重要', {icon: 1});
+				AjaxUtil.request({
+			  		url: '/permission/delete.html',
+			  		params: {ids:[treeNode.id]},
+			  		callback: function(data) {
+			  			zTree.removeNode(treeNode);
+			  			layer.msg('菜单删除成功 ！', {icon: 1});
+			  		}
+				});
 			});
 		}
 	}

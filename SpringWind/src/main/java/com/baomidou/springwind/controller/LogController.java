@@ -42,7 +42,7 @@ public class LogController extends BaseController {
 	@RequestMapping("/getLogList")
 	public String getUserList() {
 		Page<SysLog> page = getPage();
-		return jsonPage(sysLogService.selectPage(page, null, null, null));
+		return jsonPage(sysLogService.selectPage(page, null));
 	}
 
 	@ResponseBody

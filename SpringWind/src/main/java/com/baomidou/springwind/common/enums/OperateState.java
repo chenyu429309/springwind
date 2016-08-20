@@ -6,7 +6,7 @@ import com.baomidou.framework.common.IEnum;
  * 操作状态
  */
 public enum OperateState implements IEnum {
-	NORMAL(0, "正常"), DISABLE(1, "禁用");
+	DISABLE(0, "禁用"), ENABLE(1, "正常");
 
 	private final int key;
 	private final String desc;

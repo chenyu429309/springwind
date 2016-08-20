@@ -15,11 +15,11 @@
 
 	<select id="selectMenuByPid" resultType="Menu">
 		SELECT id AS tid,mid AS id,text,href,closeable FROM sys_permission 
-		WHERE pid=#{pid} AND type=0 AND state=0 ORDER BY sort
+		WHERE pid=#{pid} AND type=0 AND state=1 ORDER BY sort
 	</select>
 
 	<select id="selectMenuTreeByPid" resultType="MenuZtreeVO">
 		SELECT id,pid AS pId,text AS name FROM sys_permission 
-		WHERE pid=#{pid} AND type=0 AND state=0 ORDER BY sort
+		WHERE pid=#{pid} AND type=0 ORDER BY sort
 	</select>
 </mapper>
