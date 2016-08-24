@@ -40,19 +40,22 @@ $(document).ready(function(){
 function editMenu(add) {
 	var zTree = $.fn.zTree.getZTreeObj("menuTree"),
 		nodes = zTree.getSelectedNodes();
-	var treeNode = nodes[0];
-	console.log(treeNode)
-	if (treeNode.level >= 3 && add) {
-		layer.msg('请选择父级菜单 ！', {icon: 5});
+	if (nodes.length == 0) {
+		layer.msg('请选择正确的父级菜单 ！', {icon: 5});
 	} else {
-		var index = layer.open({
-			title:"添加菜单",
-			type: 2,
-		  	area: ['700px', '530px'],
-			maxmin: true,
-		  	content: '/permission/menu/add.html?id=' + treeNode.id + '&edit=' + add
-		});
-		layer.full(index);
+		var treeNode = nodes[0];
+		if (treeNode.level >= 3 && add) {
+			layer.msg('请选择父级菜单 ！', {icon: 5});
+		} else {
+			var index = layer.open({
+				title:"添加菜单",
+				type: 2,
+			  	area: ['700px', '530px'],
+				maxmin: true,
+			  	content: '/permission/menu/add.html?id=' + treeNode.id + '&add=' + add
+			});
+			layer.full(index);
+		}
 	}
 }
 
@@ -70,6 +73,7 @@ function removeMenu() {
 		layer.msg('请选择删除的菜单 ！', {icon: 5});
 	} else {
 		var treeNode = nodes[0];
+		console.log(treeNode)
 		if (treeNode.check_Child_State >=0) {
 		  	layer.msg('请选择子菜单删除 ！', {icon: 5});
 		} else {

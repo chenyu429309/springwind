@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <form id="myForm" class="form-horizontal span24" action="#springUrl('/mail/send.html')" method="post" autocomplete="off">
-    <div class="row" style="margin-top: 100px;">
+    <div class="row" style="margin-top: 100px;margin-left: 80px;">
 	    #if($!{tipMsg})<p><span class="label label-important">$!{tipMsg}</span></p>#end
 	    <p><span class="label label-success">邮件测试</span>&nbsp;输入合法电子邮箱，点击发送！</p>
 	    <input name="email" type="text" data-rule="required;email;" class="input-normal control-text" placeholder="电子邮箱">
