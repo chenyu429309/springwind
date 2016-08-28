@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.kisso.annotation.Permission;
@@ -42,15 +43,33 @@ public class DonateController extends BaseController {
 		Page<Donate> page = getPage();
 		return jsonPage(donateService.selectPage(page, null));
 	}
-	
+
 	/**
 	 * 添加
 	 */
 	@Permission("2000")
 	@RequestMapping("/add")
 	public String add(Model model) {
-		
+
 		return "/donate/edit";
+	}
+
+	/**
+	 * 添加、编辑权限
+	 */
+	@Permission("2000")
+	@ResponseBody
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String edit(Donate donate) {
+		boolean rlt = false;
+		if (donate != null) {
+			if (donate.getId() != null) {
+				rlt = donateService.updateSelectiveById(donate);
+			} else {
+				rlt = donateService.insertSelective(donate);
+			}
+		}
+		return callbackSuccess(rlt);
 	}
 
 }

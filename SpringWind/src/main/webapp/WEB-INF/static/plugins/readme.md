@@ -20,4 +20,14 @@
 > http://js-grid.com/demos/
 
 
+5、日期格式化 jquery-dateFormat
+
+> https://github.com/phstc/jquery-dateFormat
+
+
+6、日期控件 laydate
+
+> http://laydate.layui.com/
+
+
 

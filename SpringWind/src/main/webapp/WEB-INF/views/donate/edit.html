@@ -10,71 +10,42 @@
 <body>
 <form id="myForm" class="form-horizontal" method="post" autocomplete="off">
 <div class="demo-content" style="margin: 50px;">
-    <input type="hidden" name="type" value="$!{type}">
-	#if($!{pid})
-    <input type="hidden" name="pid" value="${pid}">
-    #else
-    <input type="hidden" name="id" value="$!{sysPermission.id}">
-    #end
     <div class="row">
       <div class="control-group span24">
-        <label class="control-label"><s>*</s>标 题：</label>
+        <label class="control-label"><s>*</s>捐赠者：</label>
         <div class="controls">
-          <input name="text" type="text" value="$!{sysPermission.text}" data-rule="required;" class="input-normal control-text">
+          <input name="donator" type="text" data-rule="required;" class="input-normal control-text">
         </div>
       </div>
     </div>
     <div class="row">
       <div class="control-group span24">
-        <label class="control-label"><s>*</s>菜单ID：</label>
+        <label class="control-label"><s>*</s>金 额：</label>
         <div class="controls">
-          <input name="mid" type="text" value="$!{sysPermission.mid}" data-rule="required;" class="input-normal control-text">
+          <input name="amount" type="text" data-rule="required;integer;length[1~11]" class="input-normal control-text">
         </div>
       </div>
       <div class="control-group span24">
-        <label class="control-label"><s>*</s>地 址：</label>
+        <label class="control-label"><s>*</s>类 型：</label>
         <div class="controls">
-          <input name="href" type="text" value="$!{sysPermission.href}" data-rule="required;" class="input-normal control-text">
-        </div>
-      </div>
-      <div class="control-group span24">
-        <label class="control-label"><s>*</s>排 序：</label>
-        <div class="controls">
-          <input name="sort" type="text" value="$!{sysPermission.sort}" data-rule="required;digits;length[1~6]" class="input-normal control-text">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="control-group span24">
-        <label class="control-label"><s>*</s>权限编码：</label>
-        <div class="controls">
-          <input name="code" type="text" value="$!{sysPermission.code}" data-rule="required;" class="input-normal control-text">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="control-group span24">
-        <label class="control-label">描 述：</label>
-        <div class="controls control-row4">
-          <textarea name="description" class="input-large" data-rule="required;">$!{sysPermission.description}</textarea>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="control-group span24">
-        <label class="control-label">菜单是否可关闭：</label>
-        <div class="controls control-row4">
-        	<select name="closeable">
-        		<option value="1" #if($!{sysPermission.closeable}==1)selected="selected"#end> 是 </option>
-        		<option value="0" #if($!{sysPermission.closeable}==0)selected="selected"#end> 否 </option>
+        	<select name="origin">
+        		<option value="1"> 支付宝 </option>
+        		<option value="0"> 微 信 </option>
         	</select>
         </div>
-        <label class="control-label">状 态：</label>
+      </div>
+      <div class="control-group span24">
+        <label class="control-label"><s>*</s>日 期：</label>
+        <div class="controls">
+        	<input class="laydate-icon" id="crTime" name="crTime" data-rule="required;" readonly="readonly">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="control-group span24">
+        <label class="control-label">留 言：</label>
         <div class="controls control-row4">
-        	<select name="state">
-        		<option value="1" #if($!{sysPermission.state}==1)selected="selected"#end> 正 常 </option>
-        		<option value="0"  #if($!{sysPermission.state}==0)selected="selected"#end> 禁 用 </option>
-        	</select>
+          <textarea name="message" class="input-large" data-rule="required;"></textarea>
         </div>
       </div>
     </div>
@@ -89,20 +60,22 @@
 <script type="text/javascript" src="/static/plugins/nice-validator-0.10.11/jquery.validator.min.js"></script>
 <script type="text/javascript" src="/static/plugins/nice-validator-0.10.11/local/zh-CN.js"></script>
 <script type="text/javascript" src="/static/plugins/layer-v2.4/layer.js"></script>
+<script type="text/javascript" src="/static/plugins/laydate-v1.1/laydate.js"></script>
 <script type="text/javascript" src="/static/js/ajax-util.js"></script>
 <script type="text/javascript">
 var myFrom = $('#myForm'), index = parent.layer.getFrameIndex(window.name);
 myFrom.bind('valid.form', function(){
  	AjaxUtil.request({
-  		url: '/permission/edit.html',
+  		url: '/donate/edit.html',
   		params: myFrom.serialize(),
   		callback: function(data) {
+  			parent.refreshGrid();
   			parent.layer.msg('添加成功！', {icon: 1});
   			parent.layer.close(index);
-  			parent.location.reload();
   		}
 	});
 });
+laydate({elem: '#crTime'})
 </script>
 </body>
 </html>

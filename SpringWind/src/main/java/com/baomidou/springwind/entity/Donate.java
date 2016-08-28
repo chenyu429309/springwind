@@ -3,6 +3,8 @@ package com.baomidou.springwind.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 
@@ -29,10 +31,11 @@ public class Donate implements Serializable {
 	/** 捐赠金额 */
 	protected Integer amount;
 
-	/**  */
+	/** 留言 */
 	protected String message;
 
 	/** 捐赠时间 */
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	protected Date crTime;
 
 	public Long getId() {

@@ -35,16 +35,9 @@ public class BaseController extends SuperController {
 	 */
 	protected String jsonPage(Page<?> page) {
 		JSONObject jo = new JSONObject();
-		jo.put("total", page.getTotal());
-		jo.put("rows", page.getRecords());
+		jo.put("data", page.getRecords());
+		jo.put("itemsCount", page.getTotal());
 		return toJson(jo);
-	
-//		JSONObject jo = new JSONObject();
-//		jo.put("success", true);
-//		jo.put("curPage", page.getCurrent());
-//		jo.put("totalRows", page.getPages());
-//		jo.put("data", page.getRecords());
-//		return toJson(jo);
 	}
 
 	@Override
