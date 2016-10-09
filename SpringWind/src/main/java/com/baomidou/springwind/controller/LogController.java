@@ -39,8 +39,8 @@ public class LogController extends BaseController {
 
 	@ResponseBody
 	@Permission("3000")
-	@RequestMapping("/getLogList")
-	public String getUserList() {
+	@RequestMapping("/jsonData")
+	public String jsonData() {
 		Page<SysLog> page = getPage();
 		return jsonPage(sysLogService.selectPage(page, null));
 	}
@@ -57,7 +57,7 @@ public class LogController extends BaseController {
 	 * 根据 ID 删除日志
 	 */
 	@ResponseBody
-	@com.baomidou.kisso.annotation.Permission("3000")
+	@Permission("3000")
 	@RequestMapping("/delLog")
 	public String delLog(@RequestParam("ids[]") List<Long> logIds) {
 		boolean rlt = false;
