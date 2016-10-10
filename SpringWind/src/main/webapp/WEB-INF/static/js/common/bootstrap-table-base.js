@@ -32,15 +32,15 @@ var TableInit = function (id) {
         return dataQueryParams(params);
     };
     //处理服务器返回数据
-//    oTableInit.responseHandler = function (res) {
-//        var data = [];
-//        var obj = eval(res);
-//        if (obj.success) {
-//            data['total'] = obj.item.totalCount;
-//            data['rows'] = obj.item.results;
-//        }
-//        return data;
-//    };
+    oTableInit.responseHandler = function (res) {
+        var data = [];
+        var obj = eval(res);
+        if (obj.success) {
+            data['total'] = obj.data.total;
+            data['rows'] = obj.data.rows;
+        }
+        return data;
+    };
     return oTableInit;
 };
 
@@ -57,6 +57,16 @@ function dataQueryParams(params) {
         dataParams['isASC']=false;
     }
     return dataParams;
+}
+
+//按钮查询
+function dataSearch(btn, form) {
+	$('#' + btn).on('click', function() {
+		$.each($("#" + form).serializeArray(), function(i, field) {
+			dataParams[field.name] = field.value;
+		});
+		$table.bootstrapTable('refresh');
+	});
 }
 
 //刷新表格

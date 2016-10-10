@@ -37,7 +37,7 @@ public class BaseController extends SuperController {
 		JSONObject jo = new JSONObject();
 		jo.put("rows", page.getRecords());
 		jo.put("total", page.getTotal());
-		return toJson(jo);
+		return callbackSuccess(jo);
 	}
 
 	@Override

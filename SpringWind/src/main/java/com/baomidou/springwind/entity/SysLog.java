@@ -1,10 +1,8 @@
 package com.baomidou.springwind.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
@@ -13,14 +11,10 @@ import com.baomidou.mybatisplus.annotations.TableName;
  *
  */
 @TableName("sys_log")
-public class SysLog implements Serializable {
+public class SysLog extends BaseEntity {
 
 	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
-
-	/** 主键 */
-	@TableId
-	private Long id;
 
 	/** 用户ID */
 	private Long uid;
@@ -33,14 +27,6 @@ public class SysLog implements Serializable {
 
 	/** 创建时间 */
 	private Date crTime;
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Long getUid() {
 		return this.uid;

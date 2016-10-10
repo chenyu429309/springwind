@@ -40,9 +40,9 @@ public class LogController extends BaseController {
 	@ResponseBody
 	@Permission("3000")
 	@RequestMapping("/jsonData")
-	public String jsonData() {
+	public String jsonData(SysLog sysLog) {
 		Page<SysLog> page = getPage();
-		return jsonPage(sysLogService.selectPage(page, null));
+		return jsonPage(sysLogService.selectPage(page, sysLog));
 	}
 
 	@ResponseBody
