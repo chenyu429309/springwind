@@ -1,24 +1,18 @@
 package com.baomidou.springwind.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
 
 /**
  *
  * 用户表
  *
  */
-public class User implements Serializable {
+public class User extends BaseEntity {
 
 	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
-
-	/** 主键ID */
-	@TableId
-	private Long id;
 
 	/** 登录名称 */
 	private String loginName;
@@ -40,14 +34,6 @@ public class User implements Serializable {
 
 	/** 最后登录时间 */
 	private Date lastTime;
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getLoginName() {
 		return this.loginName;

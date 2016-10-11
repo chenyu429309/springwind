@@ -1,191 +1,67 @@
 <!DOCTYPE HTML>
 <html>
- <head>
-  <title> 搜索表单</title>
-   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="/static/css/dpl-min.css" rel="stylesheet" type="text/css" />
-    <link href="/static/css/bui-min.css" rel="stylesheet" type="text/css" />
-    <link href="/static/css/page-min.css" rel="stylesheet" type="text/css" /> 
- </head>
- <body>
-  <div class="container">
-    <div class="row">
-      <form id="searchForm" class="form-horizontal span24">
-        <div class="row">
-          <div class="control-group span8">
-            <label class="control-label">标题：</label>
-            <div class="controls">
-              <input type="text" class="control-text" name="loginName">
-            </div>
-          </div>
-          <div class="control-group span8">
-            <label class="control-label">状态：</label>
-            <div class="controls" >
-              <select name="status">
-                <option value="1">正常</option>
-                <option value="0">禁用</option>
-              </select>
-            </div>
-          </div>
-          <div class="control-group span4">
-          <button  type="button" id="btnSearch" class="button button-primary">搜索</button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="search-grid-container">
-      <div id="grid"></div>
-    </div>
-  </div>
-  <div id="content" class="hide">
-      <form id="J_Form" class="form-horizontal" action="/perm/permission/editPermission.html">
-        <input type="hidden" name="a" value="3">
-        <div class="row">
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>标 题：</label>
-            <div class="controls">
-              <input name="title" type="text" data-rules="{required:true}" class="input-normal control-text">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>类 型：</label>
-            <div class="controls">
-              <select data-rules="{required:true}" name="type" class="input-normal"> 
-                <option value="">请选择</option>
-                <option value="0">菜单</option>
-                <option value="1">功能</option>
-              </select>
-            </div>
-          </div>
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>状 态：</label>
-            <div class="controls">
-              <select name="state" class="input-normal"> 
-                <option value="0">正常</option>
-                <option value="1">禁用</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>地 址：</label>
-            <div class="controls">
-              <input name="url" type="text" data-rules="{required:true}" class="input-normal control-text">
-            </div>
-          </div>
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>排 序：</label>
-            <div class="controls">
-              <input name="sort" type="text" data-rules="{number:true}" class="input-normal control-text">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="control-group span8">
-            <label class="control-label"><s>*</s>权限编码：</label>
-            <div class="controls">
-              <input name="permCode" type="text" data-rules="{required:true}" class="input-normal control-text">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="control-group span15">
-            <label class="control-label">描 述：</label>
-            <div class="controls control-row4">
-              <textarea name="description" class="input-large" type="text"></textarea>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
+<head>
+<title>日志管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/plugins/bootstrap-table/css/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div style="margin: 15px">
+		<div class="panel">
+		  <div class="panel-body">
+			  <form id="searchForm" class="form-inline">
+				  <div class="form-group">
+				    <label>标题：</label>
+				    <input type="text" name="title" class="form-control" placeholder="请输入标题">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">权限编码：</label>
+				    <input type="text" name="permCode" class="form-control" placeholder="请输入权限编码">
+				  </div>
+				  <button id="searchBtn" type="button" class="btn btn-success">搜 索</button>
+			  </form>
+		  </div>
+		</div>
+		<div id="jsGrid">
+			<table id="dataTable"
+				data-method="post"
+				data-url="/permission/jsonData.html"
+				data-content-type="application/x-www-form-urlencoded"
+				data-click-to-select="true">
+			    <thead>
+			        <tr>
+			        	<th data-field="state" data-checkbox="true"></th>
+			            <th data-field="title">标题</th>
+			            <th data-field="state">状态</th>
+			            <th data-field="url">地址</th>
+			            <th data-field="permCode">权限编码</th>
+			            <th data-field="type">类型</th>
+			            <th data-field="description">描述</th>
+			            <th data-field="crTime" data-align="center" data-width="100px" data-formatter="dateFormatter">创建时间</th>
+			        </tr>
+			    </thead>
+			</table>
+		</div>
+	</div>
 <script type="text/javascript" src="/static/js/jquery-1.8.1.min.js"></script>
-<script type="text/javascript" src="/static/js/bui-min.js"></script>
-<script type="text/javascript" src="/static/js/config-min.js"></script>
-<script type="text/javascript">
-  BUI.use('common/page');
-</script>
-<script type="text/javascript">
-  BUI.use('common/search',function (Search) {
-    var enumState={"0":"<font color='green'>正常</font>","1":"<font color='red'>禁用</font>"},
-    	enumType={"0":"菜单","1":"<font color='blue'>功能</font>"},
-      editing = new BUI.Grid.Plugins.DialogEditing({
-        contentId : 'content', //设置隐藏的Dialog内容
-        autoSave : true, //添加数据或者修改数据时，自动保存
-        triggerCls : 'btn-edit'
-      }),
-      columns = [
-          {title:'标题',dataIndex:'title',width:100},
-          {title:'状态',dataIndex:'state',width:60,renderer:BUI.Grid.Format.enumRenderer(enumState)},
-          {title:'类型',dataIndex:'type',width:60,renderer:BUI.Grid.Format.enumRenderer(enumType)},
-          {title:'地址',dataIndex:'url',width:260},
-          {title:'权限编码',dataIndex:'permCode',width:100},
-          {title:'描述',dataIndex:'description',width:160}
-        ],
-      store = Search.createStore('/permission/getPermissionList.html',{
-        proxy : {
-          save : { //也可以是一个字符串，那么增删改，都会往那么路径提交数据，同时附加参数saveType
-            addUrl : '/perm/permission/editPermission.html',
-            updateUrl : '/perm/permission/editPermission.html',
-            removeUrl : '/permission/delPermission.html'
-          }/*,
-          method : 'POST'*/
-        },
-        autoSync : true //保存数据后，自动更新
-        ,pageSize:10
-      }),
-      gridCfg = Search.createGridCfg(columns,{
-        tbar : {
-          items : [
-            {text : '<i class="icon-plus"></i>新建',btnCls : 'button button-small',handler:addFunction},
-            {text : '<i class="icon-edit"></i>编辑',btnCls : 'button button-small',handler:function(){alert('编辑');}},
-            {text : '<i class="icon-remove"></i>删除',btnCls : 'button button-small',handler : delFunction}
-          ]
-        },
-        plugins : [editing,BUI.Grid.Plugins.CheckSelection,BUI.Grid.Plugins.AutoFit] // 插件形式引入多选表格
-      });
+<script type="text/javascript" src="/static/plugins/bootstrap-table/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="/static/plugins/bootstrap-table/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="/static/plugins/jquery-dateFormat.min.js"></script>
+<script type="text/javascript" src="/static/plugins/layer-v2.4/layer.js"></script>
+<script type="text/javascript" src="/static/js/common/bootstrap-table-base.js"></script>
+<script type="text/javascript" src="/static/js/ajax-util.js"></script>
+<script>
+var $table = $('#dataTable');
+$(function () {
+	//初始化 Table
+	new TableInit('dataTable').Init();
+	
+});
 
-    var search = new Search({
-        store : store,
-        gridCfg : gridCfg
-      }),
-      grid = search.get('grid');
+//查询
+dataSearch('searchBtn', 'searchForm');
 
-    function addFunction(){
-      var newData = {isNew : true}; //标志是新增加的记录
-      editing.add(newData,'name'); //添加记录后，直接编辑
-    }
-
-    //删除操作
-    function delFunction(){
-      var selections = grid.getSelection();
-      delItems(selections);
-    }
-
-    function delItems(items){
-      var ids = [];
-      BUI.each(items,function(item){
-        ids.push(item.id);
-      });
-
-      if(ids.length){
-        BUI.Message.Confirm('确认要删除选中的记录么？',function(){
-          store.save('remove',{ids : ids});
-        },'question');
-      }
-    }
-
-    //监听事件，删除一条记录
-    grid.on('cellclick',function(ev){
-      var sender = $(ev.domTarget); //点击的Dom
-      if(sender.hasClass('btn-del')){
-        var record = ev.record;
-        delItems([record]);
-      }
-    });
-  });
 </script>
 <body>
-</html>  
+</html>

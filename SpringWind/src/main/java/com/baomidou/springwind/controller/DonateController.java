@@ -39,9 +39,9 @@ public class DonateController extends BaseController {
 	@ResponseBody
 	@Permission("2000")
 	@RequestMapping("/jsonData")
-	public String jsonData() {
+	public String jsonData(Donate donate) {
 		Page<Donate> page = getPage();
-		return jsonPage(donateService.selectPage(page, null));
+		return jsonPage(donateService.selectPage(page, donate));
 	}
 
 	/**

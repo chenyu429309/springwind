@@ -1,9 +1,6 @@
 package com.baomidou.springwind.entity;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
@@ -12,14 +9,10 @@ import com.baomidou.mybatisplus.annotations.TableName;
  *
  */
 @TableName("sys_permission")
-public class SysPermission implements Serializable {
+public class SysPermission extends BaseEntity {
 
 	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
-
-	/** 主键 */
-	@TableId
-	private Long id;
 
 	/** 上级ID */
 	private Long pid;
@@ -50,14 +43,6 @@ public class SysPermission implements Serializable {
 
 	/** 描述 */
 	private String description;
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Long getPid() {
 		return this.pid;

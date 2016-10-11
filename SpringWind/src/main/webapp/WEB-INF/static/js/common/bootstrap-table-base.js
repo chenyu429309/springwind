@@ -81,3 +81,8 @@ function getIdSelections() {
         return row.id
     });
 }
+
+//日期格式化
+function dateFormatter(value, row) {
+	return $.format.date(value, "yyyy-MM-dd");
+}

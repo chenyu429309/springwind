@@ -1,195 +1,66 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>用户管理</title>
+<title>日志管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/static/css/dpl-min.css" rel="stylesheet" type="text/css" />
-<link href="/static/css/bui-min.css" rel="stylesheet" type="text/css" />
-<link href="/static/css/page-min.css" rel="stylesheet" type="text/css" />
+<link href="/static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/plugins/bootstrap-table/css/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div class="container">
-    <div class="row">
-      <form id="searchForm" class="form-horizontal span24">
-        <div class="row">
-          <div class="control-group span8">
-            <label class="control-label">登录名：</label>
-            <div class="controls">
-              <input type="text" class="control-text" name="loginName">
-            </div>
-          </div>
-          <div class="control-group span8">
-            <label class="control-label">状态：</label>
-            <div class="controls" >
-              <select name="status">
-                <option value="1">正常</option>
-                <option value="0">禁用</option>
-              </select>
-            </div>
-          </div>
-          <div class="control-group span4">
-          <button  type="button" id="btnSearch" class="button button-primary">搜索</button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="search-grid-container">
-      <div id="grid"></div>
-    </div>
-  </div>
-<div id="content" class="hide">
-    <form id="J_Form" class="form-horizontal" action="http://www.builive.com/apps/default/data/edit.php?a=1">
-      <input type="hidden" name="a" value="3">
-      <div class="row">
-        <div class="control-group span8">
-          <label class="control-label"><s>*</s>登录名</label>
-          <div class="controls">
-            <input name="name" type="text" data-rules="{required:true}" class="input-normal control-text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="control-group span8">
-          <label class="control-label"><s>*</s>密 码</label>
-          <div class="controls">
-            <input name="grad" type="text" data-rules="{required:true}" class="input-normal control-text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="control-group span8">
-          <label class="control-label"><s>*</s>类 型：</label>
-          <div class="controls">
-            <select  data-rules="{required:true}"  name="sex" class="input-normal"> 
-              <option value="">请选择</option>
-              <option value="1">男</option>
-              <option value="0">女</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="control-group span8">
-          <label class="control-label"><s>*</s>电子邮箱</label>
-          <div class="controls">
-            <input name="grad" type="text" data-rules="{required:true}" class="input-normal control-text">
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+	<div style="margin: 15px">
+		<div class="panel">
+		  <div class="panel-body">
+			  <form id="searchForm" class="form-inline">
+				  <div class="form-group">
+				    <label>用户名：</label>
+				    <input type="text" name="loginName" class="form-control" placeholder="请输入用户名">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">电子邮箱：</label>
+				    <input type="text" name="email" class="form-control" placeholder="请输入电子邮箱">
+				  </div>
+				  <button id="searchBtn" type="button" class="btn btn-success">搜 索</button>
+			  </form>
+		  </div>
+		</div>
+		<div id="jsGrid">
+			<table id="dataTable"
+				data-method="post"
+				data-url="/user/jsonData.html"
+				data-content-type="application/x-www-form-urlencoded"
+				data-click-to-select="true">
+			    <thead>
+			        <tr>
+			        	<th data-field="state" data-checkbox="true"></th>
+			            <th data-field="loginName">登录名</th>
+			            <th data-field="email">电子邮箱</th>
+			            <th data-field="status">状态</th>
+			            <th data-field="type">类型</th>
+			            <th data-field="crTime" data-align="center" data-width="100px" data-formatter="dateFormatter">创建时间</th>
+			            <th data-field="lastTime" data-align="center" data-width="100px" data-formatter="dateFormatter">最后登录时间</th>
+			        </tr>
+			    </thead>
+			</table>
+		</div>
+	</div>
 <script type="text/javascript" src="/static/js/jquery-1.8.1.min.js"></script>
-<script type="text/javascript" src="/static/js/bui-min.js"></script>
-<script type="text/javascript" src="/static/js/config-min.js"></script>
-<script type="text/javascript">
- BUI.use('common/page');
-</script>
-<script type="text/javascript">
-BUI.use('common/search',function (Search) {
-   var enumStatus = {"1":"<font color='green'>正常</font>","0":"<font color='red'>禁用</font>"},
-   	 enumType = {"1":"<font color='blue'>管理员</font>","0":"普通用户"}
-     editing = new BUI.Grid.Plugins.DialogEditing({
-    	 title:'模态窗口',
-       contentId : 'content', //设置隐藏的Dialog内容
-       autoSave : true, //添加数据或者修改数据时，自动保存
-       triggerCls : 'btn-edit'
-     }),
-     columns = [
-         {title:'登录名',dataIndex:'loginName',width:100},
-         {title:'电子邮箱',dataIndex:'email',width:120},
-         {title:'状态',dataIndex:'status',width:60,renderer:BUI.Grid.Format.enumRenderer(enumStatus)},
-         {title:'类型',dataIndex:'type',width:100,renderer:BUI.Grid.Format.enumRenderer(enumType)},
-         {title:'创建时间',dataIndex:'crTime',width:100,renderer:BUI.Grid.Format.dateRenderer},
-         {title:'最后登录时间',dataIndex:'lastTime',width:160,renderer:BUI.Grid.Format.datetimeRenderer},
-         {title:'操作',dataIndex:'',width:80,renderer : function(value,obj){
-             var op = '<button class="button button-success">恢复</button>';
-             if(obj.status == 1) {
-               op = '<button class="button button-warning">禁用</button>';
-             }
-             return op;
-           }}
-       ],
-     store = Search.createStore('/perm/user/getUserList.html',{
-       proxy : {
-         save : { //也可以是一个字符串，那么增删改，都会往那么路径提交数据，同时附加参数saveType
-           addUrl : 'http://www.builive.com/apps/default/data/add.json',
-           updateUrl : 'http://www.builive.com/apps/default/data/edit.json',
-           removeUrl : '/perm/user/delUser.html'
-         }/*,
-         method : 'POST'*/
-       },
-       autoSync : true //保存数据后，自动更新
-       ,pageSize:10
-     }),
-     gridCfg = Search.createGridCfg(columns,{
-       tbar : {
-         items : [
-           {text : '<i class="icon-plus"></i>新建',btnCls : 'button button-small',handler:addFunction},
-           {text : '<i class="icon-edit"></i>编辑',btnCls : 'button button-small',handler:editFunction},
-           {text : '<i class="icon-remove"></i>删除',btnCls : 'button button-small',handler : delFunction}
-         ]
-       },
-       plugins : [editing,BUI.Grid.Plugins.CheckSelection,BUI.Grid.Plugins.AutoFit] // 插件形式引入多选表格
-   });	
-
-   //搜索操作
-   var search = new Search({
-     	store : store,
-     	gridCfg : gridCfg
-   }),
-   grid = search.get('grid');
+<script type="text/javascript" src="/static/plugins/bootstrap-table/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="/static/plugins/bootstrap-table/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="/static/plugins/jquery-dateFormat.min.js"></script>
+<script type="text/javascript" src="/static/plugins/layer-v2.4/layer.js"></script>
+<script type="text/javascript" src="/static/js/common/bootstrap-table-base.js"></script>
+<script type="text/javascript" src="/static/js/ajax-util.js"></script>
+<script>
+var $table = $('#dataTable');
+$(function () {
+	//初始化 Table
+	new TableInit('dataTable').Init();
 	
-   //添加操作
-   function addFunction(){
-     	var newData = {isNew : true}; //标志是新增加的记录
-     	editing.add(newData,'name'); //添加记录后，直接编辑
-   }
-	
-   //编辑操作
-   function editFunction(){
-     	var items = grid.getSelection();
-		var ids = [];
-		BUI.each(items, function(item) {
-			ids.push(item.id);
-		});
-	
-		if (ids.length) {
-			BUI.Message.Confirm('确认要编辑选中的记录么？', function() {
-				store.save('remove', {
-					ids : ids
-				});
-			}, 'question');
-		} else {
-			BUI.Message.Alert('请选择编辑数据！','error');
-		}
-	}
-
-   //删除操作
-   function delFunction(){
-     	var items = grid.getSelection();
-		var ids = [];
-		BUI.each(items, function(item) {
-			ids.push(item.id);
-		});
-	
-		if (ids.length) {
-			BUI.Message.Confirm('确认要删除选中的记录么？', function() {
-				store.save('remove', {ids:ids});
-			}, 'question');
-		} else {
-			BUI.Message.Alert('请选择删除数据！','error');
-		}
-	}
-
-	//监听事件，删除一条记录
-	grid.on('cellclick', function(ev) {
-		var sender = $(ev.domTarget); //点击的Dom
-		if (sender.hasClass('btn-del')) {
-			var record = ev.record;
-			delItems([ record ]);
-		}
-	});
 });
+
+//查询
+dataSearch('searchBtn', 'searchForm');
+
 </script>
 <body>
-</html>  
+</html>

@@ -1,26 +1,20 @@
 package com.baomidou.springwind.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
 
 /**
  *
  * 捐赠表
  *
  */
-public class Donate implements Serializable {
+public class Donate extends BaseEntity {
 
 	@TableField(exist = false)
 	protected static final long serialVersionUID = 1L;
-
-	/** 主键 */
-	@TableId
-	protected Long id;
 
 	/** 捐赠者 */
 	protected String donator;
@@ -35,16 +29,8 @@ public class Donate implements Serializable {
 	protected String message;
 
 	/** 捐赠时间 */
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected Date crTime;
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getDonator() {
 		return this.donator;

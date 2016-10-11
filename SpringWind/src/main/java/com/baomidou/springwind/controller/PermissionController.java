@@ -73,10 +73,10 @@ public class PermissionController extends BaseController {
 
 	@ResponseBody
 	@Permission("2000")
-	@RequestMapping("/getPermissionList")
-	public String getPermissionList() {
+	@RequestMapping("/jsonData")
+	public String getPermissionList(SysPermission sysPermission) {
 		Page<SysPermission> page = getPage();
-		return jsonPage(sysPermissionService.selectPage(page, null));
+		return jsonPage(sysPermissionService.selectPage(page, sysPermission));
 	}
 
 	/**

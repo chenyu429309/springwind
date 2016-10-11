@@ -75,10 +75,10 @@ public class UserController extends BaseController {
 
 	@ResponseBody
 	@Permission("2000")
-	@RequestMapping("/getUserList")
-	public String getUserList() {
+	@RequestMapping("/jsonData")
+	public String jsonData(User user) {
 		Page<User> page = getPage();
-		return jsonPage(userService.selectPage(page, null));
+		return jsonPage(userService.selectPage(page, user));
 	}
 
 	/**

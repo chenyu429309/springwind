@@ -2,7 +2,6 @@ package com.baomidou.springwind.service;
 
 import java.util.List;
 
-import com.baomidou.framework.service.ISuperService;
 import com.baomidou.kisso.Token;
 import com.baomidou.springwind.entity.Menu;
 import com.baomidou.springwind.entity.SysPermission;
@@ -14,7 +13,7 @@ import com.baomidou.springwind.entity.vo.MenuZtreeVO;
  * Permission 表数据服务层接口
  *
  */
-public interface ISysPermissionService extends ISuperService<SysPermission> {
+public interface ISysPermissionService extends IBaseService<SysPermission> {
 
 	List<SysPermission> selectAllByUserId(Long userId);
 
