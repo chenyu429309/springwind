@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.kisso.annotation.Permission;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.entity.Role;
 import com.baomidou.springwind.entity.RolePermission;
@@ -168,7 +169,9 @@ public class RoleController extends BaseController {
 			//查询出本角色已经分配了的权限
 			RolePermission rolePermission = new RolePermission();
 			rolePermission.setRid(roleId);
-			List<RolePermission> roleRightList = rolePermissionService.selectList(rolePermission);
+			EntityWrapper<RolePermission> ew = new EntityWrapper<RolePermission>();
+			ew.setEntity(rolePermission);
+			List<RolePermission> roleRightList = rolePermissionService.selectList(ew);
 			
 			//如果存在权限，先进行删除
 			if (roleRightList.size() > 0) {

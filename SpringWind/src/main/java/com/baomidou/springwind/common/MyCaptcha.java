@@ -4,8 +4,8 @@ import java.awt.image.BufferedImageOp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.baomidou.framework.captcha.DefaultCaptcha;
-import com.baomidou.framework.captcha.ICaptchaStore;
+import com.baomidou.kisso.common.captcha.DefaultCaptcha;
+import com.baomidou.kisso.common.captcha.ICaptchaStore;
 import com.baomidou.kisso.common.captcha.background.LineNoiseBackgroundFactory;
 import com.baomidou.kisso.common.captcha.filter.ConfigurableFilterFactory;
 import com.baomidou.kisso.common.captcha.filter.library.AbstractImageOp;
