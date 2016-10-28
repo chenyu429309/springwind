@@ -1,33 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false" scan="true" scanPeriod="1000 seconds">
-	<timestamp key="date" datePattern="yyyyMMdd" />
-	<!-- Output to Console -->
-	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss} %level %c:%L - %msg%n</pattern>
-			<charset>UTF-8</charset>
+	
+	<!-- 控制台日志 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{HH:mm:ss} %-5level %c:%L - %msg%n</pattern>
 		</encoder>
 	</appender>
-	<!-- Output to File -->
-	<appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>/home/logs/springwind.log</File>
+
+	<!-- 日常log -->
+	<appender name="debug-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>
-				/home/logs/springwind.%d{yyyy-MM-dd}.log
-			</FileNamePattern>
-			<!-- keep 1 days worth of history -->
+			<fileNamePattern>/home/logs/%d{yyyy-MM}/%d{yyyy-MM-dd}.log</fileNamePattern>
 			<MaxHistory>10</MaxHistory>
 		</rollingPolicy>
-		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss} %level %c:%L - %msg%n</pattern>
-			<charset>UTF-8</charset>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %c:%L - %msg%n</pattern>
 		</encoder>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
 	</appender>
-	<!-- 打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和  OFF 默认是DEBUG -->
-	<root level="ERROR">
-		<appender-ref ref="Console" />
-		<appender-ref ref="File" />
+
+	<!-- warn log 严重日志 -->
+	<appender name="warn-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/home/logs/%d{yyyy-MM}/warn.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<MaxHistory>10</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %c:%L - %msg%n</pattern>
+		</encoder>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<!-- error log 异常日志 -->
+	<appender name="error-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/home/logs/%d{yyyy-MM}/error.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<MaxHistory>10</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %c:%L - %msg%n</pattern>
+		</encoder>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	
+	<!-- 打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF 默认是DEBUG -->
+	<root level="WARN">
+		<appender-ref ref="console" />
+		<appender-ref ref="debug-file" />
+		<appender-ref ref="warn-file" />
+		<appender-ref ref="error-file" />
 	</root>
+	
+	
 	<logger name="org.springframework" level="ERROR" />
 	<logger name="com.baomidou.springwind" level="DEBUG" />
+	
 </configuration>
