@@ -8,7 +8,7 @@ SSM 架构后台管理系统
 [项目核心库 spring-wind-core 点击查看](http://git.oschina.net/juapk/spring-wind)
 
 
-[捐赠记录,感谢你们的支持！](http://git.oschina.net/juapk/kisso/wikis/%E6%8D%90%E8%B5%A0%E8%AE%B0%E5%BD%95)
+[捐赠记录,感谢你们的支持！](http://git.oschina.net/baomidou/kisso/wikis/%E6%8D%90%E8%B5%A0%E8%AE%B0%E5%BD%95)
 
 
 ------------------------------------------------
