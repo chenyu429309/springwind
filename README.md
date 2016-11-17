@@ -57,15 +57,13 @@ http://git.oschina.net/juapk/spring-wind
 
 2、导入数据库 /SpringWind/src/test/resources/springwind.sql
 
-3、导入Quartz 相关表 /SpringWind/src/test/resources/quartz_mysql_innodb.sql
-
-4、操作系统 host 添加一行设置 127.0.0.1 demo.baomidou.com
+3、操作系统 host 添加一行设置 127.0.0.1 demo.baomidou.com
     hosts文件存放目录：C:\Windows\System32\drivers\etc
     修改前请查看hosts文件属性是否为只读，如果只读右键单击文件，单击属性菜单，弹出属性对话框，修改去掉只读属性。
 
-5、配置 无项目名称的 访问：http://demo.baomidou.com:8080 登录账户默认：  admin 管理员，密码 123 ，普通会员 test 密码  123
+4、配置 无项目名称的 访问：http://demo.baomidou.com:8080 登录账户默认：  admin 管理员，密码 123 ，普通会员 test 密码  123
 
-6、必须配置 hosts 重启浏览器，**未配置无项目名称**访问 404 ！！
+5、必须配置 hosts 重启浏览器，**未配置无项目名称**访问 404 ！！
 
  /SpringWind/src/main/resources/properties/sso.properties 配置修改为：
 
