@@ -20,6 +20,12 @@ SSM 架构后台管理系统
 
 ------------------------------------------------
 
+# 其他开源项目 | Other Project
+
+- [基于Cookie的SSO中间件 Kisso](http://git.oschina.net/baomidou/kisso)
+- [Mybatis-Plus CRUD 快速开发框架](http://git.oschina.net/baomidou/mybatis-plus)
+- [基于Hibernate扩展 Hibernate-Plus](http://git.oschina.net/baomidou/hibernate-plus)
+
 # SpringWind 说明
 
 
