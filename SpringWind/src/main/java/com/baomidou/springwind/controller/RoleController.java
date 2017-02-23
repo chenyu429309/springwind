@@ -102,7 +102,7 @@ public class RoleController extends BaseController {
 			if ( role.getId() != null ) {
 				rlt = roleService.updateById(role);
 			} else {
-				rlt = roleService.insertSelective(role);
+				rlt = roleService.insert(role);
 			}
 		}
 		return callbackSuccess(rlt);
@@ -176,7 +176,7 @@ public class RoleController extends BaseController {
 			//如果存在权限，先进行删除
 			if (roleRightList.size() > 0) {
 				for (RolePermission rp :roleRightList) {
-					rolePermissionService.deleteSelective(rp);
+					rolePermissionService.delete(new EntityWrapper<RolePermission>(rp));
 				}
 			}
 			

@@ -2,15 +2,15 @@ package com.baomidou.springwind.mapper;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.springwind.entity.RolePermission;
-import com.baomidou.mybatisplus.mapper.AutoMapper;
 
 /**
  *
  * RolePermission 表数据库控制层接口
  *
  */
-public interface RolePermissionMapper extends AutoMapper<RolePermission> {
+public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
 	
 	/**

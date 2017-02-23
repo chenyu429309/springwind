@@ -109,7 +109,7 @@ public class AccountController extends SuperController {
 				user.setType(UserType.MEMBER.key());
 				user.setCrTime(new Date());
 				user.setLastTime(user.getCrTime());
-				boolean rlt = userService.insertSelective(user);
+				boolean rlt = userService.insert(user);
 				if (rlt) {
 					/*
 					 * 注册成功，自动登录进入后台

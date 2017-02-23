@@ -61,11 +61,11 @@ public class UserController extends BaseController {
 		if ( user != null ) {
 			user.setPassword(SaltEncoder.md5SaltEncode(user.getLoginName(), user.getPassword()));
 			if ( user.getId() != null ) {
-				rlt = userService.updateSelectiveById(user);
+				rlt = userService.updateById(user);
 			} else {
 				user.setCrTime(new Date());
 				user.setLastTime(user.getCrTime());
-				rlt = userService.insertSelective(user);
+				rlt = userService.insert(user);
 			}
 		}
 		return callbackSuccess(rlt);

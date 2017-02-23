@@ -2,6 +2,7 @@ package com.baomidou.springwind.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.springwind.entity.UserRole;
 import com.baomidou.springwind.mapper.UserRoleMapper;
 import com.baomidou.springwind.service.IUserRoleService;
@@ -19,7 +20,7 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleMapper, UserRol
 	public boolean existRoleUser( Long roleId ) {
 		UserRole ur = new UserRole();
 		ur.setRid(roleId);
-		int rlt = baseMapper.selectCount(ur);
+		int rlt = baseMapper.selectCount(new EntityWrapper<UserRole>(ur));
 		return rlt >= 1;
 	}
 

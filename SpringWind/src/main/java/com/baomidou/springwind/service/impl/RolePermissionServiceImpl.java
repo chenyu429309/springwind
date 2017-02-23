@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.framework.annotations.Log;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.springwind.entity.RolePermission;
 import com.baomidou.springwind.mapper.RolePermissionMapper;
 import com.baomidou.springwind.service.IRolePermissionService;
@@ -28,7 +29,7 @@ public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermissionMap
 	public boolean existRolePermission(Long permissionId) {
 		RolePermission rp = new RolePermission();
 		rp.setPid(permissionId);
-		int rlt = baseMapper.selectCount(rp);
+		int rlt = baseMapper.selectCount(new EntityWrapper<RolePermission>(rp));
 		return rlt >= 1;
 	}
 

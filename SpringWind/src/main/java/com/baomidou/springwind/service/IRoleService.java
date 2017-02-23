@@ -1,6 +1,6 @@
 package com.baomidou.springwind.service;
 
-import com.baomidou.framework.service.ISuperService;
+import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.springwind.entity.Role;
 
 /**
@@ -8,7 +8,8 @@ import com.baomidou.springwind.entity.Role;
  * Role 表数据服务层接口
  *
  */
-public interface IRoleService extends ISuperService<Role> {
+public interface IRoleService extends IService<Role> {
 
-    void deleteByUserId(Long userId);
+	void deleteByUserId(Long userId);
+
 }

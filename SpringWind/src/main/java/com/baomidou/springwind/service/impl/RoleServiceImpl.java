@@ -1,5 +1,6 @@
 package com.baomidou.springwind.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.springwind.entity.Role;
 import com.baomidou.springwind.entity.UserRole;
 import com.baomidou.springwind.mapper.RoleMapper;
@@ -24,6 +25,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
 	public void deleteByUserId(Long userId) {
 		UserRole ur = new UserRole();
 		ur.setUid(userId);
-		userRoleMapper.deleteSelective(ur);
+		userRoleMapper.delete(new EntityWrapper<UserRole>(ur));
 	}
+
 }

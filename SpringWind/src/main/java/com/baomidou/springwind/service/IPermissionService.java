@@ -2,8 +2,8 @@ package com.baomidou.springwind.service;
 
 import java.util.List;
 
-import com.baomidou.framework.service.ISuperService;
 import com.baomidou.kisso.Token;
+import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.springwind.entity.Permission;
 import com.baomidou.springwind.entity.vo.MenuVO;
 
@@ -12,7 +12,7 @@ import com.baomidou.springwind.entity.vo.MenuVO;
  * Permission 表数据服务层接口
  *
  */
-public interface IPermissionService extends ISuperService<Permission> {
+public interface IPermissionService extends IService<Permission> {
 
 	List<MenuVO> selectMenuVOByUserId( Long userId );
 
